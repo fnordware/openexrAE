@@ -41,7 +41,7 @@
 #include "OpenEXR_iccProfileAttribute.h"
 
 
-#include <ImfInputFile.h>
+#include "ImfHybridInputFile.h"
 #include <ImfOutputFile.h>
 #include <ImfRgbaFile.h>
 
@@ -518,10 +518,10 @@ OpenEXR_FileInfo(
 	
 	// read the EXR
 	IStreamPlatform instream(file_pathZ);
-	InputFile in(instream);
+	HybridInputFile in(instream);
 	
-	const Header &head = in.header();
-	const ChannelList &channels = head.channels();
+	const Header &head = in.header(0);
+	const ChannelList &channels = in.channels();
 
 
 	// what kind of image is this?
@@ -746,7 +746,7 @@ OpenEXR_FileInfo(
 			Imf::PixelType pix_type;
 			int dimension = 0;
 			
-			for(list<string>::const_iterator j = channels_in_layer.begin(); j != channels_in_layer.end(); j++)
+			for(list<string>::const_iterator j = channels_in_layer.begin(); j != channels_in_layer.end() && dimension < 4; j++)
 			{
 				if( compound_layer_name.empty() )
 				{
@@ -805,8 +805,8 @@ OpenEXR_FileInfo(
 	
 	
 	
-	const Box2i &dataW = head.dataWindow();
-	const Box2i &dispW = head.displayWindow();
+	const Box2i &dataW = in.dataWindow();
+	const Box2i &dispW = in.displayWindow();
 	
 	// if conditions are right, pop up our displayWindow dialog
 	// only when the footage is first imported
@@ -1083,9 +1083,9 @@ OpenEXR_DrawSparseFrame(
 	if(gMemoryMap)
 		instream.memoryMap();
 
-	InputFile in(instream);
+	HybridInputFile in(instream);
 	
-	const Header &head = in.header();
+	const Header &head = in.header(0);
 	
 	
 	if(options == NULL)
@@ -1102,7 +1102,8 @@ OpenEXR_DrawSparseFrame(
 	
 	if(options->display_window == DW_DISPLAY_WINDOW)
 	{
-		if( (dataW.min.x > dispW.min.x) ||
+		if(	in.parts() > 1 ||
+			(dataW.min.x > dispW.min.x) ||
 			(dataW.min.y > dispW.min.y) ||
 			(dataW.max.x < dispW.max.x) ||
 			(dataW.max.y < dispW.max.y) )
@@ -1680,13 +1681,13 @@ OpenEXR_DrawAuxChannel(
 	if(gMemoryMap)
 		instream.memoryMap();
 	
-	InputFile in(instream);
+	HybridInputFile in(instream);
 	
-	const Header &head = in.header();
-	const ChannelList &channels = head.channels();
+	const Header &head = in.header(0);
+	const ChannelList &channels = in.channels();
 	
-	const Box2i &dataW = head.dataWindow();
-	const Box2i &dispW = head.displayWindow();
+	const Box2i &dataW = in.dataWindow();
+	const Box2i &dispW = in.displayWindow();
 	
 	assert(options->display_window == DW_DATA_WINDOW || options->display_window == DW_DISPLAY_WINDOW);
 	
@@ -1767,7 +1768,7 @@ OpenEXR_DrawAuxChannel(
 				string compound_layer_name;
 				vector<string> compound_layer_channels;
 				
-				for(list<string>::const_iterator j = channels_in_layer.begin(); j != channels_in_layer.end(); j++)
+				for(list<string>::const_iterator j = channels_in_layer.begin(); j != channels_in_layer.end() && compound_layer_channels.size() < chunkP->dimensionL; j++)
 				{
 					if( compound_layer_name.empty() )
 					{

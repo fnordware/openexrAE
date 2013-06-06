@@ -82,14 +82,12 @@ FixSubsampling(const FrameBuffer &framebuffer, const Box2i &dw)
 
 
 OpenEXR_ChannelCache::OpenEXR_ChannelCache(const SPBasicSuite *pica_basicP, const AEIO_InterruptFuncs *inter,
-											InputFile &in, const IStreamPlatform &stream) :
+											HybridInputFile &in, const IStreamPlatform &stream) :
 	suites(pica_basicP),
 	_path(stream.getPath()),
 	_modtime(stream.getModTime())
 {
-    const Header &head = in.header();
-	
-	const Box2i &dw = head.dataWindow();
+	const Box2i &dw = in.dataWindow();
 	
 	_width = dw.max.x - dw.min.x + 1;
 	_height = dw.max.y - dw.min.y + 1;
@@ -99,7 +97,7 @@ OpenEXR_ChannelCache::OpenEXR_ChannelCache(const SPBasicSuite *pica_basicP, cons
 	
 	try
 	{
-		const ChannelList &channels = head.channels();
+		const ChannelList &channels = in.channels();
 		
 		for(ChannelList::ConstIterator i = channels.begin(); i != channels.end(); ++i)
 		{
@@ -538,7 +536,7 @@ OpenEXR_CachePool::findCache(const IStreamPlatform &stream) const
 
 
 OpenEXR_ChannelCache *
-OpenEXR_CachePool::addCache(InputFile &in, const IStreamPlatform &stream, const AEIO_InterruptFuncs *inter)
+OpenEXR_CachePool::addCache(HybridInputFile &in, const IStreamPlatform &stream, const AEIO_InterruptFuncs *inter)
 {
 	_pool.sort(compare_age);
 	
@@ -584,7 +582,7 @@ OpenEXR_CachePool::deleteStaleCaches(int timeout)
 }
 
 
-int ScanlineBlockSize(const InputFile &in)
+int ScanlineBlockSize(const HybridInputFile &in)
 {
 	// When multithreaded, we can see speedups if we read in enough scanlines at a time.
 	// Piz and B44(A) compression use blocks of 32 scan lines,
@@ -594,7 +592,7 @@ int ScanlineBlockSize(const InputFile &in)
 	
 	if( isTiled( in.version() ) )
 	{
-		const TileDescriptionAttribute *tiles = in.header().findTypedAttribute<TileDescriptionAttribute>("tiles");
+		const TileDescriptionAttribute *tiles = in.header(0).findTypedAttribute<TileDescriptionAttribute>("tiles");
 		
 		if(tiles)
 		{
@@ -606,8 +604,8 @@ int ScanlineBlockSize(const InputFile &in)
 	}
 	
 			
-	const Box2i &dataW = in.header().dataWindow();
-	const Box2i &dispW = in.header().displayWindow();
+	const Box2i &dataW = in.dataWindow();
+	const Box2i &dispW = in.displayWindow();
 	
 	if(dataW != dispW)
 		scanline_block_size *= 2; // might not be on tile/block boundries, so double up

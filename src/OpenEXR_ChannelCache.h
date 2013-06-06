@@ -9,7 +9,7 @@
 #ifndef OPENEXR_CHANNEL_CACHE_H
 #define OPENEXR_CHANNEL_CACHE_H
 
-#include <ImfInputFile.h>
+#include "ImfHybridInputFile.h"
 
 #include "OpenEXR_PlatformIO.h"
 
@@ -37,7 +37,7 @@ class OpenEXR_ChannelCache
 {
   public:
 	OpenEXR_ChannelCache(const SPBasicSuite *pica_basicP, const AEIO_InterruptFuncs *inter,
-							Imf::InputFile &in, const IStreamPlatform &stream);
+							Imf::HybridInputFile &in, const IStreamPlatform &stream);
 	~OpenEXR_ChannelCache();
 	
 	void fillFrameBuffer(const Imf::FrameBuffer &framebuffer, const Imath::Box2i &dw);
@@ -82,7 +82,7 @@ class OpenEXR_CachePool
 	
 	OpenEXR_ChannelCache *findCache(const IStreamPlatform &stream) const;
 	
-	OpenEXR_ChannelCache *addCache(Imf::InputFile &in, const IStreamPlatform &stream, const AEIO_InterruptFuncs *inter);
+	OpenEXR_ChannelCache *addCache(Imf::HybridInputFile &in, const IStreamPlatform &stream, const AEIO_InterruptFuncs *inter);
 	
 	void deleteStaleCaches(int timeout);
 	
@@ -93,7 +93,7 @@ class OpenEXR_CachePool
 };
 
 
-int ScanlineBlockSize(const Imf::InputFile &in);
+int ScanlineBlockSize(const Imf::HybridInputFile &in);
 
 
 #endif // OPENEXR_CHANNEL_CACHE_H

@@ -18,6 +18,7 @@
 		2A8F7F851760363F00E03502 /* libIlmBase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A8F7F7F1760363300E03502 /* libIlmBase.a */; };
 		2A8F7F9D176036B500E03502 /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A8F7F9C176036B300E03502 /* libzlib.a */; };
 		2A8F80FE1760378800E03502 /* liblcms.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A8F80FD1760378300E03502 /* liblcms.a */; };
+		2A8F846A17607BDC00E03502 /* ImfHybridInputFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A8F846817607BDC00E03502 /* ImfHybridInputFile.cpp */; };
 		2AA3373910B86FDD00DCD565 /* OpenEXR_Dialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AA3373810B86FDD00DCD565 /* OpenEXR_Dialog.xib */; };
 		2AB0B76610BA49A600D6996E /* OpenEXR_OutUI_Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB0B76410BA49A600D6996E /* OpenEXR_OutUI_Controller.m */; };
 		2AC2AA8D168500A9008F4124 /* OpenEXR_ChannelCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AC2AA8C168500A9008F4124 /* OpenEXR_ChannelCache.cpp */; };
@@ -121,6 +122,8 @@
 		2A8F7F731760363300E03502 /* IlmBase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IlmBase.xcodeproj; path = ../../ext/openexr/IlmBase/xcode/xcode3/IlmBase.xcodeproj; sourceTree = SOURCE_ROOT; };
 		2A8F7F94176036B300E03502 /* zlib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zlib.xcodeproj; path = ext/zlib.xcodeproj; sourceTree = "<group>"; };
 		2A8F80F81760378300E03502 /* lcms.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lcms.xcodeproj; path = ext/lcms.xcodeproj; sourceTree = "<group>"; };
+		2A8F846817607BDC00E03502 /* ImfHybridInputFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImfHybridInputFile.cpp; path = ../../src/ImfHybridInputFile.cpp; sourceTree = SOURCE_ROOT; };
+		2A8F846917607BDC00E03502 /* ImfHybridInputFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImfHybridInputFile.h; path = ../../src/ImfHybridInputFile.h; sourceTree = SOURCE_ROOT; };
 		2AA3373810B86FDD00DCD565 /* OpenEXR_Dialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OpenEXR_Dialog.xib; path = ../../src/mac/OpenEXR_Dialog.xib; sourceTree = "<group>"; };
 		2AB0B76410BA49A600D6996E /* OpenEXR_OutUI_Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenEXR_OutUI_Controller.m; path = ../../src/mac/OpenEXR_OutUI_Controller.m; sourceTree = "<group>"; };
 		2AB0B76510BA49A600D6996E /* OpenEXR_OutUI_Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenEXR_OutUI_Controller.h; path = ../../src/mac/OpenEXR_OutUI_Controller.h; sourceTree = "<group>"; };
@@ -222,6 +225,8 @@
 				C67534681085829300A36364 /* OpenEXR_UI.h */,
 				2A82BA2410B1345900161A77 /* OpenEXR_UI_Cocoa.mm */,
 				C675346A1085829300A36364 /* OpenEXR_PiPL.r */,
+				2A8F846917607BDC00E03502 /* ImfHybridInputFile.h */,
+				2A8F846817607BDC00E03502 /* ImfHybridInputFile.cpp */,
 				2A8F7F731760363300E03502 /* IlmBase.xcodeproj */,
 				2A8F7F6A1760361700E03502 /* OpenEXR.xcodeproj */,
 				2A8F7F94176036B300E03502 /* zlib.xcodeproj */,
@@ -410,6 +415,7 @@
 				2AC2AA8D168500A9008F4124 /* OpenEXR_ChannelCache.cpp in Sources */,
 				2A5D12DC1687A5B6001D979E /* OpenEXR_InUI_Controller.m in Sources */,
 				2AEFD0BF16EFB29E005F0DBC /* OpenEXR_displayWindow_Controller.m in Sources */,
+				2A8F846A17607BDC00E03502 /* ImfHybridInputFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
