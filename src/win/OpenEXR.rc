@@ -1,0 +1,139 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "OpenEXR_resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+OUTDIALOG DIALOGEX 0, 0, 181, 146
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "OpenEXR Options"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,124,125,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,66,125,50,14
+    COMBOBOX        3,79,50,66,14,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Compression",IDC_STATIC,25,50,48,12,SS_CENTERIMAGE,WS_EX_RIGHT
+    CONTROL         102,IDC_STATIC,"Static",SS_BITMAP,7,7,167,31
+    CONTROL         "32-bit float",5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,40,90,51,10
+    LTEXT           "(not recommended)",6,52,100,64,8
+    CONTROL         "Luminance/Chroma",4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,40,73,82,12
+END
+
+INDIALOG DIALOGEX 0, 0, 181, 146
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "OpenEXR Input Options"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,124,125,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,66,125,50,14
+    CONTROL         "Cache Channels",3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,63,50,73,10
+    COMBOBOX        4,94,90,43,14,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Cache Size:",IDC_STATIC,41,90,48,12,SS_CENTERIMAGE,WS_EX_RIGHT
+    CONTROL         102,IDC_STATIC,"Static",SS_BITMAP,7,7,167,31
+    GROUPBOX        "OpenEXR Preferences",IDC_STATIC,18,74,147,39
+END
+
+DWDIALOG DIALOGEX 0, 0, 200, 146
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "OpenEXR displayWindow"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,144,125,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,86,125,50,14
+    PUSHBUTTON      "Set Default",3,7,125,50,14
+    CONTROL         "Automatically show dialog",7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,54,102,108,10
+    CONTROL         102,IDC_STATIC,"Static",SS_BITMAP,17,7,167,31
+    CONTROL         "displayWindow",5,"Button",BS_AUTORADIOBUTTON,42,68,126,10
+    CONTROL         "dataWindow",6,"Button",BS_AUTORADIOBUTTON,42,83,126,10
+    LTEXT           "Static text that wraps",4,27,44,151,19
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    "OUTDIALOG", DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 174
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 139
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+BANNER1                 BITMAP                  "OpenEXR_banner.bmp"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
