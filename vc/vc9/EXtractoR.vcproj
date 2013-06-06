@@ -80,7 +80,7 @@
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="true"
 				ShowProgress="0"
-				OutputFile="C:\Program Files\Adobe\Adobe After Effects CC\Support Files\Plug-ins\EXtractoR.aex"
+				OutputFile="$(OutDir)\$(ProjectName).aex"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
 				IgnoreDefaultLibraryNames="libcmt.lib"
