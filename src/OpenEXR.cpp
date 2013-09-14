@@ -1088,8 +1088,7 @@ OpenEXR_DrawSparseFrame(
 	const Header &head = in.header(0);
 	
 	
-	if(options == NULL)
-		throw NullExc("Why are options NULL?");
+	assert(options != NULL); // but might be if someone opens a really old project
 	
 	
 	PF_EffectWorld *active_world = wP;
@@ -1100,7 +1099,7 @@ OpenEXR_DrawSparseFrame(
 	const Box2i &dispW = head.displayWindow();
 	
 	
-	if(options->display_window == DW_DISPLAY_WINDOW)
+	if(options != NULL && options->display_window == DW_DISPLAY_WINDOW)
 	{
 		if(	in.parts() > 1 ||
 			(dataW.min.x > dispW.min.x) ||
@@ -1163,7 +1162,7 @@ OpenEXR_DrawSparseFrame(
 	}
 	else
 	{
-		assert(options->display_window == DW_DATA_WINDOW);
+		assert(options != NULL && options->display_window == DW_DATA_WINDOW);
 		
 		const int data_width = (dataW.max.x - dataW.min.x) + 1;
 		const int data_height = (dataW.max.y - dataW.min.y) + 1;
@@ -1206,7 +1205,7 @@ OpenEXR_DrawSparseFrame(
 		
 		OpenEXR_ChannelCache *chan_cache = gCachePool.findCache(instream);
 		
-		if(chan_cache == NULL && options->cache_channels && gChannelCaches > 0)
+		if(chan_cache == NULL && options != NULL && options->cache_channels && gChannelCaches > 0)
 		{
 			chan_cache = gCachePool.addCache(in, instream, inter);			
 		}
@@ -1225,7 +1224,7 @@ OpenEXR_DrawSparseFrame(
 			int begin_line = dataW.min.y;
 			int end_line = dataW.max.y;
 			
-			if(options->display_window == DW_DISPLAY_WINDOW)
+			if(options != NULL && options->display_window == DW_DISPLAY_WINDOW)
 			{
 				begin_line = max(dataW.min.y, dispW.min.y);
 				end_line = min(dataW.max.y, dispW.max.y);
@@ -1285,7 +1284,7 @@ OpenEXR_DrawSparseFrame(
 		int begin_line = dataW.min.y;
 		int end_line = dataW.max.y;
 		
-		if(options->display_window == DW_DISPLAY_WINDOW)
+		if(options != NULL && options->display_window == DW_DISPLAY_WINDOW)
 		{
 			begin_line = max(dataW.min.y, dispW.min.y);
 			end_line = min(dataW.max.y, dispW.max.y);
