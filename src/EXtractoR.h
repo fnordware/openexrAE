@@ -47,7 +47,7 @@
 #define COPYRIGHT			"(c) 2007-2013 fnord"
 #define WEBSITE				"www.fnordware.com"
 #define	MAJOR_VERSION		1
-#define	MINOR_VERSION		8
+#define	MINOR_VERSION		9
 #define	BUG_VERSION			0
 #define	STAGE_VERSION		PF_Stage_RELEASE
 #define	BUILD_VERSION		0

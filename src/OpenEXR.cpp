@@ -13,7 +13,7 @@
 //	1.6		27 October 2011 - Performance enhancements, using iterate suites where possible
 //	1.7		26 April 2012 - More performance enhancements, unlimited number of channels
 //	1.8		1 January 2013 - AE channel cache, UTF-8 support
-//
+//  1.9		17 December 2013 - OpenEXR 2 support, displayWindow handling, EXtractoR layer pulldown
 //
 //	ToDo in this module:
 //
@@ -25,7 +25,7 @@
 //
 //	ToDo in other plug-ins:
 //
-//	Add layer pulldown to EXtractoR to automatically set RGB channels
+//	Move EXtractoR and IDentifier channel selection to the custom UI, not a dialog
 //	Add other Shift Channels-like options to EXtractoR (maybe....for Ben Grossmann)
 //	Some way to automatically set ranges for things like Z-Depth (maybe sample the CW with mouse?)
 //	Do something with Coverage in IDentifier (?)
