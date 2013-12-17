@@ -326,6 +326,17 @@ Profile_To_Chromaticities(
 }
 
 
+static inline cmsUInt16Number
+SwapEndian(cmsUInt16Number in)
+{
+#ifdef AE_LITTLE_ENDIAN
+	return ( (in >> 8) | (in << 8) );
+#else
+	return in;
+#endif
+}
+
+
 // given Chromatifities from the file, makes a profile and passes to AE
 A_Boolean
 Chromaticities_To_Profile(
@@ -400,6 +411,19 @@ Chromaticities_To_Profile(
 			cmsSaveProfileToMem(myProfile, *icc_profile, &bytes_needed);
 			
 			*icc_profile_len = bytes_needed;
+			
+			// The profile written to memory is given a timestamp, which will make
+			// profiles that should be identical slightly different, which will
+			// mess with AE.  We're going to hard code our own time instead.
+			
+			cmsICCHeader *icc_header = (cmsICCHeader *)*icc_profile;
+			
+			icc_header->date.year	= SwapEndian(2012);
+			icc_header->date.month	= SwapEndian(12);
+			icc_header->date.day	= SwapEndian(12);
+			icc_header->date.hours	= SwapEndian(12);
+			icc_header->date.minutes= SwapEndian(12);
+			icc_header->date.seconds= SwapEndian(12);
 			
 			set_profile = TRUE;
 		}
