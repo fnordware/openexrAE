@@ -81,6 +81,8 @@ extern AEGP_PluginID S_mem_id;
 
 // global Channel Map, set up when plug-in loads
 static ChannelMap *gChannelMap = NULL;
+static int gNumCPUs = 1;
+
 
 // our prefs
 static A_long gChannelCaches = 3;
@@ -110,12 +112,12 @@ OpenEXR_Init(struct SPBasicSuite *pica_basicP)
 		host_info(mach_host_self(), HOST_BASIC_INFO, 
 				  (host_info_t)&hostInfo, &infoCount);
 		
-		setGlobalThreadCount(hostInfo.max_cpus);
+		gNumCPUs = hostInfo.max_cpus;
 #else // WIN_ENV
 		SYSTEM_INFO systemInfo;
 		GetSystemInfo(&systemInfo);
 
-		setGlobalThreadCount(systemInfo.dwNumberOfProcessors);
+		gNumCPUs = systemInfo.dwNumberOfProcessors;
 #endif
 	}
 
@@ -1078,6 +1080,10 @@ OpenEXR_DrawSparseFrame(
 	
 	try{
 	
+	if( IlmThread::supportsThreads() )
+		setGlobalThreadCount(gNumCPUs);
+	
+		
 	IStreamPlatform instream(file_pathZ, basic_dataP->pica_basicP);
 
 	if(gMemoryMap)
@@ -1674,6 +1680,10 @@ OpenEXR_DrawAuxChannel(
 	
 	try{
 	
+	if( IlmThread::supportsThreads() )
+		setGlobalThreadCount(gNumCPUs);
+	
+	
 	// read the EXR
 	IStreamPlatform instream(file_pathZ, basic_dataP->pica_basicP);
 	
@@ -2140,6 +2150,10 @@ OpenEXR_OutputFile(
 
 	try{
 	
+	if( IlmThread::supportsThreads() )
+		setGlobalThreadCount(gNumCPUs);
+
+
 	int data_width, display_width, data_height, display_height;
 	
 	data_width = display_width = info->width;
