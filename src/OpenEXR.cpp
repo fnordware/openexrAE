@@ -826,77 +826,79 @@ OpenEXR_FileInfo(
 		options->display_window = (displayWindowDefaultL ? DW_DISPLAY_WINDOW : DW_DATA_WINDOW);
 		
 		
-		const bool force_dlog = ShiftKeyHeld();
+	#define PREFS_ENABLE_DISPLAYWINDOW "Enable displayWindow Dialog"
+		A_long displayWindowEnabledL = TRUE;
+		suites.PersistentDataSuite()->AEGP_GetLong(blobH, PREFS_SECTION, PREFS_ENABLE_DISPLAYWINDOW, displayWindowEnabledL, &displayWindowEnabledL);
 		
-		if(dataW != dispW || force_dlog)
+		A_Boolean ui_is_suppressedB = FALSE;
+		suites.UtilitySuite()->AEGP_GetSuppressInteractiveUI(&ui_is_suppressedB);
+		
+	#define PREFS_AUTO_DISPLAYWINDOW "Automatically show displayWindow dialog"
+		A_long autoDisplayWindowL = FALSE;
+		suites.PersistentDataSuite()->AEGP_GetLong(blobH, PREFS_SECTION, PREFS_AUTO_DISPLAYWINDOW, autoDisplayWindowL, &autoDisplayWindowL);
+	
+	
+		const bool request_dlog = ShiftKeyHeld();
+		
+		if((displayWindowEnabledL && !ui_is_suppressedB) &&
+			((dataW != dispW && autoDisplayWindowL) || request_dlog))
 		{
-			A_Boolean ui_is_suppressedB = FALSE;
-			suites.UtilitySuite()->AEGP_GetSuppressInteractiveUI(&ui_is_suppressedB);
+			stringstream message, dispWstr, dataWstr;
 			
-		#define PREFS_AUTO_DISPLAYWINDOW "Automatically show displayWindow dialog"
-			A_long autoDisplayWindowL = FALSE;
-			suites.PersistentDataSuite()->AEGP_GetLong(blobH, PREFS_SECTION, PREFS_AUTO_DISPLAYWINDOW, autoDisplayWindowL, &autoDisplayWindowL);
-		
-		
-			if(!ui_is_suppressedB && (autoDisplayWindowL || force_dlog))
+			if(dataW != dispW)
 			{
-				stringstream message, dispWstr, dataWstr;
-				
-				if(dataW != dispW)
-				{
-					message << "displayWindow and dataWindow are different. " <<
-						"Choose one to determine file size.";
-				}
-				else
-				{
-					message << "Shift key was held down. Choose to use displayWindow or dataWindow.";
-				}
-				
-				const int displayWidth = dispW.max.x - dispW.min.x + 1;
-				const int displayHeight = dispW.max.y - dispW.min.y + 1;
-				dispWstr << "displayWindow (" << displayWidth << "x" << displayHeight << ")";
-				
-				const int dataWidth = dataW.max.x - dataW.min.x + 1;
-				const int dataHeight = dataW.max.y - dataW.min.y + 1;
-				dataWstr << "dataWindow (" << dataWidth << "x" << dataHeight << ")";
-				
-
-				A_Boolean displayWindowB = displayWindowDefaultL;
-				A_Boolean displayWindowDefaultB = displayWindowDefaultL;
-				A_Boolean autoShowDialogB = autoDisplayWindowL;
-				A_Boolean clicked_ok = FALSE;
-			
-				OpenEXR_displayWindowDialog(basic_dataP,
-											message.str().c_str(),
-											dispWstr.str().c_str(),
-											dataWstr.str().c_str(),
-											&displayWindowB,
-											&displayWindowDefaultB,
-											&autoShowDialogB,
-											&clicked_ok);
-											
-				
-				if(displayWindowDefaultL != displayWindowDefaultB)
-				{
-					displayWindowDefaultL = displayWindowDefaultB;
-				
-					suites.PersistentDataSuite()->AEGP_SetLong(blobH, PREFS_SECTION, PREFS_DISPLAYWINDOW, displayWindowDefaultL);
-				}
-				
-				if(autoDisplayWindowL != autoShowDialogB)
-				{
-					autoDisplayWindowL = autoShowDialogB;
-						
-					suites.PersistentDataSuite()->AEGP_SetLong(blobH, PREFS_SECTION, PREFS_AUTO_DISPLAYWINDOW, autoDisplayWindowL);
-				}
-				
-				if(clicked_ok)
-				{
-					options->display_window = (displayWindowB ? DW_DISPLAY_WINDOW : DW_DATA_WINDOW);
-				}
-				else
-					return AEIO_Err_USER_CANCEL;
+				message << "displayWindow and dataWindow are different. " <<
+					"Choose one to determine file size.";
 			}
+			else
+			{
+				message << "Shift key was held down. Choose to use displayWindow or dataWindow.";
+			}
+			
+			const int displayWidth = dispW.max.x - dispW.min.x + 1;
+			const int displayHeight = dispW.max.y - dispW.min.y + 1;
+			dispWstr << "displayWindow (" << displayWidth << "x" << displayHeight << ")";
+			
+			const int dataWidth = dataW.max.x - dataW.min.x + 1;
+			const int dataHeight = dataW.max.y - dataW.min.y + 1;
+			dataWstr << "dataWindow (" << dataWidth << "x" << dataHeight << ")";
+			
+
+			A_Boolean displayWindowB = displayWindowDefaultL;
+			A_Boolean displayWindowDefaultB = displayWindowDefaultL;
+			A_Boolean autoShowDialogB = autoDisplayWindowL;
+			A_Boolean clicked_ok = FALSE;
+		
+			OpenEXR_displayWindowDialog(basic_dataP,
+										message.str().c_str(),
+										dispWstr.str().c_str(),
+										dataWstr.str().c_str(),
+										&displayWindowB,
+										&displayWindowDefaultB,
+										&autoShowDialogB,
+										&clicked_ok);
+										
+			
+			if(displayWindowDefaultL != displayWindowDefaultB)
+			{
+				displayWindowDefaultL = displayWindowDefaultB;
+			
+				suites.PersistentDataSuite()->AEGP_SetLong(blobH, PREFS_SECTION, PREFS_DISPLAYWINDOW, displayWindowDefaultL);
+			}
+			
+			if(autoDisplayWindowL != autoShowDialogB)
+			{
+				autoDisplayWindowL = autoShowDialogB;
+					
+				suites.PersistentDataSuite()->AEGP_SetLong(blobH, PREFS_SECTION, PREFS_AUTO_DISPLAYWINDOW, autoDisplayWindowL);
+			}
+			
+			if(clicked_ok)
+			{
+				options->display_window = (displayWindowB ? DW_DISPLAY_WINDOW : DW_DATA_WINDOW);
+			}
+			else
+				return AEIO_Err_USER_CANCEL;
 		}
 		
 		// turn on caching if we exceed the auto-cache threshold
@@ -1692,7 +1694,6 @@ OpenEXR_DrawAuxChannel(
 	
 	HybridInputFile in(instream);
 	
-	const Header &head = in.header(0);
 	const ChannelList &channels = in.channels();
 	
 	const Box2i &dataW = in.dataWindow();
