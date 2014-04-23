@@ -827,7 +827,7 @@ OpenEXR_FileInfo(
 		
 		
 	#define PREFS_ENABLE_DISPLAYWINDOW "Enable displayWindow Dialog"
-		A_long displayWindowEnabledL = TRUE;
+		A_long displayWindowEnabledL = FALSE;
 		suites.PersistentDataSuite()->AEGP_GetLong(blobH, PREFS_SECTION, PREFS_ENABLE_DISPLAYWINDOW, displayWindowEnabledL, &displayWindowEnabledL);
 		
 		A_Boolean ui_is_suppressedB = FALSE;
