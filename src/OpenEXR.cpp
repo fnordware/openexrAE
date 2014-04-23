@@ -2012,8 +2012,8 @@ OpenEXR_DrawAuxChannel(
 			copy_width = (copy_width / scale.h) + (copy_width % scale.h ? 1 : 0);
 			copy_height = (copy_height / scale.v) + (copy_height % scale.v ? 1 : 0);
 			
-			assert(((disp_origin.v / scale.v) + copy_width) <= chunkP->widthL);
-			assert(((disp_origin.h / scale.h) + copy_height) <= chunkP->heightL);
+			assert(((disp_origin.h / scale.h) + copy_width) <= chunkP->widthL);
+			assert(((disp_origin.v / scale.v) + copy_height) <= chunkP->heightL);
 		
 
 			IterateData i_data = { interP, data_pixel_origin, rowbytes, display_pixel_origin, chunkP->row_bytesL, channel_dims, copy_width, scale, shift };
