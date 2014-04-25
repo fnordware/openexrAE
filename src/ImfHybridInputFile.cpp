@@ -10,6 +10,9 @@
 #include "ImfHybridInputFile.h"
 
 #include "ImfInputPart.h"
+#include "ImfPartType.h"
+
+#include "Iex.h"
 
 
 OPENEXR_IMF_INTERNAL_NAMESPACE_SOURCE_ENTER
@@ -104,26 +107,32 @@ HybridInputFile::setup()
 	{
 		const Header &head = _multiPart.header(n);
 		
-		// this will make a dataWindow that can hold the dataWindows of every part
-		_dataWindow.extendBy( head.dataWindow() );
-		
-		// all displayWindows should be the same, actually
-		_displayWindow.extendBy( head.displayWindow() );
-		
-		
-		const ChannelList &chans = head.channels();
-
-		for(ChannelList::ConstIterator i = chans.begin(); i != chans.end(); ++i)
+		if(head.type() != OPENEXR_IMF_INTERNAL_NAMESPACE::DEEPTILE)
 		{
-			const bool rename = (_multiPart.parts() > 1) && (n > 0 || _renameFirstPart) && head.hasName();
+			// this will make a dataWindow that can hold the dataWindows of every part
+			_dataWindow.extendBy( head.dataWindow() );
 			
-			const string hybrid_name = (rename ? head.name() + "." + i.name() : i.name());
+			// all displayWindows should be the same, actually
+			_displayWindow.extendBy( head.displayWindow() );
 			
-			_map[ hybrid_name ] = HybridChannel(n, i.name());
 			
-			_chanList.insert(hybrid_name, i.channel());
+			const ChannelList &chans = head.channels();
+
+			for(ChannelList::ConstIterator i = chans.begin(); i != chans.end(); ++i)
+			{
+				const bool rename = (_multiPart.parts() > 1) && (n > 0 || _renameFirstPart) && head.hasName();
+				
+				const string hybrid_name = (rename ? head.name() + "." + i.name() : i.name());
+				
+				_map[ hybrid_name ] = HybridChannel(n, i.name());
+				
+				_chanList.insert(hybrid_name, i.channel());
+			}
 		}
 	}
+	
+	if(_chanList.begin() == _chanList.end()) // empty
+		throw IEX_NAMESPACE::BaseExc("DeepTile images not supported");  // only reason this should happen
 }
 
 
