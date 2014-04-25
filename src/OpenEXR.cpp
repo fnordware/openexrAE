@@ -1093,8 +1093,6 @@ OpenEXR_DrawSparseFrame(
 
 	HybridInputFile in(instream);
 	
-	const Header &head = in.header(0);
-	
 	
 	assert(options != NULL); // but might be if someone opens a really old project
 	
@@ -1103,8 +1101,8 @@ OpenEXR_DrawSparseFrame(
 	PF_PixelPtr pixel_origin = active_world->data;
 	
 	
-	const Box2i &dataW = head.dataWindow();
-	const Box2i &dispW = head.displayWindow();
+	const Box2i &dataW = in.dataWindow();
+	const Box2i &dispW = in.displayWindow();
 	
 	
 	if(options != NULL && options->display_window == DW_DISPLAY_WINDOW)
@@ -1197,9 +1195,9 @@ OpenEXR_DrawSparseFrame(
 	// Since we're reading into an RGBA float buffer, we can usually use the general read function,
 	// which handles half->float conversion for us.
 	// YCC and other cases use the more robust RgbaInputFile.
-	if( head.channels().findChannel("R") &&
-		head.channels().findChannel("G") &&
-		head.channels().findChannel("B") )
+	if( in.channels().findChannel("R") &&
+		in.channels().findChannel("G") &&
+		in.channels().findChannel("B") )
 	{
 		FrameBuffer frameBuffer;
 		
