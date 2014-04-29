@@ -522,12 +522,10 @@ OpenEXR_FileInfo(
 	IStreamPlatform instream(file_pathZ);
 	HybridInputFile in(instream);
 	
-	const Header &head = in.header(0);
 	const ChannelList &channels = in.channels();
 
-
 	// what kind of image is this?
-	if( head.channels().findChannel("A") )
+	if( channels.findChannel("A") )
 		info->planes = 4; // has to be RGBA with an alpha
 	else if( channels.findChannel("Y") &&
 			!channels.findChannel("RY") &&
@@ -549,6 +547,9 @@ OpenEXR_FileInfo(
 	// EXR RGB channels are always float
 	info->depth = 32;
 
+	
+	// for other attributes we will use the first part's header
+	const Header &head = in.header(0);
 	
 	// EXR stores pixel aspect ratio as a floating point number (boo!)
 	float pixel_aspect_ratio = head.pixelAspectRatio();
@@ -671,7 +672,7 @@ OpenEXR_FileInfo(
 					
 					// do we really have all the relevant channels?
 					for(int c=0; c < entry.dimensions(); c++)
-						if( !head.channels().findChannel( entry.chan_part(c).c_str() ) )
+						if( !channels.findChannel( entry.chan_part(c).c_str() ) )
 							have_them = false;
 					
 					if(have_them && entry.name().size() < PF_CHANNEL_NAME_LEN)
