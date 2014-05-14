@@ -56,7 +56,7 @@ FixSubsampling(const FrameBuffer &framebuffer, const Box2i &dw)
 					{
 						*((half *)pix_expanded) = *((half *)pix_subsampled);
 					}
-					if(slice.type == Imf::FLOAT)
+					else if(slice.type == Imf::FLOAT)
 					{
 						*((float *)pix_expanded) = *((float *)pix_subsampled);
 					}
@@ -133,7 +133,7 @@ OpenEXR_ChannelCache::OpenEXR_ChannelCache(const SPBasicSuite *pica_basicP, cons
 				throw NullExc("Why is the locked handle NULL?");
 			
 			
-			char *channel_origin = buf - (pix_size * dw.min.x) - (rowbytes * dw.min.y);
+			char * const channel_origin = buf - (pix_size * dw.min.x) - (rowbytes * dw.min.y);
 			
 			frameBuffer.insert(i.name(), Slice(	channel.type,
 												channel_origin,
