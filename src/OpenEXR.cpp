@@ -1401,6 +1401,8 @@ OpenEXR_InitInOptions(
 	// initialize the options when they're first created
 	A_Err err = A_Err_NONE;
 	
+	memset(options, 0, sizeof(OpenEXR_inData));
+	
 	options->compression_type = Imf::NUM_COMPRESSION_METHODS + 1; // so basically unknown
 	options->cache_channels = FALSE;
 	options->display_window = DW_UNKNOWN;
@@ -2083,6 +2085,8 @@ OpenEXR_InitOutOptions(
 	// will probably do this only once per AE user per version
 	
 	A_Err err						=	A_Err_NONE;
+	
+	memset(options, 0, sizeof(OpenEXR_outData));
 	
 	options->compression_type = Imf::PIZ_COMPRESSION;
 	options->float_not_half = FALSE;
