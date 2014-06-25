@@ -20,7 +20,14 @@ iccProfileAttribute::iccProfileAttribute()
 
 iccProfileAttribute::iccProfileAttribute(void *profile, size_t size)
 {
+	if(profile == NULL || size == 0)
+		throw Iex::NullExc("Setting profile to NULL");
+
 	_profile = malloc(_size = size);
+	
+	if(_profile == NULL)
+		throw std::bad_alloc();
+		
 	memcpy(_profile, profile, size);
 }
 
@@ -76,6 +83,9 @@ iccProfileAttribute::readValueFrom(IStream &is, int size, int version)
 	
 	_profile = malloc(_size = size);
 	
+	if(_profile == NULL)
+		throw std::bad_alloc();
+	
 	Xdr::read<StreamIO>(is, (char *)_profile, size);
 }
 
@@ -93,6 +103,10 @@ iccProfileAttribute::copyValueFrom(const Attribute &other)
 	if(o->_profile && o->_size)
 	{
 		_profile = malloc(_size = o->_size);
+		
+		if(_profile == NULL)
+			throw std::bad_alloc();
+			
 		memcpy(_profile, o->_profile, o->_size);
 	}
 	else
