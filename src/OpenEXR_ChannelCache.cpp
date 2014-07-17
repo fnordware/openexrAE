@@ -588,7 +588,14 @@ int ScanlineBlockSize(const HybridInputFile &in)
 	// Piz and B44(A) compression use blocks of 32 scan lines,
 	// so we'll make sure each thread gets at least a full block.
 	
-	int scanline_block_size = 32 * max(globalThreadCount(), 1);
+	int scanline_block_size = 32;
+	
+	if(in.header(0).compression() == DWAB_COMPRESSION)
+		scanline_block_size = 256; // well, DWAB uses 256
+	
+	
+	scanline_block_size *= max(globalThreadCount(), 1);
+	
 	
 	if( isTiled( in.version() ) )
 	{

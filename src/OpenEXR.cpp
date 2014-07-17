@@ -360,6 +360,14 @@ OpenEXR_GetInSpecInfo(
 				info += "B44A compression";
 				break;
 
+			case Imf::DWAA_COMPRESSION:
+				info += "DWAA compression";
+				break;
+
+			case Imf::DWAB_COMPRESSION:
+				info += "DWAB compression";
+				break;
+
 			default:
 				info += "some weird compression";
 				break;
@@ -1420,7 +1428,7 @@ OpenEXR_CopyInOptions(
 	const OpenEXR_inData	*old_options)
 {
 	// test to see if this looks like one of our options handles
-	if(old_options->compression_type <= Imf::B44A_COMPRESSION &&
+	if(old_options->compression_type < Imf::NUM_COMPRESSION_METHODS &&
 		(old_options->cache_channels == TRUE || old_options->cache_channels == FALSE) &&
 		old_options->display_window <= DW_UNKNOWN)
 	{
@@ -2438,6 +2446,14 @@ OpenEXR_GetOutSpecInfo(
 			
 		case Imf::B44A_COMPRESSION:
 			strcpy(verbiageP->sub_type, "B44A compression");
+			break;
+
+		case Imf::DWAA_COMPRESSION:
+			strcpy(verbiageP->sub_type, "DWAA compression");
+			break;
+
+		case Imf::DWAB_COMPRESSION:
+			strcpy(verbiageP->sub_type, "DWAB compression");
 			break;
 
 		default:
