@@ -32,6 +32,8 @@ enum
     OUT_PXR24_COMPRESSION,	// lossy 24-bit float compression
 	OUT_B44_COMPRESSION,	// lossy 16-bit float compression
 	OUT_B44A_COMPRESSION,	// B44 w/ bonus area compression
+	OUT_DWAA_COMPRESSION,	// DCT compression
+	OUT_DWAB_COMPRESSION,	// DCT compression with 256-pixel blocks
 
     OUT_NUM_COMPRESSION_METHODS	// number of different compression methods
 };
@@ -65,22 +67,22 @@ static BOOL CALLBACK DialogProc(HWND hwndDlg, UINT message, WPARAM wParam, LPARA
 			do{
 				// set up the menu
 				// I prefer to do it programatically to insure that the compression types match the index
-				char *op1 = "None";
-				char *op2 = "RLE";
-				char *op3 = "Zip";
-				char *op4 = "Zip16";
-				char *op5 = "Piz";
-				char *op6 = "PXR24";
-				char *op7 = "B44";
-				char *op8 = "B44A";
-
-				char *opts[] = {op1, op2, op3, op4, op5, op6, op7, op8};
+				const char *opts[] = {	"None",
+										"RLE",
+										"Zip",
+										"Zip16",
+										"Piz",
+										"PXR24",
+										"B44",
+										"B44A",
+										"DWAA",
+										"DWAB" };
 
 				HWND menu = GetDlgItem(hwndDlg, OUT_Compression_Menu);
 
 				int i;
 
-				for(int i=OUT_NO_COMPRESSION; i<=OUT_B44A_COMPRESSION; i++)
+				for(int i=OUT_NO_COMPRESSION; i < OUT_NUM_COMPRESSION_METHODS; i++)
 				{
 					SendMessage(menu,( UINT)CB_ADDSTRING, (WPARAM)wParam, (LPARAM)(LPCTSTR)opts[i] );
 					SendMessage( menu,(UINT)CB_SETITEMDATA, (WPARAM)i, (LPARAM)(DWORD)i); // this is the compresion number
