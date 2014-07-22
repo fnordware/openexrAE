@@ -1,0 +1,461 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 44;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2A3BA7B210C0C66200AD32F2 /* EXtractoR_Dialog_Cocoa.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2A3BA7B110C0C66200AD32F2 /* EXtractoR_Dialog_Cocoa.mm */; };
+		2A3BA9DF10C0E23B00AD32F2 /* EXtractoR_Dialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A3BA9DE10C0E23B00AD32F2 /* EXtractoR_Dialog.xib */; };
+		2A3BA9E510C0E25200AD32F2 /* EXtractoR banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A3BA9E410C0E25200AD32F2 /* EXtractoR banner.png */; };
+		2A3BA9F010C0E5B300AD32F2 /* EXtractoR_Dialog_Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3BA9EF10C0E5B300AD32F2 /* EXtractoR_Dialog_Controller.m */; };
+		2A3BAA7110C0F40600AD32F2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A3BAA7010C0F40600AD32F2 /* Cocoa.framework */; };
+		2A8897E610C05F6900ADA4BB /* EXtractoR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A8897E110C05F6900ADA4BB /* EXtractoR.cpp */; };
+		2A8897E710C05F6900ADA4BB /* EXtractoR_ArbData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A8897E310C05F6900ADA4BB /* EXtractoR_ArbData.cpp */; };
+		2A8897E810C05F6900ADA4BB /* EXtractoR_PiPL.r in Rez */ = {isa = PBXBuildFile; fileRef = 2A8897E410C05F6900ADA4BB /* EXtractoR_PiPL.r */; };
+		2A8897E910C05F6900ADA4BB /* EXtractoR_UI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A8897E510C05F6900ADA4BB /* EXtractoR_UI.cpp */; };
+		2A88980410C0626600ADA4BB /* fnord_MissingSuiteError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A88980110C0626600ADA4BB /* fnord_MissingSuiteError.cpp */; };
+		2A88980510C0626600ADA4BB /* fnord_SuiteHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A88980210C0626600ADA4BB /* fnord_SuiteHandler.cpp */; };
+		2ABA3009197EF9E900C754E6 /* libOpenEXR.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABA3002197EF9C000C754E6 /* libOpenEXR.a */; };
+		2ABA301B197EFA4F00C754E6 /* libIlmBase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABA3012197EFA2800C754E6 /* libIlmBase.a */; };
+		2AC7450216555C2400980332 /* OpenEXR_UTF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7450016555C2400980332 /* OpenEXR_UTF.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2ABA3001197EF9C000C754E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A6D4B1515CDE3DE006BADE7;
+			remoteInfo = OpenEXR;
+		};
+		2ABA3003197EF9C000C754E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A588C1A19787559000D94D0;
+			remoteInfo = b44ExpLogTable;
+		};
+		2ABA3005197EF9C000C754E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A588C3C197875C2000D94D0;
+			remoteInfo = dwaLookups;
+		};
+		2ABA3007197EF9E000C754E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A6D4B1415CDE3DE006BADE7;
+			remoteInfo = OpenEXR;
+		};
+		2ABA3011197EFA2800C754E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ABA300B197EFA2700C754E6 /* IlmBase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A6D4C4D15CDEB0A006BADE7;
+			remoteInfo = IlmBase;
+		};
+		2ABA3013197EFA2800C754E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ABA300B197EFA2700C754E6 /* IlmBase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A6D4CFF15CDEBEF006BADE7;
+			remoteInfo = eLut;
+		};
+		2ABA3015197EFA2800C754E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ABA300B197EFA2700C754E6 /* IlmBase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A6D4D3715CDF275006BADE7;
+			remoteInfo = toFloat;
+		};
+		2ABA3017197EFA3900C754E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ABA300B197EFA2700C754E6 /* IlmBase.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A6D4C4C15CDEB0A006BADE7;
+			remoteInfo = IlmBase;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2A3BA7B110C0C66200AD32F2 /* EXtractoR_Dialog_Cocoa.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = EXtractoR_Dialog_Cocoa.mm; path = ../../src/mac/EXtractoR_Dialog_Cocoa.mm; sourceTree = SOURCE_ROOT; };
+		2A3BA9DE10C0E23B00AD32F2 /* EXtractoR_Dialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EXtractoR_Dialog.xib; path = ../../src/mac/EXtractoR_Dialog.xib; sourceTree = "<group>"; };
+		2A3BA9E410C0E25200AD32F2 /* EXtractoR banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "EXtractoR banner.png"; path = "../../src/mac/EXtractoR banner.png"; sourceTree = SOURCE_ROOT; };
+		2A3BA9EE10C0E5B300AD32F2 /* EXtractoR_Dialog_Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EXtractoR_Dialog_Controller.h; path = ../../src/mac/EXtractoR_Dialog_Controller.h; sourceTree = "<group>"; };
+		2A3BA9EF10C0E5B300AD32F2 /* EXtractoR_Dialog_Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EXtractoR_Dialog_Controller.m; path = ../../src/mac/EXtractoR_Dialog_Controller.m; sourceTree = "<group>"; };
+		2A3BAA7010C0F40600AD32F2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		2A8897E110C05F6900ADA4BB /* EXtractoR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EXtractoR.cpp; path = ../../src/EXtractoR.cpp; sourceTree = SOURCE_ROOT; };
+		2A8897E210C05F6900ADA4BB /* EXtractoR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EXtractoR.h; path = ../../src/EXtractoR.h; sourceTree = SOURCE_ROOT; };
+		2A8897E310C05F6900ADA4BB /* EXtractoR_ArbData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EXtractoR_ArbData.cpp; path = ../../src/EXtractoR_ArbData.cpp; sourceTree = SOURCE_ROOT; };
+		2A8897E410C05F6900ADA4BB /* EXtractoR_PiPL.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; name = EXtractoR_PiPL.r; path = ../../src/EXtractoR_PiPL.r; sourceTree = SOURCE_ROOT; };
+		2A8897E510C05F6900ADA4BB /* EXtractoR_UI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EXtractoR_UI.cpp; path = ../../src/EXtractoR_UI.cpp; sourceTree = SOURCE_ROOT; };
+		2A88980110C0626600ADA4BB /* fnord_MissingSuiteError.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fnord_MissingSuiteError.cpp; path = ../../src/fnord_MissingSuiteError.cpp; sourceTree = SOURCE_ROOT; };
+		2A88980210C0626600ADA4BB /* fnord_SuiteHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fnord_SuiteHandler.cpp; path = ../../src/fnord_SuiteHandler.cpp; sourceTree = SOURCE_ROOT; };
+		2A88980310C0626600ADA4BB /* fnord_SuiteHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fnord_SuiteHandler.h; path = ../../src/fnord_SuiteHandler.h; sourceTree = SOURCE_ROOT; };
+		2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenEXR.xcodeproj; path = ../../ext/openexr/OpenEXR/xcode/xcode5/OpenEXR.xcodeproj; sourceTree = "<group>"; };
+		2ABA300B197EFA2700C754E6 /* IlmBase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IlmBase.xcodeproj; path = ../../ext/openexr/IlmBase/xcode/xcode5/IlmBase.xcodeproj; sourceTree = "<group>"; };
+		2AC7450016555C2400980332 /* OpenEXR_UTF.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenEXR_UTF.cpp; path = ../../src/OpenEXR_UTF.cpp; sourceTree = SOURCE_ROOT; };
+		2AC7450116555C2400980332 /* OpenEXR_UTF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenEXR_UTF.h; path = ../../src/OpenEXR_UTF.h; sourceTree = SOURCE_ROOT; };
+		2AE34DD0175DAFFE00417904 /* EXtractoR_Dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EXtractoR_Dialog.h; path = ../../src/EXtractoR_Dialog.h; sourceTree = SOURCE_ROOT; };
+		C4E618CC095A3CE80012CA3F /* EXtractoR.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EXtractoR.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4E618CD095A3CE80012CA3F /* EXtractoR.plugin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EXtractoR.plugin-Info.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C4E618CA095A3CE80012CA3F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2ABA301B197EFA4F00C754E6 /* libIlmBase.a in Frameworks */,
+				2ABA3009197EF9E900C754E6 /* libOpenEXR.a in Frameworks */,
+				2A3BAA7110C0F40600AD32F2 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2ABA2FFC197EF9C000C754E6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2ABA3002197EF9C000C754E6 /* libOpenEXR.a */,
+				2ABA3004197EF9C000C754E6 /* b44ExpLogTable */,
+				2ABA3006197EF9C000C754E6 /* dwaLookups */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2ABA300C197EFA2700C754E6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2ABA3012197EFA2800C754E6 /* libIlmBase.a */,
+				2ABA3014197EFA2800C754E6 /* eLut */,
+				2ABA3016197EFA2800C754E6 /* toFloat */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C4E6187C095A3C800012CA3F = {
+			isa = PBXGroup;
+			children = (
+				2A8897E210C05F6900ADA4BB /* EXtractoR.h */,
+				2A8897E110C05F6900ADA4BB /* EXtractoR.cpp */,
+				2A8897E310C05F6900ADA4BB /* EXtractoR_ArbData.cpp */,
+				2A8897E510C05F6900ADA4BB /* EXtractoR_UI.cpp */,
+				2AE34DD0175DAFFE00417904 /* EXtractoR_Dialog.h */,
+				2A3BA7B110C0C66200AD32F2 /* EXtractoR_Dialog_Cocoa.mm */,
+				2A8897E410C05F6900ADA4BB /* EXtractoR_PiPL.r */,
+				2AC7450116555C2400980332 /* OpenEXR_UTF.h */,
+				2AC7450016555C2400980332 /* OpenEXR_UTF.cpp */,
+				2A88980310C0626600ADA4BB /* fnord_SuiteHandler.h */,
+				2A88980210C0626600ADA4BB /* fnord_SuiteHandler.cpp */,
+				2A88980110C0626600ADA4BB /* fnord_MissingSuiteError.cpp */,
+				2ABA300B197EFA2700C754E6 /* IlmBase.xcodeproj */,
+				2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */,
+				C4E6188C095A3C800012CA3F /* Products */,
+				C4E618CD095A3CE80012CA3F /* EXtractoR.plugin-Info.plist */,
+				2A3BA9DE10C0E23B00AD32F2 /* EXtractoR_Dialog.xib */,
+				2A3BA9E410C0E25200AD32F2 /* EXtractoR banner.png */,
+				2A3BA9EE10C0E5B300AD32F2 /* EXtractoR_Dialog_Controller.h */,
+				2A3BA9EF10C0E5B300AD32F2 /* EXtractoR_Dialog_Controller.m */,
+				2A3BAA7010C0F40600AD32F2 /* Cocoa.framework */,
+			);
+			comments = "SDK Backwards is some pretty rudimentary audio processing, but the flags and params are handled in an appropriate manner.";
+			sourceTree = "<group>";
+		};
+		C4E6188C095A3C800012CA3F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C4E618CC095A3CE80012CA3F /* EXtractoR.plugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C4E618CB095A3CE80012CA3F /* EXtractoR */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C4E618CE095A3CE90012CA3F /* Build configuration list for PBXNativeTarget "EXtractoR" */;
+			buildPhases = (
+				C4E618C8095A3CE80012CA3F /* Resources */,
+				C4E618C9095A3CE80012CA3F /* Sources */,
+				C4E618CA095A3CE80012CA3F /* Frameworks */,
+				C4E618EA095A3E040012CA3F /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2ABA3018197EFA3900C754E6 /* PBXTargetDependency */,
+				2ABA3008197EF9E000C754E6 /* PBXTargetDependency */,
+			);
+			name = EXtractoR;
+			productName = SDK_Backwards.plugin;
+			productReference = C4E618CC095A3CE80012CA3F /* EXtractoR.plugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C4E6187E095A3C800012CA3F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = C4E6187F095A3C800012CA3F /* Build configuration list for PBXProject "EXtractoR" */;
+			compatibilityVersion = "Xcode 3.0";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = C4E6187C095A3C800012CA3F;
+			productRefGroup = C4E6188C095A3C800012CA3F /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 2ABA300C197EFA2700C754E6 /* Products */;
+					ProjectRef = 2ABA300B197EFA2700C754E6 /* IlmBase.xcodeproj */;
+				},
+				{
+					ProductGroup = 2ABA2FFC197EF9C000C754E6 /* Products */;
+					ProjectRef = 2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				C4E618CB095A3CE80012CA3F /* EXtractoR */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		2ABA3002197EF9C000C754E6 /* libOpenEXR.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libOpenEXR.a;
+			remoteRef = 2ABA3001197EF9C000C754E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2ABA3004197EF9C000C754E6 /* b44ExpLogTable */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = b44ExpLogTable;
+			remoteRef = 2ABA3003197EF9C000C754E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2ABA3006197EF9C000C754E6 /* dwaLookups */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = dwaLookups;
+			remoteRef = 2ABA3005197EF9C000C754E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2ABA3012197EFA2800C754E6 /* libIlmBase.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libIlmBase.a;
+			remoteRef = 2ABA3011197EFA2800C754E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2ABA3014197EFA2800C754E6 /* eLut */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = eLut;
+			remoteRef = 2ABA3013197EFA2800C754E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2ABA3016197EFA2800C754E6 /* toFloat */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = toFloat;
+			remoteRef = 2ABA3015197EFA2800C754E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C4E618C8095A3CE80012CA3F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A3BA9DF10C0E23B00AD32F2 /* EXtractoR_Dialog.xib in Resources */,
+				2A3BA9E510C0E25200AD32F2 /* EXtractoR banner.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		C4E618EA095A3E040012CA3F /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A8897E810C05F6900ADA4BB /* EXtractoR_PiPL.r in Rez */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C4E618C9095A3CE80012CA3F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A8897E610C05F6900ADA4BB /* EXtractoR.cpp in Sources */,
+				2A8897E710C05F6900ADA4BB /* EXtractoR_ArbData.cpp in Sources */,
+				2A8897E910C05F6900ADA4BB /* EXtractoR_UI.cpp in Sources */,
+				2A88980410C0626600ADA4BB /* fnord_MissingSuiteError.cpp in Sources */,
+				2A88980510C0626600ADA4BB /* fnord_SuiteHandler.cpp in Sources */,
+				2A3BA7B210C0C66200AD32F2 /* EXtractoR_Dialog_Cocoa.mm in Sources */,
+				2A3BA9F010C0E5B300AD32F2 /* EXtractoR_Dialog_Controller.m in Sources */,
+				2AC7450216555C2400980332 /* OpenEXR_UTF.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2ABA3008197EF9E000C754E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OpenEXR;
+			targetProxy = 2ABA3007197EF9E000C754E6 /* PBXContainerItemProxy */;
+		};
+		2ABA3018197EFA3900C754E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IlmBase;
+			targetProxy = 2ABA3017197EFA3900C754E6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2A1BAC2310C3C82A00244D12 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				AE_SDK = "\"../../ext/Adobe After Effects CS5 Mac SDK\"";
+				"AE_SDK[arch=i386]" = "\"../../ext/Adobe After Effects CS3 Mac SDK\"";
+				"AE_SDK[arch=ppc]" = "\"../../ext/Adobe After Effects CS3 Mac SDK\"";
+				ARCHS = x86_64;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(AE_SDK)/Examples/Headers",
+					"$(AE_SDK)/Examples/Util",
+					"$(AE_SDK)/Examples/Headers/SP",
+					"$(AE_SDK)/Examples/Resources",
+					../../ext/openexr/IlmBase/xcode/xcode3,
+					../../ext/openexr/IlmBase/Iex,
+					../../ext/openexr/OpenEXR/xcode/xcode3,
+					../../ext/openexr/OpenEXR/IlmImf,
+				);
+				REZ_PREPROCESSOR_DEFINITIONS = __MACH__;
+				REZ_SEARCH_PATHS = "$(SDK_DIR)/System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Headers";
+			};
+			name = Release;
+		};
+		2A1BAC2410C3C82A00244D12 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SDKROOT)/System/Library/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GENERATE_PKGINFO_FILE = YES;
+				INFOPLIST_FILE = "EXtractoR.plugin-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/EXtractoR/Build/Products/Debug",
+				);
+				LINK_WITH_STANDARD_LIBRARIES = YES;
+				PREBINDING = NO;
+				PRODUCT_NAME = EXtractoR;
+				WRAPPER_EXTENSION = plugin;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		C4E61880095A3C800012CA3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				AE_SDK = "\"../../ext/Adobe After Effects CS5 Mac SDK\"";
+				"AE_SDK[arch=i386]" = "\"../../ext/Adobe After Effects CS3 Mac SDK\"";
+				"AE_SDK[arch=ppc]" = "\"../../ext/Adobe After Effects CS3 Mac SDK\"";
+				ARCHS = x86_64;
+				COPY_PHASE_STRIP = NO;
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(AE_SDK)/Examples/Headers",
+					"$(AE_SDK)/Examples/Util",
+					"$(AE_SDK)/Examples/Headers/SP",
+					"$(AE_SDK)/Examples/Resources",
+					../../ext/openexr/IlmBase/xcode/xcode3,
+					../../ext/openexr/IlmBase/Iex,
+					../../ext/openexr/OpenEXR/xcode/xcode3,
+					../../ext/openexr/OpenEXR/IlmImf,
+				);
+				REZ_PREPROCESSOR_DEFINITIONS = __MACH__;
+				REZ_SEARCH_PATHS = "$(SDK_DIR)/System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Headers";
+				STRIP_INSTALLED_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		C4E618CF095A3CE90012CA3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SDKROOT)/System/Library/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GENERATE_PKGINFO_FILE = YES;
+				INFOPLIST_FILE = "EXtractoR.plugin-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/EXtractoR/Build/Products/Debug",
+				);
+				LINK_WITH_STANDARD_LIBRARIES = YES;
+				PREBINDING = NO;
+				PRODUCT_NAME = EXtractoR;
+				WRAPPER_EXTENSION = plugin;
+				ZERO_LINK = NO;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C4E6187F095A3C800012CA3F /* Build configuration list for PBXProject "EXtractoR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4E61880095A3C800012CA3F /* Debug */,
+				2A1BAC2310C3C82A00244D12 /* Release */,
+			);
+			defaultConfigurationIsVisible = 1;
+			defaultConfigurationName = Debug;
+		};
+		C4E618CE095A3CE90012CA3F /* Build configuration list for PBXNativeTarget "EXtractoR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4E618CF095A3CE90012CA3F /* Debug */,
+				2A1BAC2410C3C82A00244D12 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C4E6187E095A3C800012CA3F /* Project object */;
+}
