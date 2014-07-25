@@ -436,9 +436,9 @@ FrameSeq_DeathHook(const SPBasicSuite *pica_basicP)
 
 
 A_Err
-FrameSeq_IdleHook(const SPBasicSuite *pica_basicP, A_long *max_sleepPL)
+FrameSeq_IdleHook(AEIO_BasicData *basic_dataP, AEIO_IdleFlags *idle_flags0)
 {
-	return OpenEXR_IdleHook(pica_basicP);
+	return OpenEXR_IdleHook(basic_dataP, idle_flags0);
 }
 
 

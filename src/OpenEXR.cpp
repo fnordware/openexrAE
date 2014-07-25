@@ -219,13 +219,16 @@ OpenEXR_DeathHook(const SPBasicSuite *pica_basicP)
 
 
 A_Err
-OpenEXR_IdleHook(const SPBasicSuite *pica_basicP)
+OpenEXR_IdleHook(AEIO_BasicData *basic_dataP, AEIO_IdleFlags *idle_flags0)
 {
 	if(gCacheTimeout > 0)
 	{
-		gCachePool.deleteStaleCaches(gCacheTimeout);
+		const bool deleted_something = gCachePool.deleteStaleCaches(gCacheTimeout);
 		
-		DeleteFileCache(pica_basicP, gCacheTimeout);
+		if(deleted_something)
+			*idle_flags0 |= AEIO_IdleFlag_PURGED_MEM;
+		
+		DeleteFileCache(basic_dataP->pica_basicP, gCacheTimeout);
 	}
 
 	return A_Err_NONE;

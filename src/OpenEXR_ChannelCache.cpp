@@ -565,11 +565,13 @@ OpenEXR_CachePool::addCache(HybridInputFile &in, const IStreamPlatform &stream, 
 }
 
 
-void
+bool
 OpenEXR_CachePool::deleteStaleCaches(int timeout)
 {
 	if(_pool.size() > 0)
 	{
+		const int old_size = _pool.size();
+	
 		_pool.sort(compare_age);
 		
 		if( _pool.front()->cacheIsStale(timeout) )
@@ -578,7 +580,11 @@ OpenEXR_CachePool::deleteStaleCaches(int timeout)
 			
 			_pool.pop_front();
 		}
+		
+		return (_pool.size() < old_size); // did something actually get deleted?
 	}
+	
+	return false;
 }
 
 
