@@ -565,11 +565,13 @@ OpenEXR_CachePool::addCache(HybridInputFile &in, const IStreamPlatform &stream, 
 }
 
 
-void
+bool
 OpenEXR_CachePool::deleteStaleCaches(int timeout)
 {
 	if(_pool.size() > 0)
 	{
+		const int old_size = _pool.size();
+	
 		_pool.sort(compare_age);
 		
 		if( _pool.front()->cacheIsStale(timeout) )
@@ -578,7 +580,11 @@ OpenEXR_CachePool::deleteStaleCaches(int timeout)
 			
 			_pool.pop_front();
 		}
+		
+		return (_pool.size() < old_size); // did something actually get deleted?
 	}
+	
+	return false;
 }
 
 
@@ -588,7 +594,14 @@ int ScanlineBlockSize(const HybridInputFile &in)
 	// Piz and B44(A) compression use blocks of 32 scan lines,
 	// so we'll make sure each thread gets at least a full block.
 	
-	int scanline_block_size = 32 * max(globalThreadCount(), 1);
+	int scanline_block_size = 32;
+	
+	if(in.header(0).compression() == DWAB_COMPRESSION)
+		scanline_block_size = 256; // well, DWAB uses 256
+	
+	
+	scanline_block_size *= max(globalThreadCount(), 1);
+	
 	
 	if( isTiled( in.version() ) )
 	{

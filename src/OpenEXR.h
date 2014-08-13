@@ -53,7 +53,7 @@ A_Err
 OpenEXR_DeathHook(const SPBasicSuite *pica_basicP);
 
 A_Err
-OpenEXR_IdleHook(const SPBasicSuite *pica_basicP);
+OpenEXR_IdleHook(AEIO_BasicData *basic_dataP, AEIO_IdleFlags *idle_flags0);
 
 A_Err
 OpenEXR_PurgeHook(const SPBasicSuite *pica_basicP);

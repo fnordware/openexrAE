@@ -10,6 +10,8 @@
 
 #include "FrameSeq.h"
 
+#include <assert.h>
+
 AEGP_PluginID			S_mem_id					=	0;
 
 
@@ -18,14 +20,6 @@ static A_Err DeathHook(
 	AEGP_DeathRefcon deathcon)
 {
 	return FrameSeq_DeathHook((const SPBasicSuite *)deathcon);
-}
-
-static A_Err IdleHook(	
-	AEGP_GlobalRefcon unused1,
-	AEGP_IdleRefcon refcon,
-	A_long *max_sleepPL)
-{
-	return FrameSeq_IdleHook((const SPBasicSuite *)refcon, max_sleepPL);
 }
 
 static A_Err CommandHook(
@@ -62,7 +56,9 @@ static A_Err
 AEIO_InitInSpecInteractive(
 	AEIO_BasicData	*basic_dataP,
 	AEIO_InSpecH	specH)
-{ 
+{
+	assert(FALSE); // don't think I should be getting this
+	
 	return A_Err_NONE; 
 };
 
@@ -101,6 +97,8 @@ AEIO_SynchInSpec(
 	AEIO_InSpecH	specH, 
 	A_Boolean		*changed0)
 { 
+	assert(FALSE); // don't think I should be getting this
+	
 	return AEIO_Err_USE_DFLT_CALLBACK;
 };
 
@@ -111,6 +109,8 @@ AEIO_GetActiveExtent(
 	const A_Time	*tr,				/* >> */
 	A_LRect			*extent)			/* << */
 { 
+	assert(FALSE); // don't think I should be getting this
+	
 	return AEIO_Err_USE_DFLT_CALLBACK; 
 };		
 
@@ -146,6 +146,8 @@ AEIO_GetDimensions(
 	A_long					 *width0, 
 	A_long					 *height0)
 { 
+	assert(FALSE); // don't think I should be getting this
+	
 	return AEIO_Err_USE_DFLT_CALLBACK; 
 };
 					
@@ -155,6 +157,8 @@ AEIO_GetDuration(
 	AEIO_InSpecH	specH, 
 	A_Time			*tr)
 { 
+	assert(FALSE); // don't think I should be getting this
+	
 	return AEIO_Err_USE_DFLT_CALLBACK; 
 };
 
@@ -164,6 +168,8 @@ AEIO_GetTime(
 	AEIO_InSpecH	specH, 
 	A_Time			*tr)
 { 
+	assert(FALSE); // don't think I should be getting this
+	
 	return AEIO_Err_USE_DFLT_CALLBACK; 
 };
 
@@ -179,6 +185,8 @@ AEIO_GetSound(
 	A_u_long					num_samplesLu,
 	void						*dataPV)
 { 
+	assert(FALSE); // don't think I should be getting this
+	
 	return A_Err_NONE;
 };
 
@@ -231,6 +239,7 @@ AEIO_SetOutputFile(
 	const A_UTF16Char	*file_pathZ)
 #endif
 { 
+	// this does get called, will have the full "file.[####].exr" path
   	return AEIO_Err_USE_DFLT_CALLBACK;
 }
 
@@ -240,7 +249,7 @@ AEIO_StartAdding(
 	AEIO_OutSpecH		outH, 
 	A_long				flags)
 { 
-	// shouldn't get called for frame-based formats
+	// this does actually get called, if we need to prepare
 	return A_Err_NONE;
 };
 
@@ -255,7 +264,8 @@ AEIO_AddFrame(
 	A_Boolean				was_compressedB,	
 	AEIO_InterruptFuncs		*inter0)
 { 
-	// shouldn't get called for frame-based formats
+	assert(FALSE); // shouldn't get called for frame-based formats
+	
 	return A_Err_NONE;
 };
 								
@@ -265,7 +275,7 @@ AEIO_EndAdding(
 	AEIO_OutSpecH			outH, 
 	A_long					flags)
 { 
-	// shouldn't get called for frame-based formats
+	// done with the render, anything to dispose?
 	return A_Err_NONE;
 };
 
@@ -285,6 +295,7 @@ AEIO_WriteLabels(
 	AEIO_OutSpecH	outH, 
 	AEIO_LabelFlags	*written)
 { 
+	// yep, this is getting called, once per frame
 	return AEIO_Err_USE_DFLT_CALLBACK;
 };
 
@@ -295,6 +306,7 @@ AEIO_GetSizes(
 	A_u_longlong	*free_space, 
 	A_u_longlong	*file_size)
 { 
+	// this gets called, but default callback should be fine
 	return AEIO_Err_USE_DFLT_CALLBACK;
 };
 
@@ -302,9 +314,9 @@ static A_Err
 AEIO_Flush(
 	AEIO_BasicData	*basic_dataP,
 	AEIO_OutSpecH	outH)
-{ 
+{
 	/*	free any temp buffers you kept around for
-		writing.
+		writing.  Yes, this gets called.
 	*/
 	return A_Err_NONE; 
 };
@@ -317,7 +329,8 @@ AEIO_AddSoundChunk(
 	A_u_long	num_samplesLu,
 	const void		*dataPV)
 { 
-	// shouldn't get called for frame-based formats
+	assert(FALSE); // shouldn't get called for frame-based formats
+	
 	return A_Err_NONE;
 };
 
@@ -327,8 +340,10 @@ AEIO_Idle(
 	AEIO_BasicData			*basic_dataP,
 	AEIO_ModuleSignature	sig,
 	AEIO_IdleFlags			*idle_flags0)
-{ 
-	return A_Err_NONE; 
+{
+	assert(sig == 'oEXR' || sig == 'RXEo'); // some sort of historical endian thing?
+
+	return FrameSeq_IdleHook(basic_dataP, idle_flags0);
 };	
 
 
@@ -408,6 +423,7 @@ AEIO_NumAuxFiles(
 	A_long			*files_per_framePL0)
 { 
 	*files_per_framePL0 = 0;
+	
 	return A_Err_NONE; 
 };
 
@@ -422,7 +438,9 @@ AEIO_GetNthAuxFileSpec(
 #else
 	AEGP_MemHandle			*pathPH)
 #endif
-{ 
+{
+	assert(FALSE); // no aux files
+	
 	return A_Err_NONE; 
 };
 
@@ -430,7 +448,9 @@ static A_Err
 AEIO_CloseSourceFiles(
 	AEIO_BasicData	*basic_dataP,
 	AEIO_InSpecH			seqH)
-{ 
+{
+	assert(FALSE); // don't think I should be getting this
+
 	return A_Err_NONE; 
 };		// TRUE for close, FALSE for unclose
 
@@ -441,7 +461,9 @@ AEIO_CountUserData(
 	A_u_long 				typeLu,
 	A_u_long				max_sizeLu,
 	A_u_long				*num_of_typePLu)
-{ 
+{
+	assert(FALSE); // don't think I should be getting this
+
 	return A_Err_NONE; 
 };
 
@@ -453,6 +475,8 @@ AEIO_SetUserData(
 	A_u_long				indexLu,
 	const AEIO_Handle		dataH)
 { 
+	assert(FALSE); // don't think I should be getting this
+
 	return A_Err_NONE; 
 };
 
@@ -465,6 +489,8 @@ AEIO_GetUserData(
 	A_u_long				max_sizeLu,
 	AEIO_Handle				*dataPH)
 { 
+	assert(FALSE); // don't think I should be getting this
+	
 	return A_Err_NONE; 
 };
                             
@@ -476,7 +502,8 @@ AEIO_AddMarker(
 	AEIO_MarkerType 		marker_type, 
 	void					*marker_dataPV, 
 	AEIO_InterruptFuncs		*inter0)
-{ 
+{
+	assert(FALSE);  // don't expect to get this called
 	/*	The type of the marker is in marker_type,
 		and the text they contain is in 
 		marker_dataPV.
@@ -526,6 +553,7 @@ AEIO_GetFlatOutputOptions(
 	// FrameSeq
 	return FrameSeq_GetFlatOutputOptions(basic_dataP, outH, optionsPH);
 }
+
 
 static A_Err
 AEIO_ConstructModuleInfo(
@@ -641,12 +669,6 @@ GPMain_IO(
 		err = suites.RegisterSuite()->AEGP_RegisterDeathHook(aegp_plugin_id,
 															DeathHook,
 															(AEGP_DeathRefcon)pica_basicP);
-	}		
-	if (!err)
-	{
-		err = suites.RegisterSuite()->AEGP_RegisterIdleHook(aegp_plugin_id,
-															IdleHook,
-															(AEGP_IdleRefcon)pica_basicP);
 	}		
 	if (!err)
 	{

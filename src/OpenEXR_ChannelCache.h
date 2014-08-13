@@ -84,7 +84,7 @@ class OpenEXR_CachePool
 	
 	OpenEXR_ChannelCache *addCache(Imf::HybridInputFile &in, const IStreamPlatform &stream, const AEIO_InterruptFuncs *inter);
 	
-	void deleteStaleCaches(int timeout);
+	bool deleteStaleCaches(int timeout); // returns true if something was deleted
 	
   private:
 	int _max_caches;

@@ -11,7 +11,7 @@
 	
 	[compressionPulldown removeAllItems];
 	[compressionPulldown addItemsWithTitles:
-		[NSArray arrayWithObjects:@"None", @"RLE", @"Zip", @"Zip16", @"Piz", @"PXR24", @"B44", @"B44A", nil]];
+		[NSArray arrayWithObjects:@"None", @"RLE", @"Zip", @"Zip16", @"Piz", @"PXR24", @"B44", @"B44A", @"DWAA", @"DWAB", nil]];
 
 	theResult = DIALOG_RESULT_CONTINUE;
 

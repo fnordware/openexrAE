@@ -110,7 +110,7 @@ A_Err
 FrameSeq_DeathHook(const SPBasicSuite *pica_basicP);
 
 A_Err
-FrameSeq_IdleHook(const SPBasicSuite *pica_basicP, A_long *max_sleepPL);
+FrameSeq_IdleHook(AEIO_BasicData *basic_dataP, AEIO_IdleFlags *idle_flags0);
 
 A_Err
 FrameSeq_PurgeHook(const SPBasicSuite *pica_basicP);

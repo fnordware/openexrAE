@@ -219,13 +219,16 @@ OpenEXR_DeathHook(const SPBasicSuite *pica_basicP)
 
 
 A_Err
-OpenEXR_IdleHook(const SPBasicSuite *pica_basicP)
+OpenEXR_IdleHook(AEIO_BasicData *basic_dataP, AEIO_IdleFlags *idle_flags0)
 {
 	if(gCacheTimeout > 0)
 	{
-		gCachePool.deleteStaleCaches(gCacheTimeout);
+		const bool deleted_something = gCachePool.deleteStaleCaches(gCacheTimeout);
 		
-		DeleteFileCache(pica_basicP, gCacheTimeout);
+		if(deleted_something)
+			*idle_flags0 |= AEIO_IdleFlag_PURGED_MEM;
+		
+		DeleteFileCache(basic_dataP->pica_basicP, gCacheTimeout);
 	}
 
 	return A_Err_NONE;
@@ -358,6 +361,14 @@ OpenEXR_GetInSpecInfo(
 
 			case Imf::B44A_COMPRESSION:
 				info += "B44A compression";
+				break;
+
+			case Imf::DWAA_COMPRESSION:
+				info += "DWAA compression";
+				break;
+
+			case Imf::DWAB_COMPRESSION:
+				info += "DWAB compression";
 				break;
 
 			default:
@@ -1420,7 +1431,7 @@ OpenEXR_CopyInOptions(
 	const OpenEXR_inData	*old_options)
 {
 	// test to see if this looks like one of our options handles
-	if(old_options->compression_type <= Imf::B44A_COMPRESSION &&
+	if(old_options->compression_type < Imf::NUM_COMPRESSION_METHODS &&
 		(old_options->cache_channels == TRUE || old_options->cache_channels == FALSE) &&
 		old_options->display_window <= DW_UNKNOWN)
 	{
@@ -2438,6 +2449,14 @@ OpenEXR_GetOutSpecInfo(
 			
 		case Imf::B44A_COMPRESSION:
 			strcpy(verbiageP->sub_type, "B44A compression");
+			break;
+
+		case Imf::DWAA_COMPRESSION:
+			strcpy(verbiageP->sub_type, "DWAA compression");
+			break;
+
+		case Imf::DWAB_COMPRESSION:
+			strcpy(verbiageP->sub_type, "DWAB compression");
 			break;
 
 		default:
