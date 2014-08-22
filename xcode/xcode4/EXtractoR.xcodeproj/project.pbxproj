@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A294E0C19A7C69E00375270 /* libIlmBase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A294DF719A7C64800375270 /* libIlmBase.a */; };
+		2A294E0D19A7C69E00375270 /* libOpenEXR.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A294E0319A7C65900375270 /* libOpenEXR.a */; };
 		2A3BA7B210C0C66200AD32F2 /* EXtractoR_Dialog_Cocoa.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2A3BA7B110C0C66200AD32F2 /* EXtractoR_Dialog_Cocoa.mm */; };
 		2A3BA9DF10C0E23B00AD32F2 /* EXtractoR_Dialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A3BA9DE10C0E23B00AD32F2 /* EXtractoR_Dialog.xib */; };
 		2A3BA9E510C0E25200AD32F2 /* EXtractoR banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A3BA9E410C0E25200AD32F2 /* EXtractoR banner.png */; };
@@ -18,67 +20,65 @@
 		2A8897E910C05F6900ADA4BB /* EXtractoR_UI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A8897E510C05F6900ADA4BB /* EXtractoR_UI.cpp */; };
 		2A88980410C0626600ADA4BB /* fnord_MissingSuiteError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A88980110C0626600ADA4BB /* fnord_MissingSuiteError.cpp */; };
 		2A88980510C0626600ADA4BB /* fnord_SuiteHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A88980210C0626600ADA4BB /* fnord_SuiteHandler.cpp */; };
-		2ABA3009197EF9E900C754E6 /* libOpenEXR.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABA3002197EF9C000C754E6 /* libOpenEXR.a */; };
-		2ABA301B197EFA4F00C754E6 /* libIlmBase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABA3012197EFA2800C754E6 /* libIlmBase.a */; };
 		2AC7450216555C2400980332 /* OpenEXR_UTF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7450016555C2400980332 /* OpenEXR_UTF.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2ABA3001197EF9C000C754E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2A6D4B1515CDE3DE006BADE7;
-			remoteInfo = OpenEXR;
-		};
-		2ABA3003197EF9C000C754E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2A588C1A19787559000D94D0;
-			remoteInfo = b44ExpLogTable;
-		};
-		2ABA3005197EF9C000C754E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2A588C3C197875C2000D94D0;
-			remoteInfo = dwaLookups;
-		};
-		2ABA3007197EF9E000C754E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 2A6D4B1415CDE3DE006BADE7;
-			remoteInfo = OpenEXR;
-		};
-		2ABA3011197EFA2800C754E6 /* PBXContainerItemProxy */ = {
+		2A294DF619A7C64800375270 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2ABA300B197EFA2700C754E6 /* IlmBase.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 2A6D4C4D15CDEB0A006BADE7;
 			remoteInfo = IlmBase;
 		};
-		2ABA3013197EFA2800C754E6 /* PBXContainerItemProxy */ = {
+		2A294DF819A7C64800375270 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2ABA300B197EFA2700C754E6 /* IlmBase.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 2A6D4CFF15CDEBEF006BADE7;
 			remoteInfo = eLut;
 		};
-		2ABA3015197EFA2800C754E6 /* PBXContainerItemProxy */ = {
+		2A294DFA19A7C64800375270 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2ABA300B197EFA2700C754E6 /* IlmBase.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 2A6D4D3715CDF275006BADE7;
 			remoteInfo = toFloat;
 		};
-		2ABA3017197EFA3900C754E6 /* PBXContainerItemProxy */ = {
+		2A294E0219A7C65900375270 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A6D4B1515CDE3DE006BADE7;
+			remoteInfo = OpenEXR;
+		};
+		2A294E0419A7C65900375270 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A588C1A19787559000D94D0;
+			remoteInfo = b44ExpLogTable;
+		};
+		2A294E0619A7C65900375270 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A588C3C197875C2000D94D0;
+			remoteInfo = dwaLookups;
+		};
+		2A294E0819A7C69400375270 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2ABA300B197EFA2700C754E6 /* IlmBase.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 2A6D4C4C15CDEB0A006BADE7;
 			remoteInfo = IlmBase;
+		};
+		2A294E0A19A7C69400375270 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A6D4B1415CDE3DE006BADE7;
+			remoteInfo = OpenEXR;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -97,8 +97,8 @@
 		2A88980110C0626600ADA4BB /* fnord_MissingSuiteError.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fnord_MissingSuiteError.cpp; path = ../../src/fnord_MissingSuiteError.cpp; sourceTree = SOURCE_ROOT; };
 		2A88980210C0626600ADA4BB /* fnord_SuiteHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fnord_SuiteHandler.cpp; path = ../../src/fnord_SuiteHandler.cpp; sourceTree = SOURCE_ROOT; };
 		2A88980310C0626600ADA4BB /* fnord_SuiteHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fnord_SuiteHandler.h; path = ../../src/fnord_SuiteHandler.h; sourceTree = SOURCE_ROOT; };
-		2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenEXR.xcodeproj; path = ../../ext/openexr/OpenEXR/xcode/xcode5/OpenEXR.xcodeproj; sourceTree = "<group>"; };
-		2ABA300B197EFA2700C754E6 /* IlmBase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IlmBase.xcodeproj; path = ../../ext/openexr/IlmBase/xcode/xcode5/IlmBase.xcodeproj; sourceTree = "<group>"; };
+		2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenEXR.xcodeproj; path = ../../ext/openexr/OpenEXR/xcode/xcode4/OpenEXR.xcodeproj; sourceTree = "<group>"; };
+		2ABA300B197EFA2700C754E6 /* IlmBase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IlmBase.xcodeproj; path = ../../ext/openexr/IlmBase/xcode/xcode4/IlmBase.xcodeproj; sourceTree = "<group>"; };
 		2AC7450016555C2400980332 /* OpenEXR_UTF.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenEXR_UTF.cpp; path = ../../src/OpenEXR_UTF.cpp; sourceTree = SOURCE_ROOT; };
 		2AC7450116555C2400980332 /* OpenEXR_UTF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenEXR_UTF.h; path = ../../src/OpenEXR_UTF.h; sourceTree = SOURCE_ROOT; };
 		2AE34DD0175DAFFE00417904 /* EXtractoR_Dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EXtractoR_Dialog.h; path = ../../src/EXtractoR_Dialog.h; sourceTree = SOURCE_ROOT; };
@@ -111,8 +111,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2ABA301B197EFA4F00C754E6 /* libIlmBase.a in Frameworks */,
-				2ABA3009197EF9E900C754E6 /* libOpenEXR.a in Frameworks */,
+				2A294E0C19A7C69E00375270 /* libIlmBase.a in Frameworks */,
+				2A294E0D19A7C69E00375270 /* libOpenEXR.a in Frameworks */,
 				2A3BAA7110C0F40600AD32F2 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,22 +120,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2ABA2FFC197EF9C000C754E6 /* Products */ = {
+		2A294DF119A7C64800375270 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2ABA3002197EF9C000C754E6 /* libOpenEXR.a */,
-				2ABA3004197EF9C000C754E6 /* b44ExpLogTable */,
-				2ABA3006197EF9C000C754E6 /* dwaLookups */,
+				2A294DF719A7C64800375270 /* libIlmBase.a */,
+				2A294DF919A7C64800375270 /* eLut */,
+				2A294DFB19A7C64800375270 /* toFloat */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2ABA300C197EFA2700C754E6 /* Products */ = {
+		2A294DFD19A7C65900375270 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2ABA3012197EFA2800C754E6 /* libIlmBase.a */,
-				2ABA3014197EFA2800C754E6 /* eLut */,
-				2ABA3016197EFA2800C754E6 /* toFloat */,
+				2A294E0319A7C65900375270 /* libOpenEXR.a */,
+				2A294E0519A7C65900375270 /* b44ExpLogTable */,
+				2A294E0719A7C65900375270 /* dwaLookups */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -191,8 +191,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				2ABA3018197EFA3900C754E6 /* PBXTargetDependency */,
-				2ABA3008197EF9E000C754E6 /* PBXTargetDependency */,
+				2A294E0919A7C69400375270 /* PBXTargetDependency */,
+				2A294E0B19A7C69400375270 /* PBXTargetDependency */,
 			);
 			name = EXtractoR;
 			productName = SDK_Backwards.plugin;
@@ -219,11 +219,11 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 2ABA300C197EFA2700C754E6 /* Products */;
+					ProductGroup = 2A294DF119A7C64800375270 /* Products */;
 					ProjectRef = 2ABA300B197EFA2700C754E6 /* IlmBase.xcodeproj */;
 				},
 				{
-					ProductGroup = 2ABA2FFC197EF9C000C754E6 /* Products */;
+					ProductGroup = 2A294DFD19A7C65900375270 /* Products */;
 					ProjectRef = 2ABA2FFB197EF9C000C754E6 /* OpenEXR.xcodeproj */;
 				},
 			);
@@ -235,46 +235,46 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		2ABA3002197EF9C000C754E6 /* libOpenEXR.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libOpenEXR.a;
-			remoteRef = 2ABA3001197EF9C000C754E6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2ABA3004197EF9C000C754E6 /* b44ExpLogTable */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = b44ExpLogTable;
-			remoteRef = 2ABA3003197EF9C000C754E6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2ABA3006197EF9C000C754E6 /* dwaLookups */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = dwaLookups;
-			remoteRef = 2ABA3005197EF9C000C754E6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2ABA3012197EFA2800C754E6 /* libIlmBase.a */ = {
+		2A294DF719A7C64800375270 /* libIlmBase.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libIlmBase.a;
-			remoteRef = 2ABA3011197EFA2800C754E6 /* PBXContainerItemProxy */;
+			remoteRef = 2A294DF619A7C64800375270 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		2ABA3014197EFA2800C754E6 /* eLut */ = {
+		2A294DF919A7C64800375270 /* eLut */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			path = eLut;
-			remoteRef = 2ABA3013197EFA2800C754E6 /* PBXContainerItemProxy */;
+			remoteRef = 2A294DF819A7C64800375270 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		2ABA3016197EFA2800C754E6 /* toFloat */ = {
+		2A294DFB19A7C64800375270 /* toFloat */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			path = toFloat;
-			remoteRef = 2ABA3015197EFA2800C754E6 /* PBXContainerItemProxy */;
+			remoteRef = 2A294DFA19A7C64800375270 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2A294E0319A7C65900375270 /* libOpenEXR.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libOpenEXR.a;
+			remoteRef = 2A294E0219A7C65900375270 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2A294E0519A7C65900375270 /* b44ExpLogTable */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = b44ExpLogTable;
+			remoteRef = 2A294E0419A7C65900375270 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2A294E0719A7C65900375270 /* dwaLookups */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = dwaLookups;
+			remoteRef = 2A294E0619A7C65900375270 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -321,15 +321,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2ABA3008197EF9E000C754E6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = OpenEXR;
-			targetProxy = 2ABA3007197EF9E000C754E6 /* PBXContainerItemProxy */;
-		};
-		2ABA3018197EFA3900C754E6 /* PBXTargetDependency */ = {
+		2A294E0919A7C69400375270 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = IlmBase;
-			targetProxy = 2ABA3017197EFA3900C754E6 /* PBXContainerItemProxy */;
+			targetProxy = 2A294E0819A7C69400375270 /* PBXContainerItemProxy */;
+		};
+		2A294E0B19A7C69400375270 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OpenEXR;
+			targetProxy = 2A294E0A19A7C69400375270 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -351,9 +351,9 @@
 					"$(AE_SDK)/Examples/Util",
 					"$(AE_SDK)/Examples/Headers/SP",
 					"$(AE_SDK)/Examples/Resources",
-					../../ext/openexr/IlmBase/xcode/xcode5,
+					../../ext/openexr/IlmBase/xcode/xcode4,
 					../../ext/openexr/IlmBase/Iex,
-					../../ext/openexr/OpenEXR/xcode/xcode5,
+					../../ext/openexr/OpenEXR/xcode/xcode4,
 					../../ext/openexr/OpenEXR/IlmImf,
 				);
 				REZ_PREPROCESSOR_DEFINITIONS = __MACH__;
@@ -399,9 +399,9 @@
 					"$(AE_SDK)/Examples/Util",
 					"$(AE_SDK)/Examples/Headers/SP",
 					"$(AE_SDK)/Examples/Resources",
-					../../ext/openexr/IlmBase/xcode/xcode5,
+					../../ext/openexr/IlmBase/xcode/xcode4,
 					../../ext/openexr/IlmBase/Iex,
-					../../ext/openexr/OpenEXR/xcode/xcode5,
+					../../ext/openexr/OpenEXR/xcode/xcode4,
 					../../ext/openexr/OpenEXR/IlmImf,
 				);
 				REZ_PREPROCESSOR_DEFINITIONS = __MACH__;
