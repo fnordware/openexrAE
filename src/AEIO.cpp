@@ -60,7 +60,7 @@ AEIO_InitInSpecInteractive(
 	assert(FALSE); // don't think I should be getting this
 	
 	return A_Err_NONE; 
-};
+}
 
 static A_Err
 AEIO_DisposeInSpec(
@@ -69,7 +69,7 @@ AEIO_DisposeInSpec(
 { 
 	// FrameSeq
 	return FrameSeq_DisposeInSpec(basic_dataP, specH);
-};
+}
 
 static A_Err
 AEIO_FlattenOptions(
@@ -79,7 +79,7 @@ AEIO_FlattenOptions(
 { 
 	// FrameSeq
 	return FrameSeq_FlattenOptions(basic_dataP, specH, flat_optionsPH);
-};		
+}	
 
 static A_Err
 AEIO_InflateOptions(
@@ -89,7 +89,7 @@ AEIO_InflateOptions(
 { 
 	// FrameSeq
 	return FrameSeq_InflateOptions(basic_dataP, specH, flat_optionsH);
-};		
+}
 
 static A_Err
 AEIO_SynchInSpec(
@@ -97,10 +97,10 @@ AEIO_SynchInSpec(
 	AEIO_InSpecH	specH, 
 	A_Boolean		*changed0)
 { 
-	assert(FALSE); // don't think I should be getting this
+	// called when project is loaded
 	
 	return AEIO_Err_USE_DFLT_CALLBACK;
-};
+}
 
 static A_Err	
 AEIO_GetActiveExtent(
@@ -112,7 +112,7 @@ AEIO_GetActiveExtent(
 	assert(FALSE); // don't think I should be getting this
 	
 	return AEIO_Err_USE_DFLT_CALLBACK; 
-};		
+}
 
 static A_Err	
 AEIO_GetInSpecInfo(
@@ -122,8 +122,7 @@ AEIO_GetInSpecInfo(
 { 
 	// handled by FrameSeq framework
 	return FrameSeq_GetInSpecInfo(basic_dataP, specH, verbiageP);
-};
-
+}
 
 static A_Err	
 AEIO_DrawSparseFrame(
@@ -135,8 +134,7 @@ AEIO_DrawSparseFrame(
 { 
 	// handled by the FrameSeq framework
 	return FrameSeq_DrawSparseFrame(basic_dataP, specH, sparse_framePPB, wP, draw_flagsP);
-
-};
+}
 
 static A_Err	
 AEIO_GetDimensions(
@@ -149,7 +147,7 @@ AEIO_GetDimensions(
 	assert(FALSE); // don't think I should be getting this
 	
 	return AEIO_Err_USE_DFLT_CALLBACK; 
-};
+}
 					
 static A_Err	
 AEIO_GetDuration(
@@ -160,7 +158,7 @@ AEIO_GetDuration(
 	assert(FALSE); // don't think I should be getting this
 	
 	return AEIO_Err_USE_DFLT_CALLBACK; 
-};
+}
 
 static A_Err	
 AEIO_GetTime(
@@ -171,7 +169,7 @@ AEIO_GetTime(
 	assert(FALSE); // don't think I should be getting this
 	
 	return AEIO_Err_USE_DFLT_CALLBACK; 
-};
+}
 
 static A_Err	
 AEIO_GetSound(
@@ -188,7 +186,7 @@ AEIO_GetSound(
 	assert(FALSE); // don't think I should be getting this
 	
 	return A_Err_NONE;
-};
+}
 
 static A_Err	
 AEIO_InqNextFrameTime(
@@ -200,7 +198,7 @@ AEIO_InqNextFrameTime(
 	A_Time					*key_time_tr0)
 { 
 	return AEIO_Err_USE_DFLT_CALLBACK; 
-};
+}
 
 static A_Err	
 AEIO_DisposeOutputOptions(
@@ -208,7 +206,7 @@ AEIO_DisposeOutputOptions(
 	void			*optionsPV) // what the...?
 { 
 	return FrameSeq_DisposeOutputOptions(basic_dataP, optionsPV);
-};
+}
 
 static A_Err	
 AEIO_UserOptionsDialog(
@@ -218,7 +216,7 @@ AEIO_UserOptionsDialog(
 	A_Boolean			*user_interacted0)
 { 
 	return FrameSeq_UserOptionsDialog(basic_dataP, outH, sample0, user_interacted0);
-};
+}
 
 static A_Err	
 AEIO_GetOutputInfo(
@@ -227,7 +225,7 @@ AEIO_GetOutputInfo(
 	AEIO_Verbiage		*verbiageP)
 { 
 	return FrameSeq_GetOutputInfo(basic_dataP, outH, verbiageP);
-};
+}
 
 static A_Err	
 AEIO_SetOutputFile(
@@ -251,7 +249,7 @@ AEIO_StartAdding(
 { 
 	// this does actually get called, if we need to prepare
 	return A_Err_NONE;
-};
+}
 
 static A_Err	
 AEIO_AddFrame(
@@ -267,7 +265,7 @@ AEIO_AddFrame(
 	assert(FALSE); // shouldn't get called for frame-based formats
 	
 	return A_Err_NONE;
-};
+}
 								
 static A_Err	
 AEIO_EndAdding(
@@ -277,7 +275,7 @@ AEIO_EndAdding(
 { 
 	// done with the render, anything to dispose?
 	return A_Err_NONE;
-};
+}
 
 static A_Err	
 AEIO_OutputFrame(
@@ -287,7 +285,7 @@ AEIO_OutputFrame(
 {
 	// FrameSeq 
 	return FrameSeq_OutputFrame(basic_dataP, outH, wP);
-};
+}
 
 static A_Err	
 AEIO_WriteLabels(
@@ -297,7 +295,7 @@ AEIO_WriteLabels(
 { 
 	// yep, this is getting called, once per frame
 	return AEIO_Err_USE_DFLT_CALLBACK;
-};
+}
 
 static A_Err	
 AEIO_GetSizes(
@@ -308,7 +306,7 @@ AEIO_GetSizes(
 { 
 	// this gets called, but default callback should be fine
 	return AEIO_Err_USE_DFLT_CALLBACK;
-};
+}
 
 static A_Err	
 AEIO_Flush(
@@ -319,7 +317,7 @@ AEIO_Flush(
 		writing.  Yes, this gets called.
 	*/
 	return A_Err_NONE; 
-};
+}
 
 static A_Err	
 AEIO_AddSoundChunk(
@@ -332,7 +330,7 @@ AEIO_AddSoundChunk(
 	assert(FALSE); // shouldn't get called for frame-based formats
 	
 	return A_Err_NONE;
-};
+}
 
 
 static A_Err	
@@ -344,8 +342,7 @@ AEIO_Idle(
 	assert(sig == 'oEXR' || sig == 'RXEo'); // some sort of historical endian thing?
 
 	return FrameSeq_IdleHook(basic_dataP, idle_flags0);
-};	
-
+}
 
 static A_Err	
 AEIO_GetDepths(
@@ -355,7 +352,7 @@ AEIO_GetDepths(
 { 
 	// yeah, FrameSeq
 	return FrameSeq_GetDepths(basic_dataP, outH, which);
-};
+}
 
 static A_Err	
 AEIO_GetOutputSuffix(
@@ -364,8 +361,7 @@ AEIO_GetOutputSuffix(
 	A_char			*suffix)
 { 
 	return AEIO_Err_USE_DFLT_CALLBACK;
-};
-
+}
 
 static A_Err	
 AEIO_SeqOptionsDlg(
@@ -375,7 +371,7 @@ AEIO_SeqOptionsDlg(
 { 
 	// FrameSeq got dis
 	return FrameSeq_SeqOptionsDlg(basic_dataP, specH, user_interactedPB0);
-};
+}
 
 static A_Err	
 AEIO_GetNumAuxChannels(
@@ -384,7 +380,7 @@ AEIO_GetNumAuxChannels(
 	A_long			*num_channelsPL)
 { 
 	return FrameSeq_GetNumAuxChannels(basic_dataP, specH, num_channelsPL);
-};
+}
 									
 static A_Err	
 AEIO_GetAuxChannelDesc(	
@@ -394,7 +390,7 @@ AEIO_GetAuxChannelDesc(
 	PF_ChannelDesc	*descP)
 { 
 	return FrameSeq_GetAuxChannelDesc(basic_dataP, specH, chan_indexL, descP);	
-};
+}
 																
 static A_Err	
 AEIO_DrawAuxChannel(
@@ -405,7 +401,7 @@ AEIO_DrawAuxChannel(
 	PF_ChannelChunk			*chunkP)
 { 
 	return FrameSeq_DrawAuxChannel(basic_dataP, specH, chan_indexL, pbP, chunkP);
-};
+}
 
 static A_Err	
 AEIO_FreeAuxChannel(	
@@ -414,7 +410,7 @@ AEIO_FreeAuxChannel(
 	PF_ChannelChunk			*chunkP)
 { 
 	return FrameSeq_FreeAuxChannel(basic_dataP, specH, chunkP);
-};
+}
 
 static A_Err	
 AEIO_NumAuxFiles(		
@@ -425,7 +421,7 @@ AEIO_NumAuxFiles(
 	*files_per_framePL0 = 0;
 	
 	return A_Err_NONE; 
-};
+}
 
 static A_Err	
 AEIO_GetNthAuxFileSpec(
@@ -442,7 +438,7 @@ AEIO_GetNthAuxFileSpec(
 	assert(FALSE); // no aux files
 	
 	return A_Err_NONE; 
-};
+}
 
 static A_Err	
 AEIO_CloseSourceFiles(
@@ -452,7 +448,7 @@ AEIO_CloseSourceFiles(
 	assert(FALSE); // don't think I should be getting this
 
 	return A_Err_NONE; 
-};		// TRUE for close, FALSE for unclose
+}
 
 static A_Err	
 AEIO_CountUserData(
@@ -465,7 +461,7 @@ AEIO_CountUserData(
 	assert(FALSE); // don't think I should be getting this
 
 	return A_Err_NONE; 
-};
+}
 
 static A_Err	
 AEIO_SetUserData(    
@@ -478,7 +474,7 @@ AEIO_SetUserData(
 	assert(FALSE); // don't think I should be getting this
 
 	return A_Err_NONE; 
-};
+}
 
 static A_Err	
 AEIO_GetUserData(   
@@ -492,7 +488,7 @@ AEIO_GetUserData(
 	assert(FALSE); // don't think I should be getting this
 	
 	return A_Err_NONE; 
-};
+}
                             
 static A_Err	
 AEIO_AddMarker(		
@@ -509,7 +505,7 @@ AEIO_AddMarker(
 		marker_dataPV.
 	*/
 	return A_Err_NONE; 
-};
+}
 
 static A_Err	
 AEIO_VerifyFileImportable(
@@ -520,7 +516,7 @@ AEIO_VerifyFileImportable(
 { 
 	// pass along to FrameSeq
 	return FrameSeq_VerifyFileImportable(basic_dataP, sig, file_pathZ, importablePB);
-};		
+}	
 	
 static A_Err	
 AEIO_InitOutputSpec(
@@ -532,7 +528,6 @@ AEIO_InitOutputSpec(
 	return FrameSeq_InitOutputSpec(basic_dataP, outH, user_interacted);
 }
 
-
 static A_Err	
 AEIO_OutputInfoChanged(
 	AEIO_BasicData		*basic_dataP,
@@ -541,8 +536,6 @@ AEIO_OutputInfoChanged(
 	// different options will just result in different options data, that's all
 	return A_Err_NONE;
 }
-
-
 
 static A_Err	
 AEIO_GetFlatOutputOptions(
@@ -553,7 +546,6 @@ AEIO_GetFlatOutputOptions(
 	// FrameSeq
 	return FrameSeq_GetFlatOutputOptions(basic_dataP, outH, optionsPH);
 }
-
 
 static A_Err
 AEIO_ConstructModuleInfo(
