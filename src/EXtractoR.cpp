@@ -1262,6 +1262,24 @@ DoDialog(
 				layers[*i] = chans;
 			}
 			
+			
+			// make layers for channels that aren't part of a layer situation, like "Z"
+			for(Imf::ChannelList::ConstIterator chan = channels.begin(); chan != channels.end(); ++chan)
+			{
+				const string &name = chan.name();
+				
+				if(name.find('.') == string::npos &&
+					name != "R" && name != "G" && name != "B" && name != "A")
+				{
+					ChannelVec chans;
+					
+					chans.push_back(name);
+					
+					layers[name] = chans;
+				}
+			}
+			
+			
 			ChannelData	*channel_data[4] = {&arb_data->red,
 											&arb_data->green,
 											&arb_data->blue,
