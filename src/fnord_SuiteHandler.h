@@ -22,6 +22,11 @@
 
 // Here's a SuiteHandler that can work in several different versions of AE.
 
+#ifndef PF_AE105_PLUG_IN_VERSION
+#define PF_AE105_PLUG_IN_VERSION	13
+#define PF_AE105_PLUG_IN_SUBVERS	1
+#endif
+
 #ifndef PF_AE100_PLUG_IN_VERSION
 #define PF_AE100_PLUG_IN_VERSION	13
 #endif
@@ -31,6 +36,7 @@
 // Suites to use before AE10
 typedef		AEIO_FunctionBlock2				Current_AEIO_FunctionBlock;
 typedef		A_char							A_PathType;
+typedef		A_char							A_NameType;
 
 #define		kAEGPRegisterSuiteVersion		kAEGPRegisterSuiteVersion3
 typedef		AEGP_RegisterSuite3				AEGP_RegisterSuite;
@@ -54,6 +60,10 @@ typedef		PFAppSuite3						PFAppSuite;
 typedef		AEGP_PersistentDataSuite2		AEGP_PersistentDataSuite;
 #define		kAEGPItemSuiteVersion			kAEGPItemSuiteVersion7
 typedef		AEGP_ItemSuite7					AEGP_ItemSuite;
+#define		kAEGPCompSuiteVersion			kAEGPCompSuiteVersion6
+typedef		AEGP_CompSuite6					AEGP_CompSuite;
+#define		kAEGPLayerSuiteVersion			kAEGPLayerSuiteVersion5
+typedef		AEGP_LayerSuite5				AEGP_LayerSuite;
 
 #else
 
@@ -62,6 +72,8 @@ typedef		AEGP_ItemSuite7					AEGP_ItemSuite;
 typedef		AEIO_FunctionBlock4				Current_AEIO_FunctionBlock;
 typedef		A_UTF16Char						A_PathType;
 #define		AE_UNICODE_PATHS				1
+typedef		A_UTF16Char						A_NameType;
+#define		AE_UNICODE_NAMES				1
 
 #define		kAEGPRegisterSuiteVersion		kAEGPRegisterSuiteVersion5
 typedef		AEGP_RegisterSuite5				AEGP_RegisterSuite;
@@ -85,6 +97,10 @@ typedef		PFAppSuite4						PFAppSuite;
 typedef		AEGP_PersistentDataSuite3		AEGP_PersistentDataSuite;
 #define		kAEGPItemSuiteVersion			kAEGPItemSuiteVersion8
 typedef		AEGP_ItemSuite8					AEGP_ItemSuite;
+#define		kAEGPCompSuiteVersion			kAEGPCompSuiteVersion7
+typedef		AEGP_CompSuite7					AEGP_CompSuite;
+#define		kAEGPLayerSuiteVersion			kAEGPLayerSuiteVersion6
+typedef		AEGP_LayerSuite6				AEGP_LayerSuite;
 
 // only available in >=10.0
 #include <adobesdk/DrawbotSuite.h>
@@ -128,10 +144,10 @@ typedef		PF_iterateFloatSuite1			PF_IterateFloatSuite;
 typedef		AEGP_IterateSuite1				AEGP_IterateSuite;
 #define		kAEGPRQItemSuiteVersion			kAEGPRQItemSuiteVersion3
 typedef		AEGP_RQItemSuite3				AEGP_RQItemSuite;
-#define		kAEGPCompSuiteVersion			kAEGPCompSuiteVersion6
-typedef		AEGP_CompSuite6					AEGP_CompSuite;
-#define		kAEGPLayerSuiteVersion			kAEGPLayerSuiteVersion5
-typedef		AEGP_LayerSuite5				AEGP_LayerSuite;
+#define		kAEGPRenderOptionsSuiteVersion	kAEGPRenderOptionsSuiteVersion3
+typedef		AEGP_RenderOptionsSuite3		AEGP_RenderOptionsSuite;
+#define		kAEGPRenderSuiteVersion			kAEGPRenderSuiteVersion2
+typedef		AEGP_RenderSuite2				AEGP_RenderSuite;
 #define		kAEGPCameraSuiteVersion			kAEGPCameraSuiteVersion2
 typedef		AEGP_CameraSuite2				AEGP_CameraSuite;
 #define		kAEGPCollectionSuiteVersion		kAEGPCollectionSuiteVersion2
@@ -154,6 +170,8 @@ typedef		PF_HandleSuite1					PF_HandleSuite;
 typedef		AEGP_ColorSettingsSuite2		AEGP_ColorSettingsSuite;
 #define		kPFAdvAppSuiteVersion			kPFAdvAppSuiteVersion1
 typedef		PF_AdvAppSuite1					PFAdvAppSuite;
+#define		kAEGPTextDocumentSuiteVersion	kAEGPTextDocumentSuiteVersion1
+typedef		AEGP_TextDocumentSuite1			AEGP_TextDocumentSuite;
 
 // Suite registration and handling object
 class AEGP_SuiteHandler {
@@ -181,6 +199,8 @@ private:
 		AEGP_IOInSuite				*io_in_suiteP;
 		AEGP_IOOutSuite				*io_out_suiteP;
 		AEGP_RQItemSuite			*rq_item_suiteP;
+		AEGP_RenderOptionsSuite		*render_options_suiteP;
+		AEGP_RenderSuite			*render_suiteP;
 		AEGP_CompSuite				*comp_suiteP;
 		AEGP_LayerSuite				*layer_suiteP;
 		AEGP_CameraSuite			*camera_suiteP;
@@ -200,6 +220,7 @@ private:
 		PFAppSuite					*app_suiteP;
 		PFAdvAppSuite				*adv_app_suiteP;
 		AEGP_PersistentDataSuite	*persistent_data_suiteP;
+		AEGP_TextDocumentSuite		*text_document_suiteP;
 
 	#if PF_AE_PLUG_IN_VERSION >= PF_AE100_PLUG_IN_VERSION
 		DB_DrawbotSuite				*db_drawbot_suiteP;
@@ -208,6 +229,13 @@ private:
 		DB_PathSuite				*db_path_suiteP;
 		PF_EffectCustomUISuite		*pf_effect_customUI_suiteP;
 		PF_CustomUIThemeSuite		*pf_customUI_theme_suiteP;
+		
+		// if we need the new timecode stuff
+		#if PF_AE_PLUG_IN_VERSION > PF_AE105_PLUG_IN_VERSION || PF_AE_PLUG_IN_SUBVERS >= PF_AE105_PLUG_IN_SUBVERS
+		#define AE105_TIMECODE_SUITES
+		AEGP_ProjSuite6				*proj_suite6P;
+		AEGP_CompSuite8				*comp_suite8P;
+		#endif
 	#endif
 	};
 
@@ -254,6 +282,8 @@ private:
 		AEGP_SUITE_RELEASE_BOILERPLATE(io_out_suiteP, kAEGPIOOutSuite, kAEGPIOOutSuiteVersion);
 		AEGP_SUITE_RELEASE_BOILERPLATE(io_in_suiteP, kAEGPIOInSuite, kAEGPIOInSuiteVersion);
 		AEGP_SUITE_RELEASE_BOILERPLATE(rq_item_suiteP, kAEGPRQItemSuite, kAEGPRQItemSuiteVersion);
+		AEGP_SUITE_RELEASE_BOILERPLATE(render_options_suiteP, kAEGPRenderOptionsSuite, kAEGPRenderOptionsSuiteVersion);
+		AEGP_SUITE_RELEASE_BOILERPLATE(render_suiteP, kAEGPRenderSuite, kAEGPRenderSuiteVersion);
 		AEGP_SUITE_RELEASE_BOILERPLATE(comp_suiteP, kAEGPCompSuite, kAEGPCompSuiteVersion);
 		AEGP_SUITE_RELEASE_BOILERPLATE(layer_suiteP, kAEGPLayerSuite, kAEGPLayerSuiteVersion);
 		AEGP_SUITE_RELEASE_BOILERPLATE(camera_suiteP, kAEGPCameraSuite, kAEGPCameraSuiteVersion);
@@ -273,6 +303,7 @@ private:
 		AEGP_SUITE_RELEASE_BOILERPLATE(app_suiteP, kPFAppSuite, kPFAppSuiteVersion);
 		AEGP_SUITE_RELEASE_BOILERPLATE(adv_app_suiteP, kPFAdvAppSuite, kPFAdvAppSuiteVersion);
 		AEGP_SUITE_RELEASE_BOILERPLATE(persistent_data_suiteP, kAEGPPersistentDataSuite, kAEGPPersistentDataSuiteVersion);
+		AEGP_SUITE_RELEASE_BOILERPLATE(text_document_suiteP, kAEGPTextDocumentSuite, kAEGPTextDocumentSuiteVersion);
 
 	#if PF_AE_PLUG_IN_VERSION >= PF_AE100_PLUG_IN_VERSION
 		AEGP_SUITE_RELEASE_BOILERPLATE(db_drawbot_suiteP, kDRAWBOT_DrawSuite, kDRAWBOT_DrawbotSuite_Version);
@@ -281,6 +312,11 @@ private:
 		AEGP_SUITE_RELEASE_BOILERPLATE(db_path_suiteP, kDRAWBOT_PathSuite, kDB_PathSuite_Version);
 		AEGP_SUITE_RELEASE_BOILERPLATE(pf_effect_customUI_suiteP, kPFEffectCustomUISuite, kPFEffectCustomUISuiteVersion);
 		AEGP_SUITE_RELEASE_BOILERPLATE(pf_customUI_theme_suiteP, kCustomUIThemeSuite, kCustomUIThemeSuiteVersion);
+		
+		#ifdef AE105_TIMECODE_SUITES
+		AEGP_SUITE_RELEASE_BOILERPLATE(proj_suite6P, kAEGPProjSuite, kAEGPProjSuiteVersion6);
+		AEGP_SUITE_RELEASE_BOILERPLATE(comp_suite8P, kAEGPCompSuite, kAEGPCompSuiteVersion8);
+		#endif
 	#endif
 	}
 
@@ -320,6 +356,8 @@ public:
 	AEGP_SUITE_ACCESS_BOILERPLATE(IOInSuite, AEGP_IOInSuite, io_in_suiteP, kAEGPIOInSuite, kAEGPIOInSuiteVersion);
 	AEGP_SUITE_ACCESS_BOILERPLATE(IOOutSuite, AEGP_IOOutSuite, io_out_suiteP, kAEGPIOOutSuite, kAEGPIOOutSuiteVersion);
 	AEGP_SUITE_ACCESS_BOILERPLATE(RQItemSuite, AEGP_RQItemSuite, rq_item_suiteP, kAEGPRQItemSuite, kAEGPRQItemSuiteVersion);
+	AEGP_SUITE_ACCESS_BOILERPLATE(RenderOptionsSuite, AEGP_RenderOptionsSuite, render_options_suiteP, kAEGPRenderOptionsSuite, kAEGPRenderOptionsSuiteVersion);
+	AEGP_SUITE_ACCESS_BOILERPLATE(RenderSuite, AEGP_RenderSuite, render_suiteP, kAEGPRenderSuite, kAEGPRenderSuiteVersion);
 	AEGP_SUITE_ACCESS_BOILERPLATE(CompSuite, AEGP_CompSuite, comp_suiteP, kAEGPCompSuite, kAEGPCompSuiteVersion);
 	AEGP_SUITE_ACCESS_BOILERPLATE(LayerSuite, AEGP_LayerSuite, layer_suiteP, kAEGPLayerSuite, kAEGPLayerSuiteVersion);
 	AEGP_SUITE_ACCESS_BOILERPLATE(CameraSuite, AEGP_CameraSuite, camera_suiteP, kAEGPCameraSuite, kAEGPCameraSuiteVersion);
@@ -339,6 +377,7 @@ public:
 	AEGP_SUITE_ACCESS_BOILERPLATE(AppSuite, PFAppSuite, app_suiteP, kPFAppSuite, kPFAppSuiteVersion);
 	AEGP_SUITE_ACCESS_BOILERPLATE(AdvAppSuite, PFAdvAppSuite, adv_app_suiteP, kPFAdvAppSuite, kPFAdvAppSuiteVersion);
 	AEGP_SUITE_ACCESS_BOILERPLATE(PersistentDataSuite, AEGP_PersistentDataSuite, persistent_data_suiteP, kAEGPPersistentDataSuite, kAEGPPersistentDataSuiteVersion);
+	AEGP_SUITE_ACCESS_BOILERPLATE(TextDocumentSuite, AEGP_TextDocumentSuite, text_document_suiteP, kAEGPTextDocumentSuite, kAEGPTextDocumentSuiteVersion);
 	
 #if PF_AE_PLUG_IN_VERSION >= PF_AE100_PLUG_IN_VERSION
 	AEGP_SUITE_ACCESS_BOILERPLATE(DBDrawbotSuite, DB_DrawbotSuite, db_drawbot_suiteP, kDRAWBOT_DrawSuite, kDRAWBOT_DrawbotSuite_Version);
@@ -347,6 +386,11 @@ public:
 	AEGP_SUITE_ACCESS_BOILERPLATE(DBPathSuite, DB_PathSuite, db_path_suiteP, kDRAWBOT_PathSuite, kDB_PathSuite_Version);
 	AEGP_SUITE_ACCESS_BOILERPLATE(PFEffectCustomUISuite, PF_EffectCustomUISuite, pf_effect_customUI_suiteP, kPFEffectCustomUISuite, kPFEffectCustomUISuiteVersion);
 	AEGP_SUITE_ACCESS_BOILERPLATE(PFCustomUIThemeSuite, PF_CustomUIThemeSuite, pf_customUI_theme_suiteP, kCustomUIThemeSuite, kCustomUIThemeSuiteVersion);
+	
+	#ifdef AE105_TIMECODE_SUITES
+	AEGP_SUITE_ACCESS_BOILERPLATE(ProjSuite6, AEGP_ProjSuite6, proj_suite6P, kAEGPProjSuite, kAEGPProjSuiteVersion6);
+	AEGP_SUITE_ACCESS_BOILERPLATE(CompSuite8, AEGP_CompSuite8, comp_suite8P, kAEGPCompSuite, kAEGPCompSuiteVersion8);
+	#endif
 #endif
 };
 

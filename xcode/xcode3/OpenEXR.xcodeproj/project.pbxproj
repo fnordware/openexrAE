@@ -36,6 +36,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2A798A7E1ABA2AB10022C8F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A8F7F6A1760361700E03502 /* OpenEXR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A588C1A19787559000D94D0 /* b44ExpLogTable */;
+			remoteInfo = b44ExpLogTable;
+		};
+		2A798A801ABA2AB10022C8F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A8F7F6A1760361700E03502 /* OpenEXR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A588C3C197875C2000D94D0 /* dwaLookups */;
+			remoteInfo = dwaLookups;
+		};
 		2A8F7F711760361700E03502 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A8F7F6A1760361700E03502 /* OpenEXR.xcodeproj */;
@@ -172,6 +186,8 @@
 			isa = PBXGroup;
 			children = (
 				2A8F7F721760361700E03502 /* libOpenEXR.a */,
+				2A798A7F1ABA2AB10022C8F7 /* b44ExpLogTable */,
+				2A798A811ABA2AB10022C8F7 /* dwaLookups */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -326,6 +342,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		2A798A7F1ABA2AB10022C8F7 /* b44ExpLogTable */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = b44ExpLogTable;
+			remoteRef = 2A798A7E1ABA2AB10022C8F7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2A798A811ABA2AB10022C8F7 /* dwaLookups */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = dwaLookups;
+			remoteRef = 2A798A801ABA2AB10022C8F7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		2A8F7F721760361700E03502 /* libOpenEXR.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -448,7 +478,7 @@
 		2A1BAC7E10C3CAF100244D12 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				AE_SDK = "\"../../ext/Adobe After Effects CS5 Mac SDK\"";
+				AE_SDK = "\"../../ext/Adobe After Effects CS5.5 Mac SDK\"";
 				"AE_SDK[arch=i386]" = "\"../../ext/Adobe After Effects CS3 Mac SDK\"";
 				"AE_SDK[arch=ppc]" = "\"../../ext/Adobe After Effects CS3 Mac SDK\"";
 				ARCHS = x86_64;
@@ -506,7 +536,7 @@
 		C4E61880095A3C800012CA3F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				AE_SDK = "\"../../ext/Adobe After Effects CS5 Mac SDK\"";
+				AE_SDK = "\"../../ext/Adobe After Effects CS5.5 Mac SDK\"";
 				"AE_SDK[arch=i386]" = "\"../../ext/Adobe After Effects CS3 Mac SDK\"";
 				"AE_SDK[arch=ppc]" = "\"../../ext/Adobe After Effects CS3 Mac SDK\"";
 				ARCHS = x86_64;
