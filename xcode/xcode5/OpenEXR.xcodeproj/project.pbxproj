@@ -303,6 +303,8 @@
 /* Begin PBXProject section */
 		C4E6187E095A3C800012CA3F /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = C4E6187F095A3C800012CA3F /* Build configuration list for PBXProject "OpenEXR" */;
 			compatibilityVersion = "Xcode 3.0";
 			developmentRegion = English;
@@ -478,7 +480,7 @@
 		2A1BAC7E10C3CAF100244D12 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				AE_SDK = "\"../../ext/Adobe After Effects CS5 Mac SDK\"";
+				AE_SDK = "\"../../ext/Adobe After Effects CS5.5 Mac SDK\"";
 				"AE_SDK[arch=i386]" = "\"../../ext/Adobe After Effects CS3 Mac SDK\"";
 				"AE_SDK[arch=ppc]" = "\"../../ext/Adobe After Effects CS3 Mac SDK\"";
 				ARCHS = x86_64;
@@ -535,7 +537,7 @@
 		C4E61880095A3C800012CA3F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				AE_SDK = "\"../../ext/Adobe After Effects CS5 Mac SDK\"";
+				AE_SDK = "\"../../ext/Adobe After Effects CS5.5 Mac SDK\"";
 				"AE_SDK[arch=i386]" = "\"../../ext/Adobe After Effects CS3 Mac SDK\"";
 				"AE_SDK[arch=ppc]" = "\"../../ext/Adobe After Effects CS3 Mac SDK\"";
 				ARCHS = x86_64;
