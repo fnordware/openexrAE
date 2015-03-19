@@ -51,7 +51,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\src;..\..\ext\zlib;..\..\ext\lcms\include;..\..\ext\lcms\src;..\..\ext\openexr\OpenEXR\config.windows;..\..\ext\openexr\OpenEXR\IlmImf;..\..\ext\openexr\IlmBase\config.windows;..\..\ext\openexr\IlmBase\Imath;..\..\ext\openexr\IlmBase\IlmThread;..\..\ext\openexr\IlmBase\Iex;..\..\ext\openexr\IlmBase\Half;&quot;..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers&quot;;&quot;..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\SP&quot;;&quot;..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\Win&quot;;&quot;..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Resources&quot;;&quot;..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Util&quot;"
+				AdditionalIncludeDirectories="..\..\src;..\..\ext\zlib;..\..\ext\lcms\include;..\..\ext\lcms\src;..\..\ext\openexr\OpenEXR\config.windows;..\..\ext\openexr\OpenEXR\IlmImf;..\..\ext\openexr\IlmBase\config.windows;..\..\ext\openexr\IlmBase\Imath;..\..\ext\openexr\IlmBase\IlmThread;..\..\ext\openexr\IlmBase\Iex;..\..\ext\openexr\IlmBase\Half;&quot;..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers&quot;;&quot;..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\SP&quot;;&quot;..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\Win&quot;;&quot;..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Resources&quot;;&quot;..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Util&quot;"
 				PreprocessorDefinitions="MSWindows;WIN32;_DEBUG;_WINDOWS"
 				RuntimeLibrary="3"
 				StructMemberAlignment="3"
@@ -145,7 +145,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories="..\..\src;..\..\ext\zlib;..\..\ext\lcms\include;..\..\ext\lcms\src;..\..\ext\openexr\OpenEXR\config.windows;..\..\ext\openexr\OpenEXR\IlmImf;..\..\ext\openexr\IlmBase\config.windows;..\..\ext\openexr\IlmBase\Imath;..\..\ext\openexr\IlmBase\IlmThread;..\..\ext\openexr\IlmBase\Iex;..\..\ext\openexr\IlmBase\Half;&quot;..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers&quot;;&quot;..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\SP&quot;;&quot;..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\Win&quot;;&quot;..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Resources&quot;;&quot;..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Util&quot;"
+				AdditionalIncludeDirectories="..\..\src;..\..\ext\zlib;..\..\ext\lcms\include;..\..\ext\lcms\src;..\..\ext\openexr\OpenEXR\config.windows;..\..\ext\openexr\OpenEXR\IlmImf;..\..\ext\openexr\IlmBase\config.windows;..\..\ext\openexr\IlmBase\Imath;..\..\ext\openexr\IlmBase\IlmThread;..\..\ext\openexr\IlmBase\Iex;..\..\ext\openexr\IlmBase\Half;&quot;..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers&quot;;&quot;..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\SP&quot;;&quot;..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\Win&quot;;&quot;..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Resources&quot;;&quot;..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Util&quot;"
 				PreprocessorDefinitions="MSWindows;WIN32;NDEBUG;_WINDOWS"
 				RuntimeLibrary="2"
 				StructMemberAlignment="3"
@@ -462,63 +462,63 @@
 				Name="AE"
 				>
 				<File
-					RelativePath="..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\A.h"
+					RelativePath="..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\A.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\AE_Effect.h"
+					RelativePath="..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\AE_Effect.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\AE_EffectCB.h"
+					RelativePath="..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\AE_EffectCB.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\AE_EffectCBSuites.h"
+					RelativePath="..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\AE_EffectCBSuites.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\AE_EffectSuites.h"
+					RelativePath="..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\AE_EffectSuites.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Util\AE_EffectSuitesHelper.h"
+					RelativePath="..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Util\AE_EffectSuitesHelper.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\AE_EffectUI.h"
+					RelativePath="..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\AE_EffectUI.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\AE_GeneralPlug.h"
+					RelativePath="..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\AE_GeneralPlug.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\AE_GeneralPlugOld.h"
+					RelativePath="..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\AE_GeneralPlugOld.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\AE_IO.h"
+					RelativePath="..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\AE_IO.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\AE_Macros.h"
+					RelativePath="..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\AE_Macros.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Util\entry.h"
+					RelativePath="..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Util\entry.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\FIEL_Public.h"
+					RelativePath="..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\FIEL_Public.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\PF_Masks.h"
+					RelativePath="..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\PF_Masks.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers\PR_Public.h"
+					RelativePath="..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers\PR_Public.h"
 					>
 				</File>
 			</Filter>
@@ -544,7 +544,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Compiling the PiPL"
-						CommandLine="cl /I &quot;$(ProjectDir)..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers&quot; /EP &quot;..\..&quot;\\&quot;src&quot;\\&quot;$(InputName).r&quot; &gt; &quot;$(IntDir)&quot;\\&quot;$(InputName).rr&quot;&#x0D;&#x0A;&quot;$(ProjectDir)..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Resources\PiPLTool&quot; &quot;$(IntDir)\$(InputName).rr&quot; &quot;$(IntDir)\$(InputName).rrc&quot;&#x0D;&#x0A;cl /D &quot;MSWindows&quot; /EP $(IntDir)\$(InputName).rrc &gt;               &quot;$(ProjectDir)&quot;\\&quot;$(InputName)&quot;.rc&#x0D;&#x0A;"
+						CommandLine="cl /I &quot;$(ProjectDir)..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers&quot; /EP &quot;..\..&quot;\\&quot;src&quot;\\&quot;$(InputName).r&quot; &gt; &quot;$(IntDir)&quot;\\&quot;$(InputName).rr&quot;&#x0D;&#x0A;&quot;$(ProjectDir)..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Resources\PiPLTool&quot; &quot;$(IntDir)\$(InputName).rr&quot; &quot;$(IntDir)\$(InputName).rrc&quot;&#x0D;&#x0A;cl /D &quot;MSWindows&quot; /EP $(IntDir)\$(InputName).rrc &gt;               &quot;$(ProjectDir)&quot;\\&quot;$(InputName)&quot;.rc&#x0D;&#x0A;"
 						Outputs="$(ProjectDir)$(InputName).rc"
 					/>
 				</FileConfiguration>
@@ -554,7 +554,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Compiling the PiPL"
-						CommandLine="cl /I &quot;$(ProjectDir)..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Headers&quot; /EP &quot;..\..&quot;\\&quot;src&quot;\\&quot;$(InputName).r&quot; &gt; &quot;$(IntDir)&quot;\\&quot;$(InputName).rr&quot;&#x0D;&#x0A;&quot;$(ProjectDir)..\..\ext\Adobe After Effects CS5 Win SDK\Examples\Resources\PiPLTool&quot; &quot;$(IntDir)\$(InputName).rr&quot; &quot;$(IntDir)\$(InputName).rrc&quot;&#x0D;&#x0A;cl /D &quot;MSWindows&quot; /EP $(IntDir)\$(InputName).rrc &gt;               &quot;$(ProjectDir)&quot;\\&quot;$(InputName)&quot;.rc&#x0D;&#x0A;"
+						CommandLine="cl /I &quot;$(ProjectDir)..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Headers&quot; /EP &quot;..\..&quot;\\&quot;src&quot;\\&quot;$(InputName).r&quot; &gt; &quot;$(IntDir)&quot;\\&quot;$(InputName).rr&quot;&#x0D;&#x0A;&quot;$(ProjectDir)..\..\ext\Adobe After Effects CS5.5 Win SDK\Examples\Resources\PiPLTool&quot; &quot;$(IntDir)\$(InputName).rr&quot; &quot;$(IntDir)\$(InputName).rrc&quot;&#x0D;&#x0A;cl /D &quot;MSWindows&quot; /EP $(IntDir)\$(InputName).rrc &gt;               &quot;$(ProjectDir)&quot;\\&quot;$(InputName)&quot;.rc&#x0D;&#x0A;"
 						Outputs="$(ProjectDir)$(InputName).rc"
 					/>
 				</FileConfiguration>

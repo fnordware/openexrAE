@@ -64,14 +64,14 @@ typedef struct {
 } Render_Info;
 	
 
-typedef struct Time_Code
+typedef struct
 {
 	int hours;
 	int minutes;
 	int seconds;
 	int frame;
 	bool dropFrame;
-};
+} Time_Code;
 
 typedef struct
 {
