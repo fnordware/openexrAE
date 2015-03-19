@@ -64,6 +64,15 @@ typedef struct {
 } Render_Info;
 	
 
+typedef struct Time_Code
+{
+	int hours;
+	int minutes;
+	int seconds;
+	int frame;
+	bool dropFrame;
+};
+
 typedef struct
 {
 	A_long			width;
@@ -79,6 +88,7 @@ typedef struct
 	size_t			icc_profile_len;
 	A_Chromaticities *chromaticities;
 	Render_Info		*render_info;
+	Time_Code		*time_code;
 } FrameSeq_Info;
 
 

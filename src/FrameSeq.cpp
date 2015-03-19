@@ -296,7 +296,7 @@ SetRenderInfo(
 	AEIO_OutSpecH	outH,
 	Render_Info		*render_info)
 {
-	AEGP_SuiteHandler	suites(basic_dataP->pica_basicP);
+	AEGP_SuiteHandler suites(basic_dataP->pica_basicP);
 	
 	render_info->proj_name[0] = '\0';
 	render_info->comp_name[0] = '\0';
@@ -416,6 +416,231 @@ SetRenderInfo(
 	buf_size = COMPUTER_NAME_SIZE-1;
 	GetUserName(render_info->user_name, &buf_size);
 #endif
+}
+
+static Time_Code
+CalculateTimeCode(int frame_num, int frame_rate, bool drop_frame)
+{
+	// the easiest way to do this is just count!
+	int h = 0,
+		m = 0,
+		s = 0,
+		f = 0;
+	
+	// skip ahead quickly
+	int frames_per_ten_mins = (frame_rate * 60 * 10) - (drop_frame ? 9 * (frame_rate == 60 ? 4 : 2) : 0);
+	int frames_per_hour = 6 * frames_per_ten_mins;
+	
+	while(frame_num >= frames_per_hour)
+	{
+		h++;
+		
+		frame_num -= frames_per_hour;
+	}
+	
+	while(frame_num >= frames_per_ten_mins)
+	{
+		m += 10;
+		
+		frame_num -= frames_per_ten_mins;
+	}
+	
+	// now count out the rest
+	int frame = 0;
+	
+	while(frame++ < frame_num)
+	{
+		if(f < frame_rate - 1)
+		{
+			f++;
+		}
+		else
+		{
+			f = 0;
+			
+			if(s < 59)
+			{
+				s++;
+			}
+			else
+			{
+				s = 0;
+				
+				if(m < 59)
+				{
+					m++;
+					
+					if(drop_frame && (m % 10) != 0) // http://en.wikipedia.org/wiki/SMPTE_timecode
+					{
+						f += (frame_rate == 60 ? 4 : 2);
+					}
+				}
+				else
+				{
+					m = 0;
+					
+					h++;
+				}
+			}
+		}
+	}
+	
+	
+	Time_Code tc;
+	
+	tc.hours = h;
+	tc.minutes = m;
+	tc.seconds = s;
+	tc.frame = f;
+	tc.dropFrame = drop_frame;
+	
+	return tc;
+}
+
+static inline bool isaNumber(char c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+static void GetFrameNumber(const A_PathType *file_pathZ, A_long &frame_num)
+{
+	// that's right, we're parsing the path for a frame number, if any
+	char path[AEGP_MAX_PATH_SIZE+1];
+	
+	// poor man's unicode copy
+	char *p = path;
+	
+	while(*file_pathZ != '\0')
+	{
+		*p++ = *file_pathZ++;
+	}
+	
+	*p = '\0';
+	
+	
+	// isolate the string between the last appearing number and the first character before that
+	int i = strlen(path) - 1;
+	
+	bool fixed_number = false;
+	
+	while(i >= 0 && !fixed_number)
+	{
+		if( isaNumber(path[i]) && path[i+1] == '.' )
+		{
+			path[i+1] = '\0';
+			fixed_number = true;
+		}
+		
+		i--;
+	}
+	
+	if(fixed_number)
+	{
+		char *num_string = NULL;
+		
+		while(i >= 0 && num_string == NULL)
+		{
+			if( !isaNumber(path[i]) )
+			{
+				num_string = &path[i + 1];
+			}
+			else if(i == 0)
+			{
+				num_string = path;
+			}
+			
+			i--;
+		}
+		
+		int frame = -1;
+		
+		sscanf(num_string, "%d", &frame);
+		
+		if(frame >= 0)
+			frame_num = frame;
+	}
+}
+
+static bool possibleDropFrame(A_Time frame_duration)
+{
+	// AE will tell us if the comp is set to drop frame, even if that parameter
+	// is greyed out because it's on a frame rate like 24.  So we'll check if
+	// the framerate is one that's possible to be a drop frame.
+	const double fps = (double)frame_duration.scale / (double)frame_duration.value;
+	
+	return ( abs(fps - 29.97) < 0.01 ) || ( abs(fps - 59.94) < 0.01 );
+}
+
+static bool
+SetTimeCode(
+	AEIO_BasicData		*basic_dataP,
+	AEIO_OutSpecH		outH,
+	const A_PathType	*file_pathZ,
+	Time_Code			*time_code)
+{
+	AEGP_SuiteHandler suites(basic_dataP->pica_basicP);
+	
+	AEGP_RQItemRefH rq_itemH = NULL;
+	AEGP_OutputModuleRefH outmodH = NULL;
+	
+	A_Err err = suites.IOOutSuite()->AEGP_GetOutSpecOutputModule(outH, &rq_itemH, &outmodH);
+	
+	if(!err)
+	{
+		AEGP_CompH compH = NULL;
+		suites.RQItemSuite()->AEGP_GetCompFromRQItem(rq_itemH, &compH);
+		
+		if(compH)
+		{
+			A_long frame_num;
+			suites.IOOutSuite()->AEGP_GetOutSpecStartFrame(outH, &frame_num);
+			
+			GetFrameNumber(file_pathZ, frame_num); // yes, I'm really parsing the file path to get the frame number
+			
+	
+			// AE 10.5 (CS5.5) timecode stuff
+		#ifdef AE105_TIMECODE_SUITES
+			AEGP_ProjSuite6 *ps6P = NULL;
+			AEGP_CompSuite8 *cs8P = NULL;
+			
+			try{
+				ps6P = suites.ProjSuite6();
+				cs8P = suites.CompSuite8();
+			}catch(...) {}
+			
+			if(ps6P && cs8P)
+			{
+				AEGP_ProjectH projH;
+				ps6P->AEGP_GetProjectByIndex(0, &projH);
+	
+				AEGP_TimeDisplay3 time_dis3;
+				ps6P->AEGP_GetProjectTimeDisplay(projH, &time_dis3);
+				
+				const A_long starting_frame = (	time_dis3.frames_display_mode == AEGP_Frames_ZERO_BASED ? 0 :
+												time_dis3.frames_display_mode == AEGP_Frames_ONE_BASED ? 1 :
+												0 ); // AEGP_Frames_TIMECODE_CONVERSION
+				
+				A_Time frame_duration = {0, 0};
+				cs8P->AEGP_GetCompFrameDuration(compH, &frame_duration);
+				
+				const int timebase = ((double)frame_duration.scale / (double)frame_duration.value) + 0.5;
+				
+				A_Boolean drop_frame;
+				cs8P->AEGP_GetCompDisplayDropFrame(compH, &drop_frame);
+				
+				*time_code = CalculateTimeCode(frame_num - starting_frame,
+												timebase,
+												drop_frame && possibleDropFrame(frame_duration));
+				
+				return true;
+			}
+		#else
+			#error "Build with the CS5.5 SDK"
+		#endif
+		}
+	}
+	
+	return false;
 }
 
 
@@ -1622,6 +1847,14 @@ FrameSeq_OutputFrame(
 	// render info
 	SetRenderInfo(basic_dataP, outH, &render_info);
 	info.render_info = &render_info;
+	
+	
+	// Time Code
+	Time_Code time_code;
+	const bool got_tc = SetTimeCode(basic_dataP, outH, file_pathZ, &time_code);
+	
+	if(got_tc)
+		info.time_code = &time_code;
 		
 	
 	// for EXR, we always want to pass a float buffer

@@ -284,7 +284,7 @@ OpenEXR_ConstructModuleInfo(
 											AEIO_MFlag_NO_TIME			| 
 											AEIO_MFlag_SEQ_OPTIONS_DLG	|
 											AEIO_MFlag_SEQUENCE_OPTIONS_OK |
-											AEIO_MFlag_HOST_FRAME_START_DIALOG |
+											//AEIO_MFlag_HOST_FRAME_START_DIALOG |
 											AEIO_MFlag_CAN_DRAW_DEEP	|
 											AEIO_MFlag_HAS_AUX_DATA;
 
@@ -2240,6 +2240,14 @@ OpenEXR_OutputFile(
 		
 		if( info->render_info->framerate.value )
 			addFramesPerSecond(header, Rational(info->render_info->framerate.value, info->render_info->framerate.scale) );
+	}
+	
+	
+	if(info->time_code)
+	{
+		const Time_Code *tc = info->time_code;
+	
+		addTimeCode(header, TimeCode(tc->hours, tc->minutes, tc->seconds, tc->frame, tc->dropFrame));
 	}
 	
 	
