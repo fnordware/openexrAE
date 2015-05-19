@@ -445,7 +445,8 @@ AEIO_CloseSourceFiles(
 	AEIO_BasicData	*basic_dataP,
 	AEIO_InSpecH			seqH)
 {
-	assert(FALSE); // don't think I should be getting this
+	// this well get called during Edit->Purge->All Memory, for some reason?
+	// (frame-based formats don't usually keep files open)
 
 	return A_Err_NONE; 
 }
