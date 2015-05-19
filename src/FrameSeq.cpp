@@ -304,7 +304,8 @@ SetRenderInfo(
 	render_info->computer_name[0] = '\0';
 	render_info->user_name[0] = '\0';
 	render_info->framerate.value = 0;
-	
+
+#ifdef GET_PROJECT_AND_COMP_INFO
 	AEGP_RQItemRefH rq_itemH = NULL;
 	AEGP_OutputModuleRefH outmodH = NULL;
 	
@@ -393,6 +394,24 @@ SetRenderInfo(
 		if(projH)
 			suites.ProjSuite()->AEGP_GetProjectName(projH, render_info->proj_name);
 	}
+#else // GET_PROJECT_AND_COMP_INFO
+    
+    // framerate
+    A_Fixed fpsF = 0;
+    suites.IOOutSuite()->AEGP_GetOutSpecFPS(outH, &fpsF);
+    
+    if(fpsF % 65536 == 0)
+    {
+        render_info->framerate.value = fpsF / 65536;
+        render_info->framerate.scale = 1;
+    }
+    else
+    {
+        render_info->framerate.value = (((long long)fpsF * 1001) + 32768) / 65536;
+        render_info->framerate.scale = 1001;
+    }
+    
+#endif // GET_PROJECT_AND_COMP_INFO
 
 #ifdef MAC_ENV
 	// user and computer name
