@@ -149,8 +149,10 @@ IStreamPlatform::IStreamPlatform(const uint16_t fileName[], const SPBasicSuite *
 
 IStreamPlatform::~IStreamPlatform()
 {
-	close_file();
-	
+	try{
+		close_file();
+	} catch(...) {}
+
 	release_cache();
 }
 
@@ -591,8 +593,7 @@ OStreamPlatform::~OStreamPlatform()
 {
 	OSErr result = FSCloseFork(_refNum);
 
-	if(result != noErr)
-		throw IoExc("Error closing file.");
+	assert(result == noErr);
 }
 
 
@@ -751,8 +752,7 @@ OStreamPlatform::~OStreamPlatform()
 {
 	BOOL result = CloseHandle(_hFile);
 
-	if(!result)
-		throw IoExc("Error closing file.");
+	assert(result == TRUE);
 }
 
 
