@@ -1321,11 +1321,14 @@ OpenEXR_DrawSparseFrame(
 		}
 		
 		
-		bool have_alpha = (inputFile.channels() & WRITE_A);
-		
-		RgbaIterateData i_data = { inter, temp_Rgba, data_rowbytes, pixel_origin, active_world->rowbytes, data_width, have_alpha };
-		
-		err2 = suites.AEGPIterateSuite()->AEGP_IterateGeneric(data_height, (void *)&i_data, CopyRgbaBufferIterate<RgbaPixel, PF_PixelFloat>);
+		if(!err && !err2)
+		{
+			const bool have_alpha = (inputFile.channels() & WRITE_A);
+			
+			RgbaIterateData i_data = { inter, temp_Rgba, data_rowbytes, pixel_origin, active_world->rowbytes, data_width, have_alpha };
+			
+			err2 = suites.AEGPIterateSuite()->AEGP_IterateGeneric(data_height, (void *)&i_data, CopyRgbaBufferIterate<RgbaPixel, PF_PixelFloat>);
+		}
 	}
 	
 	
