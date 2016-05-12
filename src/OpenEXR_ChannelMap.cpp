@@ -92,7 +92,7 @@ ChannelMap::ChannelMap(const char *file_path)
 		// open file for reading
 		ifstream input_stream(file_path, ios_base::in);
 		
-		if(!input_stream.bad())
+		if( !input_stream.fail() )
 		{
 			string s;
 			
@@ -101,16 +101,16 @@ ChannelMap::ChannelMap(const char *file_path)
 				if(s.size() > 5 && s[0] != '#')
 				{
 					// parse the line into a ChannelEntry
-					int name_begin	= s.find_first_not_of(WHITESPACE, 0);
-					int name_end	= s.find_first_of(WHITESPACE, name_begin) - 1;
-					int type_begin	= s.find_first_not_of(WHITESPACE, name_end+1);
-					int type_end	= s.find_first_of(WHITESPACE, type_begin) - 1;
-					int data_begin	= s.find_first_not_of(WHITESPACE, type_end+1);
-					int data_end	= s.find_first_of(WHITESPACE, data_begin) - 1;
+					const int name_begin	= s.find_first_not_of(WHITESPACE, 0);
+					const int name_end	= s.find_first_of(WHITESPACE, name_begin) - 1;
+					const int type_begin	= s.find_first_not_of(WHITESPACE, name_end+1);
+					const int type_end	= s.find_first_of(WHITESPACE, type_begin) - 1;
+					const int data_begin	= s.find_first_not_of(WHITESPACE, type_end+1);
+					const int data_end	= s.find_first_of(WHITESPACE, data_begin) - 1;
 					
-					string name = s.substr(name_begin, 1 + name_end - name_begin);
-					string type = s.substr(type_begin, 1 + type_end - type_begin);
-					string data = s.substr(data_begin, 1 + data_end - data_begin);
+					const string name = s.substr(name_begin, 1 + name_end - name_begin);
+					const string type = s.substr(type_begin, 1 + type_end - type_begin);
+					const string data = s.substr(data_begin, 1 + data_end - data_begin);
 					
 					ChannelEntry entry(name.c_str(), type.c_str(), data.c_str());
 					
@@ -131,11 +131,7 @@ bool ChannelMap::findEntry(const char *channel_name, ChannelEntry &entry, bool s
 		{
 			for(int i=0; i < j->dimensions(); i++)
 			{
-		//#ifdef __GNUC__	
 				if(string(channel_name) == j->chan_part(i))
-		//#else
-				//if(!strcmp(channel_name, j->chan_part(i).c_str()) )
-		//#endif
 				{
 					entry = *j;
 					return true;
@@ -144,11 +140,7 @@ bool ChannelMap::findEntry(const char *channel_name, ChannelEntry &entry, bool s
 		}
 		else
 		{
-	//#ifdef __GNUC__	
 			if(string(channel_name) == j->key_name())
-	//#else
-			//if(!strcmp(channel_name, j->key_name().c_str()) )
-	//#endif
 			{
 				entry = *j;
 				return true;
@@ -179,7 +171,7 @@ bool ChannelMap::findEntry(const char *channel_name, bool search_all)
 # Other than "R", "G", "B", and "A", OpenEXR doesn't use any standard names for
 # channels, including common ones like Z-depth.
 #
-# On the other hand, many After Effects plug-ins retreive these channels based on them
+# On the other hand, many After Effects plug-ins retrieve these channels based on them
 # being tagged properly.  This file lets you map channel names to their type and
 # data format.
 #
