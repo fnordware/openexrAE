@@ -1511,14 +1511,22 @@ OpenEXR_FlattenInputOptions(
 	AEIO_Handle		optionsH)
 {
 	AEGP_SuiteHandler suites(basic_dataP->pica_basicP);
-	
-	suites.MemorySuite()->AEGP_ResizeMemHandle("Flattening Options", sizeof(Old_OpenEXR_inData), optionsH);
 
 	OpenEXR_inData *options = NULL;
+	suites.MemorySuite()->AEGP_LockMemHandle(optionsH, (void **)&options);
+
+	const A_Boolean original_cache_channels = options->cache_channels;
+
+	suites.MemorySuite()->AEGP_UnlockMemHandle(optionsH);
+
+	suites.MemorySuite()->AEGP_ResizeMemHandle("Flattening Options", sizeof(Old_OpenEXR_inData), optionsH);
+
 	suites.MemorySuite()->AEGP_LockMemHandle(optionsH, (void **)&options);
 	
 	if(options)
 	{
+		assert(options->cache_channels == original_cache_channels);
+
 		options->real_channels = options->channels = 0;
 		
 		suites.MemorySuite()->AEGP_UnlockMemHandle(optionsH);
