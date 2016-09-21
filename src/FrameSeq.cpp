@@ -902,14 +902,48 @@ FrameSeq_SeqOptionsDlg(
 
 	AEGP_SuiteHandler	suites(basic_dataP->pica_basicP);
 
-	AEIO_Handle		optionsH		=	NULL;
+	AEIO_Handle		old_optionsH		=	NULL;
+	AEIO_Handle		new_optionsH		=	NULL;
 	format_inData	*options			=	NULL;
 	
 	// get options handle
-	err = suites.IOInSuite()->AEGP_GetInSpecOptionsHandle(specH, (void**)&optionsH);
+	err = suites.IOInSuite()->AEGP_GetInSpecOptionsHandle(specH, (void**)&old_optionsH);
 
-	if(optionsH)
-		err = suites.MemorySuite()->AEGP_LockMemHandle(optionsH, (void**)&options);
+	if(old_optionsH)
+	{
+		AEGP_MemSize mem_size = 0;
+
+		err = suites.MemorySuite()->AEGP_GetMemHandleSize(old_optionsH, &mem_size);
+			
+		err = suites.MemorySuite()->AEGP_NewMemHandle( S_mem_id, "New Input Options",
+											mem_size,
+											AEGP_MemFlag_CLEAR, &new_optionsH);
+		
+		format_inData *old_options = NULL;
+		err = suites.MemorySuite()->AEGP_LockMemHandle(old_optionsH, (void**)&old_options);
+
+		err = suites.MemorySuite()->AEGP_LockMemHandle(new_optionsH, (void**)&options);
+
+		memcpy(options, old_options, mem_size);
+
+		suites.MemorySuite()->AEGP_UnlockMemHandle(old_optionsH);
+	}
+	else
+	{
+		assert(false); // don't expect this to happen
+
+		err = suites.MemorySuite()->AEGP_NewMemHandle( S_mem_id, "New Input Options",
+														sizeof(format_inData),
+														AEGP_MemFlag_CLEAR, &new_optionsH);
+
+		err = suites.MemorySuite()->AEGP_LockMemHandle(new_optionsH, (void**)&options);
+	}
+	
+	
+	A_Boolean my_bool;
+
+	if(user_interactedPB0 == NULL)
+		user_interactedPB0 = &my_bool; // I want to know if the user hit cancel, even if AE doesn't
 	
 
 	if(!err && options)
@@ -918,11 +952,22 @@ FrameSeq_SeqOptionsDlg(
 		err = OpenEXR_ReadOptionsDialog(basic_dataP, options, user_interactedPB0);
 	}
 
+	if(*user_interactedPB0)
+	{
+		AEIO_Handle more_old_optionsH = NULL;
+
+		err = suites.IOInSuite()->AEGP_SetInSpecOptionsHandle(specH, (void*)new_optionsH, (void**)&more_old_optionsH);
+
+		assert(more_old_optionsH == old_optionsH);
+	}
+
 
 	// done with options
-	if(optionsH)
-		suites.MemorySuite()->AEGP_UnlockMemHandle(optionsH);
+	if(new_optionsH)
+		suites.MemorySuite()->AEGP_UnlockMemHandle(new_optionsH);
 	
+	if(old_optionsH)
+		suites.MemorySuite()->AEGP_FreeMemHandle(old_optionsH);
 
 	return err;
 }
