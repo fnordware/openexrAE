@@ -22,6 +22,33 @@
 #include <Windows.h>
 #endif
 
+
+class ErrThrower : public std::exception
+{
+  public:
+	ErrThrower(A_Err err = A_Err_NONE) throw() : _err(err) {}
+	ErrThrower(const ErrThrower &other) throw() : _err(other._err) {}
+	virtual ~ErrThrower() throw() {}
+
+	ErrThrower & operator = (A_Err err)
+	{
+		_err = err;
+		
+		if(_err != A_Err_NONE)
+			throw *this;
+		
+		return *this;
+	}
+
+	A_Err err() const { return _err; }
+	
+	virtual const char* what() const throw() { return "AE Error"; }
+	
+  private:
+	A_Err _err;
+};
+
+
 extern AEGP_PluginID			S_mem_id;
 
 
@@ -56,21 +83,25 @@ SmartCopyWorld(
 {
 	// this is the world copy function AE should have provided
 	// with additional attention to external (true) 16-bit worlds
-	A_Err err =	A_Err_NONE;
+	A_Err ae_err =	A_Err_NONE;
 	
 	AEGP_SuiteHandler suites(basic_dataP->pica_basicP);
 	
+	try{
+	
+	ErrThrower err;
+	
 	PF_PixelFormat	source_format, dest_format;
 
-	suites.PFWorldSuite()->PF_GetPixelFormat(source_World, &source_format);
-	suites.PFWorldSuite()->PF_GetPixelFormat(dest_World, &dest_format);
+	err = suites.PFWorldSuite()->PF_GetPixelFormat(source_World, &source_format);
+	err = suites.PFWorldSuite()->PF_GetPixelFormat(dest_World, &dest_format);
 	
 	PF_Boolean hq = FALSE;			
 	
 	// can we just copy?
 	if( (source_format == dest_format) && (source_ext == dest_ext) ) // make sure you are always setting ext's
 	{
-		EasyCopy(basic_dataP, source_World, dest_World, hq);
+		err = EasyCopy(basic_dataP, source_World, dest_World, hq);
 	}
 	else
 	{
@@ -87,7 +118,7 @@ SmartCopyWorld(
 		}
 		else
 		{
-			suites.PFWorldSuite()->PF_NewWorld(NULL, source_World->width, source_World->height,
+			err = suites.PFWorldSuite()->PF_NewWorld(NULL, source_World->width, source_World->height,
 													FALSE, dest_format, temp_World);
 		}
 
@@ -193,13 +224,17 @@ SmartCopyWorld(
 		// copy from temp world if necessary, dispose temp buffer
 		if(temp_World != dest_World)
 		{
-			EasyCopy(basic_dataP, temp_World, dest_World, hq);
+			err = EasyCopy(basic_dataP, temp_World, dest_World, hq);
 
 			suites.PFWorldSuite()->PF_DisposeWorld(NULL, temp_World);
 		}
 	}
+	
+	}
+	catch(ErrThrower &err) { ae_err = err.err(); }
+	catch(...) { ae_err = AEIO_Err_PARSING; }
 
-	return err;
+	return ae_err;
 }
 
 #ifdef AE_HFS_PATHS
@@ -535,15 +570,12 @@ FrameSeq_GetInSpecInfo(
 	verbiageP->sub_type[0] = '\0';
 	
 	
-	if(!err)
-	{
-		err = OpenEXR_GetInSpecInfo(file_nameZ, options, verbiageP);
-		
-		// done with options
-		if(optionsH)
-			suites.MemorySuite()->AEGP_UnlockMemHandle(optionsH);
-	}
-
+	err = OpenEXR_GetInSpecInfo(file_nameZ, options, verbiageP);
+	
+	// done with options
+	if(optionsH)
+		suites.MemorySuite()->AEGP_UnlockMemHandle(optionsH);
+	
 	return err;
 }
 
@@ -557,7 +589,7 @@ FrameSeq_InitInSpecFromFile(
 	// tell AE all the necessary information
 	// we pass our format function a nice, easy struct to populate and then deal with it
 	
-	A_Err err						=	A_Err_NONE;
+	A_Err ae_err					=	A_Err_NONE;
 
 	AEIO_Handle		optionsH		=	NULL,
 					old_optionsH	=	NULL;
@@ -565,6 +597,10 @@ FrameSeq_InitInSpecFromFile(
 
 	AEGP_SuiteHandler	suites(basic_dataP->pica_basicP);
 	
+	try{
+	
+	ErrThrower err;
+
 	A_long			file_size = 0;
 	
 
@@ -634,11 +670,11 @@ FrameSeq_InitInSpecFromFile(
 		format_inData	*new_options = options;
 		format_inData	*old_options = NULL;
 		
-		suites.MemorySuite()->AEGP_LockMemHandle(old_optionsH, (void**)&old_options);
+		err = suites.MemorySuite()->AEGP_LockMemHandle(old_optionsH, (void**)&old_options);
 		
 		OpenEXR_CopyInOptions(basic_dataP, new_options, old_options);
 		
-		suites.MemorySuite()->AEGP_UnlockMemHandle(old_optionsH);
+		err = suites.MemorySuite()->AEGP_UnlockMemHandle(old_optionsH);
 	}
 	
 	
@@ -647,101 +683,99 @@ FrameSeq_InitInSpecFromFile(
 
 	
 	// communicate into to AE
-	if(!err)
+	A_Time			dur;
+	A_Boolean		has_alpha;
+		
+	A_short			depth = info.planes < 3 ? (info.depth == 32 ? AEIO_InputDepth_GRAY_32 : (info.depth == 16 ? AEIO_InputDepth_GRAY_16 : AEIO_InputDepth_GRAY_8)) : // greyscale
+							info.planes * info.depth; // not
+
+	err = suites.IOInSuite()->AEGP_SetInSpecDepth(specH, depth);
+
+	err = suites.IOInSuite()->AEGP_SetInSpecDimensions(specH, info.width, info.height);
+	
+	// have to set duration.scale or AE complains
+	dur.value = 0;
+	dur.scale = 100;
+	err = suites.IOInSuite()->AEGP_SetInSpecDuration(specH, &dur);
+
+	if(info.framerate > 0.f)
 	{
-		// Tell AE about our file
-		A_Time			dur;
-		A_Boolean		has_alpha;
-			
-		A_short			depth = info.planes < 3 ? (info.depth == 32 ? AEIO_InputDepth_GRAY_32 : (info.depth == 16 ? AEIO_InputDepth_GRAY_16 : AEIO_InputDepth_GRAY_8)) : // greyscale
-								info.planes * info.depth; // not
-
-		err = suites.IOInSuite()->AEGP_SetInSpecDepth(specH, depth);
-
-		err = suites.IOInSuite()->AEGP_SetInSpecDimensions(specH, info.width, info.height);
-		
-		// have to set duration.scale or AE complains
-		dur.value = 0;
-		dur.scale = 100;
-		err = suites.IOInSuite()->AEGP_SetInSpecDuration(specH, &dur);
-
-		if(info.framerate > 0.f)
-		{
-			// there is a bug that makes it so we can't re-interpret fps later if we set this
-			//err = suites.IOInSuite()->AEGP_SetInSpecNativeFPS(specH, FLOAT_2_FIX(info.framerate));
-		}
-
-
-		has_alpha = ( (info.planes == 4) || (info.planes == 2) ) &&
-						(info.alpha_type != AEIO_Alpha_NONE);
-
-		if (!err && info.alpha_type != AEIO_Alpha_UNKNOWN)
-		{
-			AEIO_AlphaLabel	alpha;
-			AEFX_CLR_STRUCT(alpha);
-
-			alpha.alpha		=	has_alpha ? info.alpha_type : AEIO_Alpha_NONE;
-			alpha.flags		=	(alpha.alpha == AEIO_Alpha_PREMUL) ? AEIO_AlphaPremul : 0;
-			alpha.version	=	AEIO_AlphaLabel_VERSION;
-			alpha.red		=	premult_color.red;
-			alpha.green		=	premult_color.green;
-			alpha.blue		=	premult_color.blue;
-			
-			err = suites.IOInSuite()->AEGP_SetInSpecAlphaLabel(specH, &alpha);
-		}
-		
-		if (!err && field_label.type != FIEL_Type_UNKNOWN)
-		{
-			err = suites.IOInSuite()->AEGP_SetInSpecInterlaceLabel(specH, &field_label);
-		}
-		
-		if(info.pixel_aspect_ratio.num != info.pixel_aspect_ratio.den)
-		{
-			err = suites.IOInSuite()->AEGP_SetInSpecHSF(specH, &info.pixel_aspect_ratio);
-		}
-		
-		if(file_size != 0)
-		{
-			err = suites.IOInSuite()->AEGP_SetInSpecSize(specH, file_size);
-		}
-		
-		if( (info.icc_profile && info.icc_profile_len) || Chromaticities_Set(info.chromaticities))
-		{
-			if(info.icc_profile == NULL || info.icc_profile_len == 0)
-			{
-				Chromaticities_To_Profile(&info.icc_profile, &info.icc_profile_len, info.chromaticities);
-			}
-			
-			if(info.icc_profile && info.icc_profile_len)
-			{
-				AEGP_ColorProfileP ae_color_profile = NULL;
-				
-				suites.ColorSettingsSuite()->AEGP_GetNewColorProfileFromICCProfile(S_mem_id,
-																					info.icc_profile_len, info.icc_profile,
-																					&ae_color_profile);
-				
-				suites.IOInSuite()->AEGP_SetInSpecEmbeddedColorProfile(specH, ae_color_profile, NULL);
-				
-				// AE made a copy, so now we disopse?
-				suites.ColorSettingsSuite()->AEGP_DisposeColorProfile(ae_color_profile);
-				
-				// free the profile
-				free(info.icc_profile);
-			}
-		}
-		
-		// set options handle
-		suites.MemorySuite()->AEGP_UnlockMemHandle(optionsH);
-	}
-	else
-	{
-		// get rid of the options handle because we got an error
-		if(optionsH)
-			suites.MemorySuite()->AEGP_FreeMemHandle(optionsH);
+		// there is a bug that makes it so we can't re-interpret fps later if we set this
+		//err = suites.IOInSuite()->AEGP_SetInSpecNativeFPS(specH, FLOAT_2_FIX(info.framerate));
 	}
 
 
-	return err;
+	has_alpha = ( (info.planes == 4) || (info.planes == 2) ) &&
+					(info.alpha_type != AEIO_Alpha_NONE);
+
+	if(info.alpha_type != AEIO_Alpha_UNKNOWN)
+	{
+		AEIO_AlphaLabel	alpha;
+		AEFX_CLR_STRUCT(alpha);
+
+		alpha.alpha		=	has_alpha ? info.alpha_type : AEIO_Alpha_NONE;
+		alpha.flags		=	(alpha.alpha == AEIO_Alpha_PREMUL) ? AEIO_AlphaPremul : 0;
+		alpha.version	=	AEIO_AlphaLabel_VERSION;
+		alpha.red		=	premult_color.red;
+		alpha.green		=	premult_color.green;
+		alpha.blue		=	premult_color.blue;
+		
+		suites.IOInSuite()->AEGP_SetInSpecAlphaLabel(specH, &alpha);
+	}
+	
+	if(field_label.type != FIEL_Type_UNKNOWN)
+	{
+		suites.IOInSuite()->AEGP_SetInSpecInterlaceLabel(specH, &field_label);
+	}
+	
+	if(info.pixel_aspect_ratio.num != info.pixel_aspect_ratio.den)
+	{
+		suites.IOInSuite()->AEGP_SetInSpecHSF(specH, &info.pixel_aspect_ratio);
+	}
+	
+	if(file_size != 0)
+	{
+		suites.IOInSuite()->AEGP_SetInSpecSize(specH, file_size);
+	}
+	
+	if( (info.icc_profile && info.icc_profile_len) || Chromaticities_Set(info.chromaticities))
+	{
+		if(info.icc_profile == NULL || info.icc_profile_len == 0)
+		{
+			Chromaticities_To_Profile(&info.icc_profile, &info.icc_profile_len, info.chromaticities);
+		}
+		
+		if(info.icc_profile && info.icc_profile_len)
+		{
+			AEGP_ColorProfileP ae_color_profile = NULL;
+			
+			suites.ColorSettingsSuite()->AEGP_GetNewColorProfileFromICCProfile(S_mem_id,
+																				info.icc_profile_len, info.icc_profile,
+																				&ae_color_profile);
+			
+			suites.IOInSuite()->AEGP_SetInSpecEmbeddedColorProfile(specH, ae_color_profile, NULL);
+			
+			// AE made a copy, so now we disopse?
+			suites.ColorSettingsSuite()->AEGP_DisposeColorProfile(ae_color_profile);
+			
+			// free the profile
+			free(info.icc_profile);
+		}
+	}
+	
+	suites.MemorySuite()->AEGP_UnlockMemHandle(optionsH);
+		
+	}
+	catch(ErrThrower &err) { ae_err = err.err(); }
+	catch(...) { ae_err = AEIO_Err_PARSING; }
+
+	
+	// get rid of the options handle because we got an error
+	if(ae_err && optionsH)
+		suites.MemorySuite()->AEGP_FreeMemHandle(optionsH);
+
+
+	return ae_err;
 }
 
 
@@ -756,9 +790,13 @@ FrameSeq_DrawSparseFrame(
 	// we'll give a file-size buffer for filling and then fit it
 	// to what AE wants
 	
-	A_Err err						=	A_Err_NONE;
+	A_Err ae_err					=	A_Err_NONE;
 
 	AEGP_SuiteHandler	suites(basic_dataP->pica_basicP);
+
+	try{
+	
+	ErrThrower err;
 
 	AEIO_Handle		optionsH		=	NULL;
 	format_inData	*options			=	NULL;
@@ -769,18 +807,18 @@ FrameSeq_DrawSparseFrame(
 	AEGP_MemHandle pathH = NULL;
 	A_PathType *file_nameZ = NULL;
 	
-	suites.IOInSuite()->AEGP_GetInSpecFilePath(specH, &pathH);
+	err = suites.IOInSuite()->AEGP_GetInSpecFilePath(specH, &pathH);
 	
 	if(pathH)
 	{
-		suites.MemorySuite()->AEGP_LockMemHandle(pathH, (void **)&file_nameZ);
+		err = suites.MemorySuite()->AEGP_LockMemHandle(pathH, (void **)&file_nameZ);
 	}
 	else
 		return AEIO_Err_BAD_FILENAME; 
 #else
 	A_PathType				file_nameZ[AEGP_MAX_PATH_SIZE];
 	
-	suites.IOInSuite()->AEGP_GetInSpecFilePath(specH, file_nameZ);
+	err = suites.IOInSuite()->AEGP_GetInSpecFilePath(specH, file_nameZ);
 #endif
 	
 #ifdef AE_HFS_PATHS	
@@ -803,10 +841,10 @@ FrameSeq_DrawSparseFrame(
 	AEIO_AlphaLabel alphaL;
 	
 	// get all that info from AE
-	suites.IOInSuite()->AEGP_GetInSpecDimensions(specH, &width, &height);
-	suites.IOInSuite()->AEGP_GetInSpecDepth(specH, &depth);
-	suites.IOInSuite()->AEGP_GetInSpecAlphaLabel(specH, &alphaL);
-	suites.IOInSuite()->AEGP_GetInSpecInterlaceLabel(specH, &field_label);
+	err = suites.IOInSuite()->AEGP_GetInSpecDimensions(specH, &width, &height);
+	err = suites.IOInSuite()->AEGP_GetInSpecDepth(specH, &depth);
+	err = suites.IOInSuite()->AEGP_GetInSpecAlphaLabel(specH, &alphaL);
+	err = suites.IOInSuite()->AEGP_GetInSpecInterlaceLabel(specH, &field_label);
 	
 	// set the info struct
 	info.width = width;
@@ -831,50 +869,48 @@ FrameSeq_DrawSparseFrame(
 		err = suites.MemorySuite()->AEGP_LockMemHandle(optionsH, (void**)&options);
 	
 	
-	if (!err) // so far so good?
+	PF_EffectWorld	temp_World_data;
+	
+	PF_EffectWorld	*temp_World = &temp_World_data,
+				*active_World = NULL;
+	
+	PF_PixelFormat	pixel_format;
+
+	err = suites.PFWorldSuite()->PF_GetPixelFormat(wP, &pixel_format);
+
+	A_long		wP_depth =	(pixel_format == PF_PixelFormat_ARGB128)? 32 :
+							(pixel_format == PF_PixelFormat_ARGB64) ? 16 : 8;
+	
+
+	// here's the only time we won't need to make our own buffer
+	if(	(info.width == wP->width) && (info.height == wP->height) && (wP_depth == 32) )
 	{
-		PF_EffectWorld	temp_World_data;
+		active_World = wP; // just use the PF_EffectWorld AE gave us
 		
-		PF_EffectWorld	*temp_World = &temp_World_data,
-					*active_World = NULL;
+		temp_World = NULL; // won't be needing this
+	}
+	else
+	{
+		// make our own PF_EffectWorld
+		err = suites.PFWorldSuite()->PF_NewWorld(NULL, info.width, info.height, FALSE,
+												PF_PixelFormat_ARGB128, temp_World);
 		
-		PF_PixelFormat	pixel_format;
-
-		suites.PFWorldSuite()->PF_GetPixelFormat(wP, &pixel_format);
-
-		A_long		wP_depth =	(pixel_format == PF_PixelFormat_ARGB128)? 32 :
-								(pixel_format == PF_PixelFormat_ARGB64) ? 16 : 8;
-		
-
-		// here's the only time we won't need to make our own buffer
-		if(	(info.width == wP->width) && (info.height == wP->height) && (wP_depth == 32) )
-		{
-			active_World = wP; // just use the PF_EffectWorld AE gave us
-			
-			temp_World = NULL; // won't be needing this
-		}
-		else
-		{
-			// make our own PF_EffectWorld
-			suites.PFWorldSuite()->PF_NewWorld(NULL, info.width, info.height, FALSE,
-													PF_PixelFormat_ARGB128, temp_World);
-			
-			active_World = temp_World;
-		}
+		active_World = temp_World;
+	}
 
 
-		// should always pass a full-sized float world to write into (using options we pass)
-		err = OpenEXR_DrawSparseFrame(basic_dataP, sparse_framePPB, active_World,
-										draw_flagsP, file_nameZ, &info, options);
+	// should always pass a full-sized float world to write into (using options we pass)
+	err = OpenEXR_DrawSparseFrame(basic_dataP, sparse_framePPB, active_World,
+									draw_flagsP, file_nameZ, &info, options);
 
-		
+	
 
-		if(temp_World)
-		{
-			SmartCopyWorld(basic_dataP, temp_World, wP, FALSE, FALSE, TRUE);
+	if(temp_World)
+	{
+		err = SmartCopyWorld(basic_dataP, temp_World, wP, FALSE, FALSE, TRUE);
 
-			suites.PFWorldSuite()->PF_DisposeWorld(NULL, temp_World);
-		}
+		suites.PFWorldSuite()->PF_DisposeWorld(NULL, temp_World);
+	}
 
 
 #ifdef AE_UNICODE_PATHS
@@ -882,13 +918,15 @@ FrameSeq_DrawSparseFrame(
 		suites.MemorySuite()->AEGP_FreeMemHandle(pathH);
 #endif
 
-		// done with options
-		if(optionsH)
-			suites.MemorySuite()->AEGP_UnlockMemHandle(optionsH);
+	// done with options
+	if(optionsH)
+		suites.MemorySuite()->AEGP_UnlockMemHandle(optionsH);
+
 	}
-
-
-	return err;
+	catch(ErrThrower &err) { ae_err = err.err(); }
+	catch(...) { ae_err = AEIO_Err_PARSING; }
+	
+	return ae_err;
 }
 
 
@@ -942,7 +980,7 @@ FrameSeq_DisposeInSpec(
 	// I guess we'll dump the handle if we've got it
 	err = suites.IOInSuite()->AEGP_GetInSpecOptionsHandle(specH, reinterpret_cast<void**>(&optionsH));
 
-	if (!err && optionsH)
+	if(!err && optionsH)
 	{
 		err = suites.MemorySuite()->AEGP_FreeMemHandle(optionsH);
 	}
@@ -967,7 +1005,7 @@ FrameSeq_FlattenOptions(
 	// get the options for flattening
 	err = suites.IOInSuite()->AEGP_GetInSpecOptionsHandle(specH, reinterpret_cast<void**>(&optionsH));
 
-	if (!err && optionsH)
+	if(!err && optionsH)
 	{
 		AEGP_MemSize mem_size;
 		
@@ -1082,9 +1120,13 @@ FrameSeq_GetNumAuxChannels(
 	A_long			*num_channelsPL)
 { 
 	// tell AE how many Aux channels we have (with options help)
-	A_Err err						=	A_Err_NONE;
+	A_Err ae_err					=	A_Err_NONE;
 
 	AEGP_SuiteHandler	suites(basic_dataP->pica_basicP);
+
+	try{
+	
+	ErrThrower err;
 
 	AEIO_Handle		optionsH		=	NULL;
 	
@@ -1094,18 +1136,18 @@ FrameSeq_GetNumAuxChannels(
 	AEGP_MemHandle pathH = NULL;
 	A_PathType *file_nameZ = NULL;
 	
-	suites.IOInSuite()->AEGP_GetInSpecFilePath(specH, &pathH);
+	err = suites.IOInSuite()->AEGP_GetInSpecFilePath(specH, &pathH);
 	
 	if(pathH)
 	{
-		suites.MemorySuite()->AEGP_LockMemHandle(pathH, (void **)&file_nameZ);
+		err = suites.MemorySuite()->AEGP_LockMemHandle(pathH, (void **)&file_nameZ);
 	}
 	else
 		return AEIO_Err_BAD_FILENAME; 
 #else
 	A_PathType				file_nameZ[AEGP_MAX_PATH_SIZE];
 	
-	suites.IOInSuite()->AEGP_GetInSpecFilePath(specH, file_nameZ);
+	err = suites.IOInSuite()->AEGP_GetInSpecFilePath(specH, file_nameZ);
 #endif
 
 #ifdef AE_HFS_PATHS	
@@ -1131,15 +1173,15 @@ FrameSeq_GetNumAuxChannels(
 		AEIO_Handle		fake_optionsH	= NULL;
 		format_inData	*fake_options	= NULL;
 	
-		suites.MemorySuite()->AEGP_NewMemHandle( S_mem_id, "Round Options",
-															sizeof(format_inData),
-															AEGP_MemFlag_CLEAR, &fake_optionsH);
+		err = suites.MemorySuite()->AEGP_NewMemHandle( S_mem_id, "Round Options",
+														sizeof(format_inData),
+														AEGP_MemFlag_CLEAR, &fake_optionsH);
 															
 		err = suites.MemorySuite()->AEGP_LockMemHandle(fake_optionsH, (void**)&fake_options);
 		
-		OpenEXR_InitInOptions(basic_dataP, (format_inData *)fake_options);
+		err = OpenEXR_InitInOptions(basic_dataP, (format_inData *)fake_options);
 		
-		OpenEXR_GetNumAuxChannels(basic_dataP, fake_optionsH, file_nameZ, num_channelsPL);
+		err = OpenEXR_GetNumAuxChannels(basic_dataP, fake_optionsH, file_nameZ, num_channelsPL);
 		
 		suites.MemorySuite()->AEGP_FreeMemHandle(fake_optionsH);
 	}
@@ -1153,7 +1195,11 @@ FrameSeq_GetNumAuxChannels(
 	if(optionsH)
 		suites.MemorySuite()->AEGP_UnlockMemHandle(optionsH);
 	
-	return err;
+	}
+	catch(ErrThrower &err) { ae_err = err.err(); }
+	catch(...) { ae_err = AEIO_Err_PARSING; }
+	
+	return ae_err;
 }
 
 									
@@ -1165,11 +1211,15 @@ FrameSeq_GetAuxChannelDesc(
 	PF_ChannelDesc	*descP)
 { 
 	// describe one of our AUX channels
-	A_Err err						=	A_Err_NONE;
+	A_Err ae_err = A_Err_NONE;
 
-	AEGP_SuiteHandler	suites(basic_dataP->pica_basicP);
+	AEGP_SuiteHandler suites(basic_dataP->pica_basicP);
 
-	AEIO_Handle		optionsH		=	NULL;
+	try{
+	
+	ErrThrower err;
+
+	AEIO_Handle optionsH = NULL;
 
 
 	// file path
@@ -1177,18 +1227,18 @@ FrameSeq_GetAuxChannelDesc(
 	AEGP_MemHandle pathH = NULL;
 	A_PathType *file_nameZ = NULL;
 	
-	suites.IOInSuite()->AEGP_GetInSpecFilePath(specH, &pathH);
+	err = suites.IOInSuite()->AEGP_GetInSpecFilePath(specH, &pathH);
 	
 	if(pathH)
 	{
-		suites.MemorySuite()->AEGP_LockMemHandle(pathH, (void **)&file_nameZ);
+		err = suites.MemorySuite()->AEGP_LockMemHandle(pathH, (void **)&file_nameZ);
 	}
 	else
 		return AEIO_Err_BAD_FILENAME; 
 #else
 	A_PathType				file_nameZ[AEGP_MAX_PATH_SIZE];
 	
-	suites.IOInSuite()->AEGP_GetInSpecFilePath(specH, file_nameZ);
+	err = suites.IOInSuite()->AEGP_GetInSpecFilePath(specH, file_nameZ);
 #endif
 
 #ifdef AE_HFS_PATHS	
@@ -1213,13 +1263,13 @@ FrameSeq_GetAuxChannelDesc(
 		AEIO_Handle		fake_optionsH	= NULL;
 		format_inData	*fake_options	= NULL;
 		
-		suites.MemorySuite()->AEGP_NewMemHandle( S_mem_id, "Round Options",
-															sizeof(format_inData),
-															AEGP_MemFlag_CLEAR, &fake_optionsH);
+		err = suites.MemorySuite()->AEGP_NewMemHandle( S_mem_id, "Round Options",
+														sizeof(format_inData),
+														AEGP_MemFlag_CLEAR, &fake_optionsH);
 															
 		err = suites.MemorySuite()->AEGP_LockMemHandle(fake_optionsH, (void**)&fake_options);
 		
-		OpenEXR_InitInOptions(basic_dataP, (format_inData *)fake_options);
+		err = OpenEXR_InitInOptions(basic_dataP, (format_inData *)fake_options);
 		
 		err = OpenEXR_GetAuxChannelDesc(basic_dataP, fake_optionsH, file_nameZ, chan_indexL, descP);
 		
@@ -1236,7 +1286,11 @@ FrameSeq_GetAuxChannelDesc(
 	if(optionsH)
 		suites.MemorySuite()->AEGP_UnlockMemHandle(optionsH);
 	
-	return err;
+	}
+	catch(ErrThrower &err) { ae_err = err.err(); }
+	catch(...) { ae_err = AEIO_Err_PARSING; }
+
+	return ae_err;
 }
 
 																
@@ -1252,10 +1306,14 @@ FrameSeq_DrawAuxChannel(
 	// unfortunately, you'll have to handle scaling yourself
 	// I don't know how to scale float worlds for you easily
 	
-	A_Err err						=	A_Err_NONE;
+	A_Err ae_err					=	A_Err_NONE;
 
 	AEGP_SuiteHandler	suites(basic_dataP->pica_basicP);
 
+	try{
+	
+	ErrThrower err;
+	
 	AEIO_Handle		optionsH		=	NULL;
 	format_inData	*options			=	NULL;
 
@@ -1265,11 +1323,11 @@ FrameSeq_DrawAuxChannel(
 	AEGP_MemHandle pathH = NULL;
 	A_PathType *file_nameZ = NULL;
 	
-	suites.IOInSuite()->AEGP_GetInSpecFilePath(specH, &pathH);
+	err = suites.IOInSuite()->AEGP_GetInSpecFilePath(specH, &pathH);
 	
 	if(pathH)
 	{
-		suites.MemorySuite()->AEGP_LockMemHandle(pathH, (void **)&file_nameZ);
+		err = suites.MemorySuite()->AEGP_LockMemHandle(pathH, (void **)&file_nameZ);
 	}
 	else
 		return AEIO_Err_BAD_FILENAME; 
@@ -1290,7 +1348,7 @@ FrameSeq_DrawAuxChannel(
 
 	
 	// get all that info from AE
-	suites.IOInSuite()->AEGP_GetInSpecDimensions(specH, &width, &height);
+	err = suites.IOInSuite()->AEGP_GetInSpecDimensions(specH, &width, &height);
 	
 	
 	// get options handle
@@ -1299,12 +1357,12 @@ FrameSeq_DrawAuxChannel(
 	if(optionsH)
 		err = suites.MemorySuite()->AEGP_LockMemHandle(optionsH, (void**)&options);
 	else
-		return err; // we need options
+		return AEIO_Err_INCONSISTENT_PARAMETERS; // we need options
 
 	
 	// use our own function to get the ChannelDesc (good thinking!)
 	PF_ChannelDesc desc;
-	FrameSeq_GetAuxChannelDesc(basic_dataP, specH, chan_indexL, &desc);
+	err = FrameSeq_GetAuxChannelDesc(basic_dataP, specH, chan_indexL, &desc);
 
 	
 	// crap, we have to scale ourselves (for a channel like object ID, antialiasing makes no sense)
@@ -1364,7 +1422,11 @@ FrameSeq_DrawAuxChannel(
 	if(optionsH)
 		suites.MemorySuite()->AEGP_UnlockMemHandle(optionsH);
 		
-	return err;
+	}
+	catch(ErrThrower &err) { ae_err = err.err(); }
+	catch(...) { ae_err = AEIO_Err_PARSING; }
+	
+	return ae_err;
 }
 
 
@@ -1498,10 +1560,14 @@ FrameSeq_OutputFrame(
 	// again, we'll get the info and provide a suitable buffer
 	// you just write the file, big guy
 	
-	A_Err err						=	A_Err_NONE;
+	A_Err ae_err = A_Err_NONE;
 
 	AEGP_SuiteHandler	suites(basic_dataP->pica_basicP);
 
+
+	try{
+	
+	ErrThrower err;
 
 	AEIO_Handle			optionsH		=	NULL;
 	format_outData		*options		=	NULL;
@@ -1525,10 +1591,10 @@ FrameSeq_OutputFrame(
 	
 	
 	// get options data
-	suites.IOOutSuite()->AEGP_GetOutSpecOptionsHandle(outH, (void**)&optionsH);
+	err = suites.IOOutSuite()->AEGP_GetOutSpecOptionsHandle(outH, (void**)&optionsH);
 	
 	if(optionsH)
-		suites.MemorySuite()->AEGP_LockMemHandle(optionsH, (void**)&options);
+		err = suites.MemorySuite()->AEGP_LockMemHandle(optionsH, (void**)&options);
 	
 	
 	// get file path
@@ -1537,11 +1603,11 @@ FrameSeq_OutputFrame(
 	A_PathType *file_pathZ = NULL;
 	
 	A_Boolean file_reservedPB = FALSE; // WTF?
-	suites.IOOutSuite()->AEGP_GetOutSpecFilePath(outH, &pathH, &file_reservedPB);
+	err = suites.IOOutSuite()->AEGP_GetOutSpecFilePath(outH, &pathH, &file_reservedPB);
 	
 	if(pathH)
 	{
-		suites.MemorySuite()->AEGP_LockMemHandle(pathH, (void **)&file_pathZ);
+		err = suites.MemorySuite()->AEGP_LockMemHandle(pathH, (void **)&file_pathZ);
 	}
 	else
 		return AEIO_Err_BAD_FILENAME; 
@@ -1549,7 +1615,7 @@ FrameSeq_OutputFrame(
 	A_PathType file_pathZ[AEGP_MAX_PATH_SIZE+1];
 	
 	A_Boolean file_reservedPB = FALSE; // WTF?
-	suites.IOOutSuite()->AEGP_GetOutSpecFilePath(outH, file_pathZ, &file_reservedPB);
+	err = suites.IOOutSuite()->AEGP_GetOutSpecFilePath(outH, file_pathZ, &file_reservedPB);
 #endif
 	
 #ifdef AE_HFS_PATHS	
@@ -1559,7 +1625,7 @@ FrameSeq_OutputFrame(
 #endif
 	
 	// get dimensions
-	suites.IOOutSuite()->AEGP_GetOutSpecDimensions(outH, &info.width, &info.height);
+	err = suites.IOOutSuite()->AEGP_GetOutSpecDimensions(outH, &info.width, &info.height);
 	
 	
 	// get depth
@@ -1571,7 +1637,7 @@ FrameSeq_OutputFrame(
 	
 	
 	// get pixel aspect ratio
-	suites.IOOutSuite()->AEGP_GetOutSpecHSF(outH, &info.pixel_aspect_ratio);
+	err = suites.IOOutSuite()->AEGP_GetOutSpecHSF(outH, &info.pixel_aspect_ratio);
 
 	
 	// get frame rate
@@ -1646,9 +1712,9 @@ FrameSeq_OutputFrame(
 	// for EXR, we always want to pass a float buffer
 	PF_PixelFormat	pixel_format;
 
-	suites.PFWorldSuite()->PF_GetPixelFormat(wP, &pixel_format);
+	err = suites.PFWorldSuite()->PF_GetPixelFormat(wP, &pixel_format);
 
-	if( pixel_format == PF_PixelFormat_ARGB128 )
+	if(pixel_format == PF_PixelFormat_ARGB128)
 	{
 		active_World = (PF_EffectWorld *)wP;
 		
@@ -1657,11 +1723,11 @@ FrameSeq_OutputFrame(
 	else
 	{
 		// make our own float PF_EffectWorld
-		suites.PFWorldSuite()->PF_NewWorld(NULL, info.width, info.height, FALSE,
+		err = suites.PFWorldSuite()->PF_NewWorld(NULL, info.width, info.height, FALSE,
 												PF_PixelFormat_ARGB128, temp_World);
 		
 		// copy the world
-		SmartCopyWorld(basic_dataP, (PF_EffectWorld *)wP, temp_World, FALSE, FALSE, FALSE);
+		err = SmartCopyWorld(basic_dataP, (PF_EffectWorld *)wP, temp_World, FALSE, FALSE, FALSE);
 			
 		active_World = temp_World;
 	}
@@ -1693,7 +1759,11 @@ FrameSeq_OutputFrame(
 	if(optionsH)
 		suites.MemorySuite()->AEGP_UnlockMemHandle(optionsH);
 	
-	return err;
+	}
+	catch(ErrThrower &err) { ae_err = err.err(); }
+	catch(...) { ae_err = AEIO_Err_PARSING; }
+	
+	return ae_err;
 }
 
 
