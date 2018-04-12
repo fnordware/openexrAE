@@ -87,7 +87,7 @@ static int gNumCPUs = 1;
 // our prefs
 static A_long gChannelCaches = 3;
 static A_long gCacheTimeout = 30;
-static A_long gAutoCacheChannels = 0;
+static A_long gAutoCacheChannels = 5;
 static A_Boolean gMemoryMap = FALSE;
 static A_Boolean gStorePersonal = FALSE;
 static A_Boolean gStoreMachine = FALSE;
