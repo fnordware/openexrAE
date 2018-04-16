@@ -24,12 +24,14 @@ typedef enum {
 	IBOutlet NSWindow *theWindow;
 	IBOutlet NSButton *cacheCheck;
 	IBOutlet NSPopUpButton *numCachesPulldown;
+	IBOutlet NSButton *cacheEverythingCheck;
 	BOOL subDialog;
 	InDialogResult theResult;
 }
 
 - (id)init:(BOOL)cache
 	numCaches:(NSInteger)num_cashes
+	cacheEverything:(BOOL)cache_everything
 	subDialog:(BOOL)sub_dialog;
 
 - (IBAction)clickOK:(id)sender;
@@ -40,5 +42,6 @@ typedef enum {
 
 - (BOOL)getCache;
 - (NSInteger)getNumCaches;
+- (BOOL)getCacheEverything;
 
 @end

@@ -113,6 +113,7 @@ OpenEXR_InDialog(
 	AEIO_BasicData		*basic_dataP,
 	A_Boolean			*cache_channels,
 	A_long				*num_caches,
+	A_Boolean			*cache_everything,
 	A_Boolean			*user_interactedPB0)
 {
 	A_Err			ae_err 		= A_Err_NONE;
@@ -135,6 +136,7 @@ OpenEXR_InDialog(
 		OpenEXR_InUI_Controller *ui_controller = [[ui_controller_class alloc]
 													init:*cache_channels
 													numCaches:*num_caches
+													cacheEverything:*cache_everything
 													subDialog:runAsSubdialog];
 		if(ui_controller)
 		{
@@ -170,6 +172,7 @@ OpenEXR_InDialog(
 				{
 					*cache_channels = [ui_controller getCache];
 					*num_caches = [ui_controller getNumCaches];
+					*cache_everything = [ui_controller getCacheEverything];
 					
 					*user_interactedPB0 = TRUE;
 				}
