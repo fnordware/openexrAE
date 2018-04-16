@@ -88,6 +88,7 @@ static int gNumCPUs = 1;
 static A_long gChannelCaches = 3;
 static A_long gCacheTimeout = 30;
 static A_long gAutoCacheChannels = 5;
+static A_Boolean gCacheEverything = TRUE;
 static A_Boolean gMemoryMap = FALSE;
 static A_Boolean gStorePersonal = FALSE;
 static A_Boolean gStoreMachine = FALSE;
@@ -154,6 +155,7 @@ OpenEXR_Init(struct SPBasicSuite *pica_basicP)
 #define PREFS_CHANNEL_CACHES "Channel Caches Number"
 #define PREFS_CACHE_EXPIRATION "Channel Cache Expiration"
 #define PREFS_AUTO_CACHE "Auto Cache Threshold"
+#define PREFS_CACHE_EVERYTHING	"Cache Everything"
 #define PREFS_MEMORY_MAP	"Memory Map"
 #define PREFS_PERSONAL_INFO "Store Personal Info"
 #define PREFS_MACHINE_INFO	"Store Machine Info"
@@ -166,6 +168,7 @@ OpenEXR_Init(struct SPBasicSuite *pica_basicP)
 	A_long channel_caches = gChannelCaches; // defaults come from global initializations above
 	A_long cache_timeout = gCacheTimeout;
 	A_long auto_cache_channels = gAutoCacheChannels;
+	A_long cache_everyhing = gCacheEverything;
 	A_long memory_map = gMemoryMap;
 	A_long store_personal = gStorePersonal;
 	A_long store_machine = gStoreMachine;
@@ -173,6 +176,7 @@ OpenEXR_Init(struct SPBasicSuite *pica_basicP)
 	suites.PersistentDataSuite()->AEGP_GetLong(blobH, PREFS_SECTION, PREFS_CHANNEL_CACHES, channel_caches, &channel_caches);
 	suites.PersistentDataSuite()->AEGP_GetLong(blobH, PREFS_SECTION, PREFS_CACHE_EXPIRATION, cache_timeout, &cache_timeout);
 	suites.PersistentDataSuite()->AEGP_GetLong(blobH, PREFS_SECTION, PREFS_AUTO_CACHE, auto_cache_channels, &auto_cache_channels);
+	suites.PersistentDataSuite()->AEGP_GetLong(blobH, PREFS_SECTION, PREFS_CACHE_EVERYTHING, cache_everyhing, &cache_everyhing);
 	suites.PersistentDataSuite()->AEGP_GetLong(blobH, PREFS_SECTION, PREFS_MEMORY_MAP, memory_map, &memory_map);
 	suites.PersistentDataSuite()->AEGP_GetLong(blobH, PREFS_SECTION, PREFS_PERSONAL_INFO, store_personal, &store_personal);
 	suites.PersistentDataSuite()->AEGP_GetLong(blobH, PREFS_SECTION, PREFS_MACHINE_INFO, store_machine, &store_machine);
@@ -180,6 +184,7 @@ OpenEXR_Init(struct SPBasicSuite *pica_basicP)
 	gChannelCaches = channel_caches;
 	gCacheTimeout = cache_timeout;
 	gAutoCacheChannels = auto_cache_channels;
+	gCacheEverything = (cache_everyhing ? TRUE : FALSE);
 	gMemoryMap = (memory_map ? TRUE : FALSE);
 	gStorePersonal = (store_personal ? TRUE : FALSE);
 	gStoreMachine = (store_machine ? TRUE : FALSE);
@@ -1223,7 +1228,7 @@ OpenEXR_DrawSparseFrame(
 		
 		OpenEXR_ChannelCache *chan_cache = gCachePool.findCache(instream);
 		
-		if(chan_cache == NULL && options != NULL && options->cache_channels && gChannelCaches > 0)
+		if(chan_cache == NULL && options != NULL && (options->cache_channels || gCacheEverything) && gChannelCaches > 0)
 		{
 			chan_cache = gCachePool.addCache(in, instream, inter);			
 		}
@@ -1462,9 +1467,10 @@ OpenEXR_ReadOptionsDialog(
 		
 		A_Boolean cache = options->cache_channels;
 		A_long num_caches = gChannelCaches;
+		A_Boolean cache_everything = gCacheEverything;
 		
 		
-		err = OpenEXR_InDialog(basic_dataP, &cache, &num_caches, &interacted);
+		err = OpenEXR_InDialog(basic_dataP, &cache, &num_caches, &cache_everything, &interacted);
 		
 		
 		if(interacted)
@@ -1477,10 +1483,14 @@ OpenEXR_ReadOptionsDialog(
 							
 				AEGP_PersistentBlobH blobH = NULL;
 				suites.PersistentDataSuite()->AEGP_GetApplicationBlob(&blobH);
-	
+				
 				suites.PersistentDataSuite()->AEGP_SetLong(blobH, PREFS_SECTION, PREFS_CHANNEL_CACHES, num_caches);
 
+				A_long cache_everythingL = cache_everything;
+				suites.PersistentDataSuite()->AEGP_SetLong(blobH, PREFS_SECTION, PREFS_CACHE_EVERYTHING, num_caches);
+
 				gChannelCaches = num_caches;
+				gCacheEverything = cache_everything;
 				
 				gCachePool.configurePool(gChannelCaches, basic_dataP->pica_basicP);
 			}
@@ -1904,7 +1914,7 @@ OpenEXR_DrawAuxChannel(
 
 		OpenEXR_ChannelCache *chan_cache = gCachePool.findCache(instream);
 		
-		if(chan_cache == NULL && options->cache_channels && gChannelCaches > 0 && CONT2())
+		if(chan_cache == NULL && (options->cache_channels || gCacheEverything) && gChannelCaches > 0 && CONT2())
 		{
 			try
 			{

@@ -18,7 +18,8 @@ enum {
 	IN_OK = IDOK,
 	IN_Cancel = IDCANCEL,
 	IN_Cache_Check = 3,
-	IN_Num_Caches_Menu
+	IN_Num_Caches_Menu,
+	IN_Cache_Everything_Check
 };
 
 
@@ -43,6 +44,7 @@ static WORD	g_item_clicked = 0;
 
 static A_Boolean	g_cache = FALSE;
 static A_long		g_num_caches = 3;
+static A_Boolean	g_cache_everything = FALSE;
 
 
 static BOOL CALLBACK DialogProc(HWND hwndDlg, UINT message, WPARAM wParam, LPARAM lParam) 
@@ -54,6 +56,7 @@ static BOOL CALLBACK DialogProc(HWND hwndDlg, UINT message, WPARAM wParam, LPARA
 		case WM_INITDIALOG:
 			do{
 				SET_CHECK(IN_Cache_Check, g_cache);
+				SET_CHECK(IN_Cache_Everything_Check, g_cache_everything);
 
 				for(int i=0; i <= 10; i++)
 				{
@@ -76,6 +79,7 @@ static BOOL CALLBACK DialogProc(HWND hwndDlg, UINT message, WPARAM wParam, LPARA
 				case IN_Cancel:  // do the same thing, but g_item_clicked will be different
 					do{
 						g_cache = GET_CHECK(IN_Cache_Check);
+						g_cache_everything = GET_CHECK(IN_Cache_Everything_Check);
 
 						g_num_caches = GET_MENU_VALUE(IN_Num_Caches_Menu);
 					}while(0);
@@ -115,6 +119,7 @@ OpenEXR_InDialog(
 	AEIO_BasicData		*basic_dataP,
 	A_Boolean			*cache_channels,
 	A_long				*num_caches,
+	A_Boolean			*cache_everything,
 	A_Boolean			*user_interactedPB0)
 {
 	A_Err err = A_Err_NONE;
@@ -122,6 +127,7 @@ OpenEXR_InDialog(
 	// set globals
 	g_cache = *cache_channels;
 	g_num_caches = *num_caches;
+	g_cache_everything = *cache_everything;
 	
 
 	// do dialog, passing plug-in path in refcon
@@ -132,6 +138,7 @@ OpenEXR_InDialog(
 	{
 		*cache_channels = g_cache;
 		*num_caches = g_num_caches;
+		*cache_everything = g_cache_everything;
 		
 		*user_interactedPB0 = TRUE;
 	}

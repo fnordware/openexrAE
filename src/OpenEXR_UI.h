@@ -29,6 +29,7 @@ OpenEXR_InDialog(
 	AEIO_BasicData		*basic_dataP,
 	A_Boolean			*cache_channels,
 	A_long				*num_caches,
+	A_Boolean			*cache_everything,
 	A_Boolean			*user_interactedPB0);
 
 A_Err	
