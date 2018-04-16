@@ -44,10 +44,10 @@
 #define DESCRIPTION			"Extract 3D Channels"
 #define RELEASE_DATE		__DATE__
 #define AUTHOR				"Brendan Bolles"
-#define COPYRIGHT			"(c) 2007-2014 fnord"
+#define COPYRIGHT			"(c) 2007-2018 fnord"
 #define WEBSITE				"www.fnordware.com"
-#define	MAJOR_VERSION		1
-#define	MINOR_VERSION		9
+#define	MAJOR_VERSION		2
+#define	MINOR_VERSION		0
 #define	BUG_VERSION			0
 #define	STAGE_VERSION		PF_Stage_RELEASE
 #define	BUILD_VERSION		0
