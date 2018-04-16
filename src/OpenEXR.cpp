@@ -14,6 +14,7 @@
 //	1.7		26 April 2012 - More performance enhancements, unlimited number of channels
 //	1.8		1 January 2013 - AE channel cache, UTF-8 support
 //  1.9		18 June 2014 - OpenEXR 2 support, displayWindow handling, EXtractoR layer pulldown
+//	2.0		16 April 2018 - Cryptomatte support, always cache
 //
 //	ToDo in this module:
 //
