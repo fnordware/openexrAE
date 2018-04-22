@@ -15,6 +15,8 @@
 
 #include "fnord_SuiteHandler.h"
 
+#include <IlmThreadMutex.h>
+
 #include <list>
 #include <time.h>
 
@@ -90,6 +92,7 @@ class OpenEXR_CachePool
 	int _max_caches;
 	const SPBasicSuite *_pica_basicP;
 	std::list<OpenEXR_ChannelCache *> _pool;
+	IlmThread::Mutex _mutex;
 };
 
 

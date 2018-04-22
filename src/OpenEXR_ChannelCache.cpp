@@ -489,6 +489,8 @@ compare_age(const OpenEXR_ChannelCache *first, const OpenEXR_ChannelCache *secon
 void
 OpenEXR_CachePool::configurePool(int max_caches, const SPBasicSuite *pica_basicP)
 {
+	Lock lock(_mutex);
+
 	_max_caches = max_caches;
 	
 	if(pica_basicP)
@@ -522,6 +524,8 @@ MatchDateTime(const DateTime &d1, const DateTime &d2)
 OpenEXR_ChannelCache *
 OpenEXR_CachePool::findCache(const IStreamPlatform &stream) const
 {
+	Lock lock(_mutex);
+
 	for(list<OpenEXR_ChannelCache *>::const_iterator i = _pool.begin(); i != _pool.end(); ++i)
 	{
 		if( MatchDateTime(stream.getModTime(), (*i)->getModTime()) &&
@@ -538,6 +542,8 @@ OpenEXR_CachePool::findCache(const IStreamPlatform &stream) const
 OpenEXR_ChannelCache *
 OpenEXR_CachePool::addCache(HybridInputFile &in, const IStreamPlatform &stream, const AEIO_InterruptFuncs *inter)
 {
+	Lock lock(_mutex);
+
 	_pool.sort(compare_age);
 	
 	while(_pool.size() && _pool.size() >= _max_caches)
@@ -568,6 +574,8 @@ OpenEXR_CachePool::addCache(HybridInputFile &in, const IStreamPlatform &stream, 
 bool
 OpenEXR_CachePool::deleteStaleCaches(int timeout)
 {
+	Lock lock(_mutex);
+
 	if(_pool.size() > 0)
 	{
 		const int old_size = _pool.size();
