@@ -12,6 +12,7 @@
 
 - (id)init:(BOOL)cache
 	numCaches:(NSInteger)num_cashes
+	cacheEverything:(BOOL)cache_everything
 	subDialog:(BOOL)sub_dialog
 {
 	self = [super init];
@@ -22,6 +23,7 @@
 	[theWindow center];
 	
 	[cacheCheck setState:(cache ? NSOnState : NSOffState)];
+	[cacheEverythingCheck setState:(cache_everything ? NSOnState : NSOffState)];
 	
 	// fill in menu, range determined here
 	int i;
@@ -68,6 +70,10 @@
 
 - (NSInteger)getNumCaches {
 	return [[numCachesPulldown selectedItem] tag];
+}
+
+- (BOOL)getCacheEverything {
+	return ([cacheEverythingCheck state] == NSOnState);
 }
 
 @end
