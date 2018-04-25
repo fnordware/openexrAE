@@ -15,7 +15,7 @@
 		2A1BA7CB10C3828500244D12 /* IDentifier_Dialog_Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1BA7CA10C3828500244D12 /* IDentifier_Dialog_Controller.m */; };
 		2A3BA9DF10C0E23B00AD32F2 /* IDentifier_Dialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A3BA9DE10C0E23B00AD32F2 /* IDentifier_Dialog.xib */; };
 		2A3BA9E510C0E25200AD32F2 /* IDentifier banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A3BA9E410C0E25200AD32F2 /* IDentifier banner.png */; };
-		2A3BAA7110C0F40600AD32F2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A3BAA7010C0F40600AD32F2 /* Cocoa.framework */; };
+		2A57844F2090AD7200C0847A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A57844E2090AD7200C0847A /* Cocoa.framework */; };
 		2A88980410C0626600ADA4BB /* fnord_MissingSuiteError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A88980110C0626600ADA4BB /* fnord_MissingSuiteError.cpp */; };
 		2A88980510C0626600ADA4BB /* fnord_SuiteHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A88980210C0626600ADA4BB /* fnord_SuiteHandler.cpp */; };
 		2AC745481655617F00980332 /* OpenEXR_UTF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AC745461655617F00980332 /* OpenEXR_UTF.cpp */; };
@@ -32,7 +32,7 @@
 		2A1BA7CA10C3828500244D12 /* IDentifier_Dialog_Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IDentifier_Dialog_Controller.m; path = ../../src/mac/IDentifier_Dialog_Controller.m; sourceTree = "<group>"; };
 		2A3BA9DE10C0E23B00AD32F2 /* IDentifier_Dialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = IDentifier_Dialog.xib; path = ../../src/mac/IDentifier_Dialog.xib; sourceTree = "<group>"; };
 		2A3BA9E410C0E25200AD32F2 /* IDentifier banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IDentifier banner.png"; path = "../../src/mac/IDentifier banner.png"; sourceTree = SOURCE_ROOT; };
-		2A3BAA7010C0F40600AD32F2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		2A57844E2090AD7200C0847A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2A88980110C0626600ADA4BB /* fnord_MissingSuiteError.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fnord_MissingSuiteError.cpp; path = ../../src/fnord_MissingSuiteError.cpp; sourceTree = SOURCE_ROOT; };
 		2A88980210C0626600ADA4BB /* fnord_SuiteHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fnord_SuiteHandler.cpp; path = ../../src/fnord_SuiteHandler.cpp; sourceTree = SOURCE_ROOT; };
 		2A88980310C0626600ADA4BB /* fnord_SuiteHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fnord_SuiteHandler.h; path = ../../src/fnord_SuiteHandler.h; sourceTree = SOURCE_ROOT; };
@@ -47,7 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A3BAA7110C0F40600AD32F2 /* Cocoa.framework in Frameworks */,
+				2A57844F2090AD7200C0847A /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,7 +74,7 @@
 				2A3BA9E410C0E25200AD32F2 /* IDentifier banner.png */,
 				2A1BA7C910C3828500244D12 /* IDentifier_Dialog_Controller.h */,
 				2A1BA7CA10C3828500244D12 /* IDentifier_Dialog_Controller.m */,
-				2A3BAA7010C0F40600AD32F2 /* Cocoa.framework */,
+				2A57844E2090AD7200C0847A /* Cocoa.framework */,
 			);
 			comments = "SDK Backwards is some pretty rudimentary audio processing, but the flags and params are handled in an appropriate manner.";
 			sourceTree = "<group>";
@@ -113,8 +113,6 @@
 /* Begin PBXProject section */
 		C4E6187E095A3C800012CA3F /* Project object */ = {
 			isa = PBXProject;
-			attributes = {
-			};
 			buildConfigurationList = C4E6187F095A3C800012CA3F /* Build configuration list for PBXProject "IDentifier" */;
 			compatibilityVersion = "Xcode 3.0";
 			developmentRegion = English;
