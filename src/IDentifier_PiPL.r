@@ -91,7 +91,7 @@ resource 'PiPL' (16000) {
 };
 
 
-#ifdef AE_OS_MAC
+#ifdef AE_OS_MAC_OLD_SCHOOL
 
 #include "MacTypes.r"
 
