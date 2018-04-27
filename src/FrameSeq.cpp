@@ -912,12 +912,12 @@ FrameSeq_DrawSparseFrame(
 
 
 	// should always pass a full-sized float world to write into (using options we pass)
-	err = OpenEXR_DrawSparseFrame(basic_dataP, sparse_framePPB, active_World,
+	ae_err = OpenEXR_DrawSparseFrame(basic_dataP, sparse_framePPB, active_World,
 									draw_flagsP, file_nameZ, &info, options);
 
 	
 
-	if(temp_World)
+	if(temp_World && !ae_err)
 	{
 		err = SmartCopyWorld(basic_dataP, temp_World, wP, FALSE, FALSE, TRUE);
 	}
@@ -1430,7 +1430,7 @@ FrameSeq_DrawAuxChannel(
 	memset(chunkP->dataPV, 0, mem_size);
 	
 
-	err = OpenEXR_DrawAuxChannel(basic_dataP, options, file_nameZ, chan_indexL, pbP, scale, chunkP);
+	ae_err = OpenEXR_DrawAuxChannel(basic_dataP, options, file_nameZ, chan_indexL, pbP, scale, chunkP);
 
 	
 	suites.HandleSuite()->host_unlock_handle(chunkP->dataH);
@@ -1759,7 +1759,7 @@ FrameSeq_OutputFrame(
 
 
 	// write out image (finally)
-	err = OpenEXR_OutputFile(basic_dataP, file_pathZ, &info, options, active_World);
+	ae_err = OpenEXR_OutputFile(basic_dataP, file_pathZ, &info, options, active_World);
 
 	
 
