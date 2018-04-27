@@ -1,0 +1,635 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 44;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2A1BAC5F10C3C9BF00244D12 /* OpenEXR banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A856B5210BF1A3300CD5519 /* OpenEXR banner.png */; };
+		2A5D12B11687A3C2001D979E /* OpenEXR_InDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A5D12B01687A3C2001D979E /* OpenEXR_InDialog.xib */; };
+		2A5D12DC1687A5B6001D979E /* OpenEXR_InUI_Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A5D12DB1687A5B6001D979E /* OpenEXR_InUI_Controller.m */; };
+		2A5D750E20923347009E8FDC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A5D750D20923347009E8FDC /* Cocoa.framework */; };
+		2A82BA1E10B1339B00161A77 /* OpenEXR_iccProfileAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A82BA1A10B1339B00161A77 /* OpenEXR_iccProfileAttribute.cpp */; };
+		2A82BA1F10B1339B00161A77 /* OpenEXR_PlatformIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A82BA1C10B1339B00161A77 /* OpenEXR_PlatformIO.cpp */; };
+		2A82BA2510B1345900161A77 /* OpenEXR_UI_Cocoa.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2A82BA2410B1345900161A77 /* OpenEXR_UI_Cocoa.mm */; };
+		2A8F7F9D176036B500E03502 /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A8F7F9C176036B300E03502 /* libzlib.a */; };
+		2A8F80FE1760378800E03502 /* liblcms.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A8F80FD1760378300E03502 /* liblcms.a */; };
+		2A8F846A17607BDC00E03502 /* ImfHybridInputFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A8F846817607BDC00E03502 /* ImfHybridInputFile.cpp */; };
+		2AA3373910B86FDD00DCD565 /* OpenEXR_Dialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AA3373810B86FDD00DCD565 /* OpenEXR_Dialog.xib */; };
+		2AB0B76610BA49A600D6996E /* OpenEXR_OutUI_Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB0B76410BA49A600D6996E /* OpenEXR_OutUI_Controller.m */; };
+		2ABA2FD1197EE8B400C754E6 /* libOpenEXR.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AED6370197EE3720055FB20 /* libOpenEXR.a */; };
+		2ABA2FD7197EE8EB00C754E6 /* libIlmBase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AED6379197EE3A60055FB20 /* libIlmBase.a */; };
+		2AC2AA8D168500A9008F4124 /* OpenEXR_ChannelCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AC2AA8C168500A9008F4124 /* OpenEXR_ChannelCache.cpp */; };
+		2AC7459B16556A9800980332 /* OpenEXR_UTF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7459916556A9800980332 /* OpenEXR_UTF.cpp */; };
+		2AEFD0B916EFAE3A005F0DBC /* OpenEXR_displayWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AEFD0B816EFAE3A005F0DBC /* OpenEXR_displayWindow.xib */; };
+		2AEFD0BF16EFB29E005F0DBC /* OpenEXR_displayWindow_Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AEFD0BE16EFB29E005F0DBC /* OpenEXR_displayWindow_Controller.m */; };
+		C6557BEC1093A7C2008C4069 /* fnord_MissingSuiteError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6557BE91093A7C2008C4069 /* fnord_MissingSuiteError.cpp */; };
+		C6557BED1093A7C2008C4069 /* fnord_SuiteHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6557BEA1093A7C2008C4069 /* fnord_SuiteHandler.cpp */; };
+		C67535641085829300A36364 /* AEIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C67534601085829300A36364 /* AEIO.cpp */; };
+		C67535651085829300A36364 /* FrameSeq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C67534621085829300A36364 /* FrameSeq.cpp */; };
+		C67535661085829300A36364 /* FrameSeq_Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C67534631085829300A36364 /* FrameSeq_Color.cpp */; };
+		C67535671085829300A36364 /* OpenEXR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C67534651085829300A36364 /* OpenEXR.cpp */; };
+		C67535681085829300A36364 /* OpenEXR_ChannelMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C67534671085829300A36364 /* OpenEXR_ChannelMap.cpp */; };
+		C675356A1085829300A36364 /* OpenEXR_PiPL.r in Rez */ = {isa = PBXBuildFile; fileRef = C675346A1085829300A36364 /* OpenEXR_PiPL.r */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2A8F7F9B176036B300E03502 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A8F7F94176036B300E03502 /* zlib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = zlib;
+		};
+		2A8F80FC1760378300E03502 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A8F80F81760378300E03502 /* lcms.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = lcms;
+		};
+		2A8F80FF1760379900E03502 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A8F7F94176036B300E03502 /* zlib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = zlib;
+		};
+		2A8F81051760379900E03502 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A8F80F81760378300E03502 /* lcms.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = lcms;
+		};
+		2ABA2FCD197EE8B400C754E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2AED636B197EE3720055FB20 /* OpenEXR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A588C1A19787559000D94D0;
+			remoteInfo = b44ExpLogTable;
+		};
+		2ABA2FCF197EE8B400C754E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2AED636B197EE3720055FB20 /* OpenEXR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A588C3C197875C2000D94D0;
+			remoteInfo = dwaLookups;
+		};
+		2ABA2FD5197EE8BC00C754E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2AED636B197EE3720055FB20 /* OpenEXR.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A6D4B1415CDE3DE006BADE7;
+			remoteInfo = OpenEXR;
+		};
+		2ABA2FD8197EE8F100C754E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2AED6372197EE3A60055FB20 /* IlmBase.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A6D4C4C15CDEB0A006BADE7;
+			remoteInfo = IlmBase;
+		};
+		2AED636F197EE3720055FB20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2AED636B197EE3720055FB20 /* OpenEXR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A6D4B1515CDE3DE006BADE7;
+			remoteInfo = OpenEXR;
+		};
+		2AED6378197EE3A60055FB20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2AED6372197EE3A60055FB20 /* IlmBase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A6D4C4D15CDEB0A006BADE7;
+			remoteInfo = IlmBase;
+		};
+		2AED637A197EE3A60055FB20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2AED6372197EE3A60055FB20 /* IlmBase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A6D4CFF15CDEBEF006BADE7;
+			remoteInfo = eLut;
+		};
+		2AED637C197EE3A60055FB20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2AED6372197EE3A60055FB20 /* IlmBase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A6D4D3715CDF275006BADE7;
+			remoteInfo = toFloat;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2A5D12B01687A3C2001D979E /* OpenEXR_InDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OpenEXR_InDialog.xib; path = ../../src/mac/OpenEXR_InDialog.xib; sourceTree = "<group>"; };
+		2A5D12DA1687A5B6001D979E /* OpenEXR_InUI_Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenEXR_InUI_Controller.h; path = ../../src/mac/OpenEXR_InUI_Controller.h; sourceTree = "<group>"; };
+		2A5D12DB1687A5B6001D979E /* OpenEXR_InUI_Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenEXR_InUI_Controller.m; path = ../../src/mac/OpenEXR_InUI_Controller.m; sourceTree = "<group>"; };
+		2A5D750D20923347009E8FDC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		2A82BA1A10B1339B00161A77 /* OpenEXR_iccProfileAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenEXR_iccProfileAttribute.cpp; path = ../../src/OpenEXR_iccProfileAttribute.cpp; sourceTree = SOURCE_ROOT; };
+		2A82BA1B10B1339B00161A77 /* OpenEXR_iccProfileAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenEXR_iccProfileAttribute.h; path = ../../src/OpenEXR_iccProfileAttribute.h; sourceTree = SOURCE_ROOT; };
+		2A82BA1C10B1339B00161A77 /* OpenEXR_PlatformIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenEXR_PlatformIO.cpp; path = ../../src/OpenEXR_PlatformIO.cpp; sourceTree = SOURCE_ROOT; };
+		2A82BA1D10B1339B00161A77 /* OpenEXR_PlatformIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenEXR_PlatformIO.h; path = ../../src/OpenEXR_PlatformIO.h; sourceTree = SOURCE_ROOT; };
+		2A82BA2410B1345900161A77 /* OpenEXR_UI_Cocoa.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OpenEXR_UI_Cocoa.mm; path = ../../src/mac/OpenEXR_UI_Cocoa.mm; sourceTree = SOURCE_ROOT; };
+		2A856B5210BF1A3300CD5519 /* OpenEXR banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "OpenEXR banner.png"; path = "../../src/mac/OpenEXR banner.png"; sourceTree = "<group>"; };
+		2A8F7F94176036B300E03502 /* zlib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zlib.xcodeproj; path = ext/zlib.xcodeproj; sourceTree = "<group>"; };
+		2A8F80F81760378300E03502 /* lcms.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lcms.xcodeproj; path = ext/lcms.xcodeproj; sourceTree = "<group>"; };
+		2A8F846817607BDC00E03502 /* ImfHybridInputFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImfHybridInputFile.cpp; path = ../../src/ImfHybridInputFile.cpp; sourceTree = SOURCE_ROOT; };
+		2A8F846917607BDC00E03502 /* ImfHybridInputFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImfHybridInputFile.h; path = ../../src/ImfHybridInputFile.h; sourceTree = SOURCE_ROOT; };
+		2AA3373810B86FDD00DCD565 /* OpenEXR_Dialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OpenEXR_Dialog.xib; path = ../../src/mac/OpenEXR_Dialog.xib; sourceTree = "<group>"; };
+		2AB0B76410BA49A600D6996E /* OpenEXR_OutUI_Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenEXR_OutUI_Controller.m; path = ../../src/mac/OpenEXR_OutUI_Controller.m; sourceTree = "<group>"; };
+		2AB0B76510BA49A600D6996E /* OpenEXR_OutUI_Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenEXR_OutUI_Controller.h; path = ../../src/mac/OpenEXR_OutUI_Controller.h; sourceTree = "<group>"; };
+		2AC2AA8B168500A9008F4124 /* OpenEXR_ChannelCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenEXR_ChannelCache.h; path = ../../src/OpenEXR_ChannelCache.h; sourceTree = SOURCE_ROOT; };
+		2AC2AA8C168500A9008F4124 /* OpenEXR_ChannelCache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenEXR_ChannelCache.cpp; path = ../../src/OpenEXR_ChannelCache.cpp; sourceTree = SOURCE_ROOT; };
+		2AC7459916556A9800980332 /* OpenEXR_UTF.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenEXR_UTF.cpp; path = ../../src/OpenEXR_UTF.cpp; sourceTree = SOURCE_ROOT; };
+		2AC7459A16556A9800980332 /* OpenEXR_UTF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenEXR_UTF.h; path = ../../src/OpenEXR_UTF.h; sourceTree = SOURCE_ROOT; };
+		2AED636B197EE3720055FB20 /* OpenEXR.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenEXR.xcodeproj; path = ../../ext/openexr/OpenEXR/xcode/xcode9/OpenEXR.xcodeproj; sourceTree = "<group>"; };
+		2AED6372197EE3A60055FB20 /* IlmBase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IlmBase.xcodeproj; path = ../../ext/openexr/IlmBase/xcode/xcode9/IlmBase.xcodeproj; sourceTree = "<group>"; };
+		2AEFD0B816EFAE3A005F0DBC /* OpenEXR_displayWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OpenEXR_displayWindow.xib; path = ../../src/mac/OpenEXR_displayWindow.xib; sourceTree = "<group>"; };
+		2AEFD0BD16EFB29E005F0DBC /* OpenEXR_displayWindow_Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenEXR_displayWindow_Controller.h; path = ../../src/mac/OpenEXR_displayWindow_Controller.h; sourceTree = "<group>"; };
+		2AEFD0BE16EFB29E005F0DBC /* OpenEXR_displayWindow_Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenEXR_displayWindow_Controller.m; path = ../../src/mac/OpenEXR_displayWindow_Controller.m; sourceTree = "<group>"; };
+		C4E618CC095A3CE80012CA3F /* OpenEXR.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenEXR.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6557BE91093A7C2008C4069 /* fnord_MissingSuiteError.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fnord_MissingSuiteError.cpp; path = ../../src/fnord_MissingSuiteError.cpp; sourceTree = SOURCE_ROOT; };
+		C6557BEA1093A7C2008C4069 /* fnord_SuiteHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fnord_SuiteHandler.cpp; path = ../../src/fnord_SuiteHandler.cpp; sourceTree = SOURCE_ROOT; };
+		C6557BEB1093A7C2008C4069 /* fnord_SuiteHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fnord_SuiteHandler.h; path = ../../src/fnord_SuiteHandler.h; sourceTree = SOURCE_ROOT; };
+		C675345F1085829300A36364 /* AEIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AEIO.h; path = ../../src/AEIO.h; sourceTree = SOURCE_ROOT; };
+		C67534601085829300A36364 /* AEIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AEIO.cpp; path = ../../src/AEIO.cpp; sourceTree = SOURCE_ROOT; };
+		C67534611085829300A36364 /* FrameSeq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FrameSeq.h; path = ../../src/FrameSeq.h; sourceTree = SOURCE_ROOT; };
+		C67534621085829300A36364 /* FrameSeq.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FrameSeq.cpp; path = ../../src/FrameSeq.cpp; sourceTree = SOURCE_ROOT; };
+		C67534631085829300A36364 /* FrameSeq_Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FrameSeq_Color.cpp; path = ../../src/FrameSeq_Color.cpp; sourceTree = SOURCE_ROOT; };
+		C67534641085829300A36364 /* OpenEXR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenEXR.h; path = ../../src/OpenEXR.h; sourceTree = SOURCE_ROOT; };
+		C67534651085829300A36364 /* OpenEXR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenEXR.cpp; path = ../../src/OpenEXR.cpp; sourceTree = SOURCE_ROOT; };
+		C67534661085829300A36364 /* OpenEXR_ChannelMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenEXR_ChannelMap.h; path = ../../src/OpenEXR_ChannelMap.h; sourceTree = SOURCE_ROOT; };
+		C67534671085829300A36364 /* OpenEXR_ChannelMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenEXR_ChannelMap.cpp; path = ../../src/OpenEXR_ChannelMap.cpp; sourceTree = SOURCE_ROOT; };
+		C67534681085829300A36364 /* OpenEXR_UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenEXR_UI.h; path = ../../src/OpenEXR_UI.h; sourceTree = SOURCE_ROOT; };
+		C675346A1085829300A36364 /* OpenEXR_PiPL.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; name = OpenEXR_PiPL.r; path = ../../src/OpenEXR_PiPL.r; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C4E618CA095A3CE80012CA3F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A5D750E20923347009E8FDC /* Cocoa.framework in Frameworks */,
+				2ABA2FD7197EE8EB00C754E6 /* libIlmBase.a in Frameworks */,
+				2ABA2FD1197EE8B400C754E6 /* libOpenEXR.a in Frameworks */,
+				2A8F7F9D176036B500E03502 /* libzlib.a in Frameworks */,
+				2A8F80FE1760378800E03502 /* liblcms.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2A8F7F95176036B300E03502 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A8F7F9C176036B300E03502 /* libzlib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2A8F80F91760378300E03502 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A8F80FD1760378300E03502 /* liblcms.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2AED636C197EE3720055FB20 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2AED6370197EE3720055FB20 /* libOpenEXR.a */,
+				2ABA2FCE197EE8B400C754E6 /* b44ExpLogTable */,
+				2ABA2FD0197EE8B400C754E6 /* dwaLookups */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2AED6373197EE3A60055FB20 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2AED6379197EE3A60055FB20 /* libIlmBase.a */,
+				2AED637B197EE3A60055FB20 /* eLut */,
+				2AED637D197EE3A60055FB20 /* toFloat */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C4E6187C095A3C800012CA3F = {
+			isa = PBXGroup;
+			children = (
+				C675345F1085829300A36364 /* AEIO.h */,
+				C67534601085829300A36364 /* AEIO.cpp */,
+				C67534611085829300A36364 /* FrameSeq.h */,
+				C67534621085829300A36364 /* FrameSeq.cpp */,
+				C67534631085829300A36364 /* FrameSeq_Color.cpp */,
+				C67534641085829300A36364 /* OpenEXR.h */,
+				C67534651085829300A36364 /* OpenEXR.cpp */,
+				2AC7459A16556A9800980332 /* OpenEXR_UTF.h */,
+				2AC7459916556A9800980332 /* OpenEXR_UTF.cpp */,
+				C67534661085829300A36364 /* OpenEXR_ChannelMap.h */,
+				C67534671085829300A36364 /* OpenEXR_ChannelMap.cpp */,
+				2AC2AA8B168500A9008F4124 /* OpenEXR_ChannelCache.h */,
+				2AC2AA8C168500A9008F4124 /* OpenEXR_ChannelCache.cpp */,
+				2A82BA1D10B1339B00161A77 /* OpenEXR_PlatformIO.h */,
+				2A82BA1C10B1339B00161A77 /* OpenEXR_PlatformIO.cpp */,
+				2A82BA1B10B1339B00161A77 /* OpenEXR_iccProfileAttribute.h */,
+				2A82BA1A10B1339B00161A77 /* OpenEXR_iccProfileAttribute.cpp */,
+				C67534681085829300A36364 /* OpenEXR_UI.h */,
+				2A82BA2410B1345900161A77 /* OpenEXR_UI_Cocoa.mm */,
+				C675346A1085829300A36364 /* OpenEXR_PiPL.r */,
+				2A8F846917607BDC00E03502 /* ImfHybridInputFile.h */,
+				2A8F846817607BDC00E03502 /* ImfHybridInputFile.cpp */,
+				2AED6372197EE3A60055FB20 /* IlmBase.xcodeproj */,
+				2AED636B197EE3720055FB20 /* OpenEXR.xcodeproj */,
+				2A8F7F94176036B300E03502 /* zlib.xcodeproj */,
+				2A8F80F81760378300E03502 /* lcms.xcodeproj */,
+				C6557BEB1093A7C2008C4069 /* fnord_SuiteHandler.h */,
+				C6557BEA1093A7C2008C4069 /* fnord_SuiteHandler.cpp */,
+				C6557BE91093A7C2008C4069 /* fnord_MissingSuiteError.cpp */,
+				C4E6188C095A3C800012CA3F /* Products */,
+				2A856B5210BF1A3300CD5519 /* OpenEXR banner.png */,
+				2AEFD0B816EFAE3A005F0DBC /* OpenEXR_displayWindow.xib */,
+				2AEFD0BD16EFB29E005F0DBC /* OpenEXR_displayWindow_Controller.h */,
+				2AEFD0BE16EFB29E005F0DBC /* OpenEXR_displayWindow_Controller.m */,
+				2A5D12B01687A3C2001D979E /* OpenEXR_InDialog.xib */,
+				2A5D12DA1687A5B6001D979E /* OpenEXR_InUI_Controller.h */,
+				2A5D12DB1687A5B6001D979E /* OpenEXR_InUI_Controller.m */,
+				2AA3373810B86FDD00DCD565 /* OpenEXR_Dialog.xib */,
+				2AB0B76510BA49A600D6996E /* OpenEXR_OutUI_Controller.h */,
+				2AB0B76410BA49A600D6996E /* OpenEXR_OutUI_Controller.m */,
+				2A5D750D20923347009E8FDC /* Cocoa.framework */,
+			);
+			sourceTree = "<group>";
+		};
+		C4E6188C095A3C800012CA3F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C4E618CC095A3CE80012CA3F /* OpenEXR.plugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C4E618CB095A3CE80012CA3F /* OpenEXR */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C4E618CE095A3CE90012CA3F /* Build configuration list for PBXNativeTarget "OpenEXR" */;
+			buildPhases = (
+				C4E618C9095A3CE80012CA3F /* Sources */,
+				C4E618CA095A3CE80012CA3F /* Frameworks */,
+				C4E618EA095A3E040012CA3F /* Rez */,
+				D0445653099417B00073E055 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2ABA2FD9197EE8F100C754E6 /* PBXTargetDependency */,
+				2ABA2FD6197EE8BC00C754E6 /* PBXTargetDependency */,
+				2A8F81001760379900E03502 /* PBXTargetDependency */,
+				2A8F81061760379900E03502 /* PBXTargetDependency */,
+			);
+			name = OpenEXR;
+			productName = IO.plugin;
+			productReference = C4E618CC095A3CE80012CA3F /* OpenEXR.plugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C4E6187E095A3C800012CA3F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = C4E6187F095A3C800012CA3F /* Build configuration list for PBXProject "OpenEXR" */;
+			compatibilityVersion = "Xcode 3.0";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = C4E6187C095A3C800012CA3F;
+			productRefGroup = C4E6188C095A3C800012CA3F /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 2AED6373197EE3A60055FB20 /* Products */;
+					ProjectRef = 2AED6372197EE3A60055FB20 /* IlmBase.xcodeproj */;
+				},
+				{
+					ProductGroup = 2A8F80F91760378300E03502 /* Products */;
+					ProjectRef = 2A8F80F81760378300E03502 /* lcms.xcodeproj */;
+				},
+				{
+					ProductGroup = 2AED636C197EE3720055FB20 /* Products */;
+					ProjectRef = 2AED636B197EE3720055FB20 /* OpenEXR.xcodeproj */;
+				},
+				{
+					ProductGroup = 2A8F7F95176036B300E03502 /* Products */;
+					ProjectRef = 2A8F7F94176036B300E03502 /* zlib.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				C4E618CB095A3CE80012CA3F /* OpenEXR */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		2A8F7F9C176036B300E03502 /* libzlib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libzlib.a;
+			remoteRef = 2A8F7F9B176036B300E03502 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2A8F80FD1760378300E03502 /* liblcms.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liblcms.a;
+			remoteRef = 2A8F80FC1760378300E03502 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2ABA2FCE197EE8B400C754E6 /* b44ExpLogTable */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = b44ExpLogTable;
+			remoteRef = 2ABA2FCD197EE8B400C754E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2ABA2FD0197EE8B400C754E6 /* dwaLookups */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = dwaLookups;
+			remoteRef = 2ABA2FCF197EE8B400C754E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2AED6370197EE3720055FB20 /* libOpenEXR.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libOpenEXR.a;
+			remoteRef = 2AED636F197EE3720055FB20 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2AED6379197EE3A60055FB20 /* libIlmBase.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libIlmBase.a;
+			remoteRef = 2AED6378197EE3A60055FB20 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2AED637B197EE3A60055FB20 /* eLut */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = eLut;
+			remoteRef = 2AED637A197EE3A60055FB20 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2AED637D197EE3A60055FB20 /* toFloat */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = toFloat;
+			remoteRef = 2AED637C197EE3A60055FB20 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D0445653099417B00073E055 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AA3373910B86FDD00DCD565 /* OpenEXR_Dialog.xib in Resources */,
+				2A1BAC5F10C3C9BF00244D12 /* OpenEXR banner.png in Resources */,
+				2A5D12B11687A3C2001D979E /* OpenEXR_InDialog.xib in Resources */,
+				2AEFD0B916EFAE3A005F0DBC /* OpenEXR_displayWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		C4E618EA095A3E040012CA3F /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C675356A1085829300A36364 /* OpenEXR_PiPL.r in Rez */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C4E618C9095A3CE80012CA3F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C67535641085829300A36364 /* AEIO.cpp in Sources */,
+				C67535651085829300A36364 /* FrameSeq.cpp in Sources */,
+				C67535661085829300A36364 /* FrameSeq_Color.cpp in Sources */,
+				C67535671085829300A36364 /* OpenEXR.cpp in Sources */,
+				C67535681085829300A36364 /* OpenEXR_ChannelMap.cpp in Sources */,
+				C6557BEC1093A7C2008C4069 /* fnord_MissingSuiteError.cpp in Sources */,
+				C6557BED1093A7C2008C4069 /* fnord_SuiteHandler.cpp in Sources */,
+				2A82BA1E10B1339B00161A77 /* OpenEXR_iccProfileAttribute.cpp in Sources */,
+				2A82BA1F10B1339B00161A77 /* OpenEXR_PlatformIO.cpp in Sources */,
+				2A82BA2510B1345900161A77 /* OpenEXR_UI_Cocoa.mm in Sources */,
+				2AB0B76610BA49A600D6996E /* OpenEXR_OutUI_Controller.m in Sources */,
+				2AC7459B16556A9800980332 /* OpenEXR_UTF.cpp in Sources */,
+				2AC2AA8D168500A9008F4124 /* OpenEXR_ChannelCache.cpp in Sources */,
+				2A5D12DC1687A5B6001D979E /* OpenEXR_InUI_Controller.m in Sources */,
+				2AEFD0BF16EFB29E005F0DBC /* OpenEXR_displayWindow_Controller.m in Sources */,
+				2A8F846A17607BDC00E03502 /* ImfHybridInputFile.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2A8F81001760379900E03502 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = zlib;
+			targetProxy = 2A8F80FF1760379900E03502 /* PBXContainerItemProxy */;
+		};
+		2A8F81061760379900E03502 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = lcms;
+			targetProxy = 2A8F81051760379900E03502 /* PBXContainerItemProxy */;
+		};
+		2ABA2FD6197EE8BC00C754E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OpenEXR;
+			targetProxy = 2ABA2FD5197EE8BC00C754E6 /* PBXContainerItemProxy */;
+		};
+		2ABA2FD9197EE8F100C754E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IlmBase;
+			targetProxy = 2ABA2FD8197EE8F100C754E6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2A1BAC7E10C3CAF100244D12 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				AE_SDK = "\"../../ext/Adobe After Effects CS5 Mac SDK\"";
+				"AE_SDK[arch=i386]" = "\"../../ext/Adobe After Effects CS3 Mac SDK\"";
+				"AE_SDK[arch=ppc]" = "\"../../ext/Adobe After Effects CS3 Mac SDK\"";
+				ARCHS = x86_64;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=i386]" = (
+					"$(inherited)",
+					AE_HFS_PATHS,
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=ppc]" = (
+					"$(inherited)",
+					AE_HFS_PATHS,
+				);
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(AE_SDK)/Examples/Headers",
+					"$(AE_SDK)/Examples/Headers/SP",
+					"$(AE_SDK)/Examples/Util",
+					"$(AE_SDK)/Examples/Resources",
+					../../ext/openexr/IlmBase/xcode/xcode9,
+					../../ext/openexr/IlmBase/Half,
+					../../ext/openexr/IlmBase/IlmThread,
+					../../ext/openexr/IlmBase/Iex,
+					../../ext/openexr/IlmBase/Imath,
+					../../ext/openexr/OpenEXR/xcode/xcode9,
+					../../ext/openexr/OpenEXR/IlmImf,
+					../../ext/lcms/include,
+					../../ext/lcms/src,
+				);
+				REZ_PREPROCESSOR_DEFINITIONS = __MACH__;
+				REZ_SEARCH_PATHS = "$(SDK_PATH)/Developer/Headers/FlatCarbon";
+				SDKROOT = macosx10.13;
+			};
+			name = Release;
+		};
+		2A1BAC7F10C3CAF100244D12 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SDKROOT)/System/Library/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GENERATE_PKGINFO_FILE = YES;
+				INFOPLIST_FILE = "OpenEXR.plugin-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				LINK_WITH_STANDARD_LIBRARIES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PREBINDING = NO;
+				PRODUCT_NAME = OpenEXR;
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Release;
+		};
+		C4E61880095A3C800012CA3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				AE_SDK = "\"../../ext/Adobe After Effects CS5 Mac SDK\"";
+				"AE_SDK[arch=i386]" = "\"../../ext/Adobe After Effects CS3 Mac SDK\"";
+				"AE_SDK[arch=ppc]" = "\"../../ext/Adobe After Effects CS3 Mac SDK\"";
+				ARCHS = x86_64;
+				COPY_PHASE_STRIP = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=i386]" = (
+					"$(GCC_PREPROCESSOR_DEFINITIONS)",
+					AE_HFS_PATHS,
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=ppc]" = (
+					"$(GCC_PREPROCESSOR_DEFINITIONS)",
+					AE_HFS_PATHS,
+				);
+				GCC_REUSE_STRINGS = NO;
+				GCC_THREADSAFE_STATICS = NO;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = NO;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(AE_SDK)/Examples/Headers",
+					"$(AE_SDK)/Examples/Headers/SP",
+					"$(AE_SDK)/Examples/Util",
+					"$(AE_SDK)/Examples/Resources",
+					../../ext/openexr/IlmBase/xcode/xcode9,
+					../../ext/openexr/IlmBase/Half,
+					../../ext/openexr/IlmBase/IlmThread,
+					../../ext/openexr/IlmBase/Iex,
+					../../ext/openexr/IlmBase/Imath,
+					../../ext/openexr/OpenEXR/xcode/xcode9,
+					../../ext/openexr/OpenEXR/IlmImf,
+					../../ext/lcms/include,
+					../../ext/lcms/src,
+				);
+				REZ_PREPROCESSOR_DEFINITIONS = __MACH__;
+				REZ_SEARCH_PATHS = "$(SDK_PATH)/Developer/Headers/FlatCarbon";
+				SDKROOT = macosx10.13;
+				STRIP_INSTALLED_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		C4E618CF095A3CE90012CA3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SDKROOT)/System/Library/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GENERATE_PKGINFO_FILE = YES;
+				INFOPLIST_FILE = "OpenEXR.plugin-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				LINK_WITH_STANDARD_LIBRARIES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PREBINDING = NO;
+				PRODUCT_NAME = OpenEXR;
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C4E6187F095A3C800012CA3F /* Build configuration list for PBXProject "OpenEXR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4E61880095A3C800012CA3F /* Debug */,
+				2A1BAC7E10C3CAF100244D12 /* Release */,
+			);
+			defaultConfigurationIsVisible = 1;
+			defaultConfigurationName = Debug;
+		};
+		C4E618CE095A3CE90012CA3F /* Build configuration list for PBXNativeTarget "OpenEXR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4E618CF095A3CE90012CA3F /* Debug */,
+				2A1BAC7F10C3CAF100244D12 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C4E6187E095A3C800012CA3F /* Project object */;
+}
