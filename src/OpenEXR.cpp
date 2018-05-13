@@ -1758,8 +1758,8 @@ OpenEXR_DrawAuxChannel(
 	// If AE is at partial resolution, we use this to shift the pixel we sample instead of getting the upper right one
 	// We're trying to get closer to AE's scaling algorithm, which we can only use on full ARGB buffers
 	PF_Point shift;
-	shift.h = (width % scale.h == 0) ? (scale.h - 1) : (width % scale.h - 1);
-	shift.v = (height % scale.v == 0) ? (scale.v - 1) : (height % scale.v - 1);
+	shift.h = (scale.h / 2);
+	shift.v = (scale.v / 2);
 	
 	
 	vector<string> layer_channels;
@@ -2035,8 +2035,12 @@ OpenEXR_DrawAuxChannel(
 										(data_origin.h * (pix_size * channel_dims));
 			
 			
-			copy_width = (copy_width / scale.h) + (copy_width % scale.h ? 1 : 0);
-			copy_height = (copy_height / scale.v) + (copy_height % scale.v ? 1 : 0);
+			copy_width = (copy_width / scale.h); // + (copy_width % scale.h ? 1 : 0); *
+			copy_height = (copy_height / scale.v); // + (copy_height % scale.v ? 1 : 0);
+			
+			// * Sometimes we'd like to grab an extra pixel at the end, but then this can get messed
+			//   up if we have a dataWindow floating inside a displayWindow.  Reader, feel free to
+			//   tackle this problem.  TODO: Resolution stuff
 			
 			assert(((disp_origin.h / scale.h) + copy_width) <= chunkP->widthL);
 			assert(((disp_origin.v / scale.v) + copy_height) <= chunkP->heightL);
